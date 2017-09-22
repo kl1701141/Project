@@ -70,9 +70,9 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UITa
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         
-        if segue.identifier == "messagePublish" {
-            let destinationController = segue.destination as! MessagePublishController
-            destinationController.device = device
+        if segue.identifier == "showDisplayingLines" {
+            let destinationController = segue.destination as! DisplayingTableViewController
+            destinationController.device = device.name
         }
     }
 

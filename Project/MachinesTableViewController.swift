@@ -12,7 +12,7 @@ import CoreData
 class MachinesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     
     var devices:[Device] = [
-        Device(name: "A0", location: "EA-101", imageName: "doge.jpg", displaying: "Hello World!", controller: "Andy Wang"),
+        Device(name: "A1", location: "EA-101", imageName: "doge.jpg", displaying: "Hello World!", controller: "Andy Wang"),
         Device(name: "B4", location: "CS-104", imageName: "doge1.png", displaying: "Wow, Such Doge!", controller: "Peter Chen, Vava Yu, PG One, GAI Wang"),
         Device(name: "H8", location: "資工系館前", imageName: "doge2.png", displaying: "I am trying to add structs to an array. I know it's possible. I have seen it in another post on the site. But I am wondering if there is any way to add structs to an array without creating variables.", controller: "Kevin Lin, Kiki Liu"),
         Device(name: "C5", location: "活動中心", imageName: "doge3.jpg", displaying: "Is there any way to add structs to an array without creating variables?", controller: "Kinny Fang, Sarah Lin, Michael Lin"),
@@ -111,7 +111,8 @@ class MachinesTableViewController: UITableViewController, NSFetchedResultsContro
         if segue.identifier == "showMachineDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! MachineDetailViewController
-                destinationController.device = devices[indexPath.row]
+                destinationController.device = (searchController.isActive) ? searchResults[indexPath.row] :  devices[indexPath.row]
+                searchController.isActive = false
             }
         }
     }

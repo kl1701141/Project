@@ -10,8 +10,9 @@ import UIKit
 
 class MessagePublishController: UIViewController {
 
-    var device:Device!
-    var host = "192.168.8.37"
+    //var device:Device!
+    var message:Message!
+    var host = "192.168.15.199"
     var port = "51700"
     
     
@@ -20,8 +21,10 @@ class MessagePublishController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+
         
-        title = "Edit " + device.name
+        title = "Edit line: " + message.line
         // Do any additional setup after loading the view.
     }
 
@@ -35,7 +38,8 @@ class MessagePublishController: UIViewController {
         let url = URL(string: urlString)!
         
         var request = URLRequest(url: url)
-        let body = "Topic=\(device.name)&Text=\(textField.text!)"
+        let body = "Topic=\(message.device)&Text=\(textField.text!)"
+        //print message.device
         
         let postData = body.data(using: String.Encoding.utf8)
         

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		761792751F61EA2900C8B6BE /* MessagePublishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761792741F61EA2900C8B6BE /* MessagePublishController.swift */; };
+		7670EBDA1F7367EA004C7FCC /* DisplayingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7670EBD91F7367EA004C7FCC /* DisplayingTableViewController.swift */; };
+		7670EBDC1F736ECA004C7FCC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7670EBDB1F736ECA004C7FCC /* Message.swift */; };
+		7670EBDE1F7384EE004C7FCC /* DisplayingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7670EBDD1F7384EE004C7FCC /* DisplayingTableViewCell.swift */; };
 		7689AE5A1F5D6DC500144FDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7689AE591F5D6DC500144FDC /* AppDelegate.swift */; };
 		7689AE5F1F5D6DC500144FDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7689AE5D1F5D6DC500144FDC /* Main.storyboard */; };
 		7689AE611F5D6DC500144FDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7689AE601F5D6DC500144FDC /* Assets.xcassets */; };
@@ -21,6 +24,9 @@
 
 /* Begin PBXFileReference section */
 		761792741F61EA2900C8B6BE /* MessagePublishController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagePublishController.swift; sourceTree = "<group>"; };
+		7670EBD91F7367EA004C7FCC /* DisplayingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayingTableViewController.swift; sourceTree = "<group>"; };
+		7670EBDB1F736ECA004C7FCC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		7670EBDD1F7384EE004C7FCC /* DisplayingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayingTableViewCell.swift; sourceTree = "<group>"; };
 		7689AE561F5D6DC500144FDC /* Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7689AE591F5D6DC500144FDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7689AE5E1F5D6DC500144FDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -70,10 +76,13 @@
 				7689AE621F5D6DC500144FDC /* LaunchScreen.storyboard */,
 				7689AE651F5D6DC500144FDC /* Info.plist */,
 				7689AE771F5FCD6300144FDC /* Device.swift */,
+				7670EBDB1F736ECA004C7FCC /* Message.swift */,
 				7689AE751F5FC42300144FDC /* MachinesTableViewController.swift */,
 				7689AE6D1F5E1F2500144FDC /* MachinesTableViewCell.swift */,
 				7689AE6F1F5E96DD00144FDC /* MachineDetailViewController.swift */,
 				7689AE731F5ECD6700144FDC /* MachineDetailViewCell.swift */,
+				7670EBD91F7367EA004C7FCC /* DisplayingTableViewController.swift */,
+				7670EBDD1F7384EE004C7FCC /* DisplayingTableViewCell.swift */,
 				761792741F61EA2900C8B6BE /* MessagePublishController.swift */,
 			);
 			path = Project;
@@ -106,7 +115,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Kevin Lin";
 				TargetAttributes = {
 					7689AE551F5D6DC500144FDC = {
@@ -152,8 +161,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				761792751F61EA2900C8B6BE /* MessagePublishController.swift in Sources */,
+				7670EBDA1F7367EA004C7FCC /* DisplayingTableViewController.swift in Sources */,
 				7689AE741F5ECD6700144FDC /* MachineDetailViewCell.swift in Sources */,
+				7670EBDC1F736ECA004C7FCC /* Message.swift in Sources */,
 				7689AE5A1F5D6DC500144FDC /* AppDelegate.swift in Sources */,
+				7670EBDE1F7384EE004C7FCC /* DisplayingTableViewCell.swift in Sources */,
 				7689AE701F5E96DD00144FDC /* MachineDetailViewController.swift in Sources */,
 				7689AE781F5FCD6300144FDC /* Device.swift in Sources */,
 				7689AE6E1F5E1F2500144FDC /* MachinesTableViewCell.swift in Sources */,
@@ -193,7 +205,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -201,7 +215,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -244,7 +262,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -252,7 +272,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
