@@ -12,12 +12,12 @@ import CoreData
 class MachinesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     
     var devices:[Device] = [
-        Device(name: "A1", location: "EA-101", imageName: "doge.jpg", displaying: "Hello World!", controller: "Andy Wang"),
-        Device(name: "B4", location: "CS-104", imageName: "doge1.png", displaying: "Wow, Such Doge!", controller: "Peter Chen, Vava Yu, PG One, GAI Wang"),
-        Device(name: "H8", location: "資工系館前", imageName: "doge2.png", displaying: "I am trying to add structs to an array. I know it's possible. I have seen it in another post on the site. But I am wondering if there is any way to add structs to an array without creating variables.", controller: "Kevin Lin, Kiki Liu"),
-        Device(name: "C5", location: "活動中心", imageName: "doge3.jpg", displaying: "Is there any way to add structs to an array without creating variables?", controller: "Kinny Fang, Sarah Lin, Michael Lin"),
-        Device(name: "D7", location: "資工系辦", imageName: "hibiki.jpg", displaying: "Not the answer you're looking for? Browse other questions tagged", controller: "Cathy Lin, Jeremy Huang"),
-        Device(name: "A2", location: "EA-206", imageName: "hibiki2.jpg", displaying: "Join the Stack Overflow Community", controller: "Doge Chen")
+        Device(name: "A1", location: "EA-101", imageName: "doge.jpg", controller: "Andy Wang"),
+        Device(name: "B4", location: "CS-104", imageName: "doge1.png", controller: "Peter Chen, Vava Yu, PG One, GAI Wang"),
+        Device(name: "H8", location: "資工系館前", imageName: "doge2.png", controller: "Kevin Lin, Kiki Liu"),
+        Device(name: "C5", location: "活動中心", imageName: "doge3.jpg", controller: "Kinny Fang, Sarah Lin, Michael Lin"),
+        Device(name: "D7", location: "資工系辦", imageName: "hibiki.jpg",controller: "Cathy Lin, Jeremy Huang"),
+        Device(name: "A2", location: "EA-206", imageName: "hibiki2.jpg", controller: "Doge Chen")
     ]
     
     var searchController: UISearchController!
@@ -57,7 +57,7 @@ class MachinesTableViewController: UITableViewController, NSFetchedResultsContro
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search device..."
-        searchController.searchBar.barTintColor = UIColor(red: 110.0/255.0, green: 66.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        searchController.searchBar.barTintColor = UIColor(red: 131.0/255.0, green: 93.0/255.0, blue: 36.0/255.0, alpha: 1.0)
         searchController.searchBar.tintColor = UIColor.white
     }
 

@@ -12,7 +12,7 @@ class MessagePublishController: UIViewController {
 
     //var device:Device!
     var message:Message!
-    var host = "192.168.15.199"
+    var host = "192.168.15.122"
     var port = "51700"
     
     

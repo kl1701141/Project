@@ -38,7 +38,7 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -52,9 +52,6 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UITa
             cell.typeLabel.text = "裝置名稱"
             cell.valueLabel.text = device.name
         case 2:
-            cell.typeLabel.text = "正在顯示"
-            cell.valueLabel.text = device.displaying
-        case 3:
             cell.typeLabel.text = "管理者"
             cell.valueLabel.text = device.controller
         default:

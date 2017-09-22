@@ -101,7 +101,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="96D-gA-A8d">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="619"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="508"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <imageView key="tableHeaderView" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Ymf-dD-MEC">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
@@ -155,54 +155,127 @@
                                     <outlet property="delegate" destination="mBz-Gm-3D4" id="ysS-gP-s2D"/>
                                 </connections>
                             </tableView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="MVO-HQ-kr0">
-                                <rect key="frame" x="16" y="627" width="343" height="32"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gD1-tb-OPP">
+                                <rect key="frame" x="16" y="530" width="343" height="116"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSw-gR-cCT">
-                                        <rect key="frame" x="0.0" y="0.0" width="164" height="32"/>
-                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                        <state key="normal" title="訂閱">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="12"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjO-3H-Eks">
-                                        <rect key="frame" x="179" y="0.0" width="164" height="32"/>
-                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                        <state key="normal" title="正在顯示">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                <integer key="value" value="12"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <segue destination="4Vs-Ug-MxX" kind="show" identifier="showDisplayingLines" id="1o3-7p-gQv"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ZAp-yt-2Ly">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="32"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4G-h1-DAH">
+                                                <rect key="frame" x="0.0" y="0.0" width="164" height="32"/>
+                                                <color key="backgroundColor" red="0.51266735792160034" green="0.36470588235294116" blue="0.14283260703086853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <state key="normal" title="插播內容">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u2r-Ta-sy0">
+                                                <rect key="frame" x="179" y="0.0" width="164" height="32"/>
+                                                <color key="backgroundColor" red="0.51266735789999995" green="0.36470588240000001" blue="0.142832607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <state key="normal" title="編輯內容">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <segue destination="4Vs-Ug-MxX" kind="show" identifier="showDisplayingLines" id="oae-mq-yjt"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="u2r-Ta-sy0" firstAttribute="width" secondItem="f4G-h1-DAH" secondAttribute="width" id="80w-x0-fQ3"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="K3C-yf-dzC">
+                                        <rect key="frame" x="0.0" y="42" width="343" height="32"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bo-oO-Z7o">
+                                                <rect key="frame" x="0.0" y="0.0" width="164" height="32"/>
+                                                <color key="backgroundColor" red="0.51266735789999995" green="0.36470588240000001" blue="0.142832607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <state key="normal" title="刪除顯示行數">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kc9-HG-H5X">
+                                                <rect key="frame" x="179" y="0.0" width="164" height="32"/>
+                                                <color key="backgroundColor" red="0.51266735789999995" green="0.36470588240000001" blue="0.142832607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <state key="normal" title="恢復顯示行數">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="kc9-HG-H5X" firstAttribute="width" secondItem="2bo-oO-Z7o" secondAttribute="width" id="ek6-ff-s8n"/>
+                                        </constraints>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="MVO-HQ-kr0">
+                                        <rect key="frame" x="0.0" y="84" width="343" height="32"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSw-gR-cCT">
+                                                <rect key="frame" x="0.0" y="0.0" width="164" height="32"/>
+                                                <color key="backgroundColor" red="0.51266735789999995" green="0.36470588240000001" blue="0.142832607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <state key="normal" title="欲顯示行數">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjO-3H-Eks">
+                                                <rect key="frame" x="179" y="0.0" width="164" height="32"/>
+                                                <color key="backgroundColor" red="0.51266735789999995" green="0.36470588240000001" blue="0.142832607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <state key="normal" title="訂閱">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="xjO-3H-Eks" firstAttribute="width" secondItem="kSw-gR-cCT" secondAttribute="width" id="449-rR-ayF"/>
+                                        </constraints>
+                                    </stackView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="xjO-3H-Eks" firstAttribute="width" secondItem="kSw-gR-cCT" secondAttribute="width" id="449-rR-ayF"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="96D-gA-A8d" firstAttribute="leading" secondItem="nna-Aq-w0T" secondAttribute="leading" id="2EJ-QW-6hJ"/>
-                            <constraint firstAttribute="trailing" secondItem="96D-gA-A8d" secondAttribute="trailing" id="3ZW-90-jaK"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MVO-HQ-kr0" secondAttribute="trailing" id="Cuv-ay-hDp"/>
-                            <constraint firstItem="MVO-HQ-kr0" firstAttribute="leading" secondItem="nna-Aq-w0T" secondAttribute="leadingMargin" id="JaH-da-CN5"/>
-                            <constraint firstItem="MVO-HQ-kr0" firstAttribute="top" secondItem="96D-gA-A8d" secondAttribute="bottom" constant="8" id="LyC-tn-JUm"/>
-                            <constraint firstItem="umx-Mn-jv2" firstAttribute="top" secondItem="MVO-HQ-kr0" secondAttribute="bottom" constant="8" id="QPp-PF-pvQ"/>
-                            <constraint firstItem="96D-gA-A8d" firstAttribute="top" secondItem="nna-Aq-w0T" secondAttribute="top" id="SUX-DB-zO5"/>
-                            <constraint firstItem="MVO-HQ-kr0" firstAttribute="top" secondItem="96D-gA-A8d" secondAttribute="bottom" constant="8" id="b0j-mt-uPz"/>
+                            <constraint firstAttribute="trailing" secondItem="96D-gA-A8d" secondAttribute="trailing" id="JWh-aS-Zy6"/>
+                            <constraint firstItem="gD1-tb-OPP" firstAttribute="top" secondItem="96D-gA-A8d" secondAttribute="bottom" constant="22" id="QEH-qg-iW4"/>
+                            <constraint firstItem="gD1-tb-OPP" firstAttribute="top" secondItem="96D-gA-A8d" secondAttribute="bottom" constant="22" id="ceS-jE-ND9"/>
+                            <constraint firstItem="96D-gA-A8d" firstAttribute="leading" secondItem="nna-Aq-w0T" secondAttribute="leading" id="hWU-ln-lwu"/>
+                            <constraint firstItem="96D-gA-A8d" firstAttribute="top" secondItem="nna-Aq-w0T" secondAttribute="top" id="hjS-kS-ntU"/>
+                            <constraint firstItem="umx-Mn-jv2" firstAttribute="top" secondItem="gD1-tb-OPP" secondAttribute="bottom" constant="21" id="r1M-HV-eqv"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gD1-tb-OPP" secondAttribute="trailing" id="x5v-2e-25C"/>
+                            <constraint firstItem="gD1-tb-OPP" firstAttribute="leading" secondItem="nna-Aq-w0T" secondAttribute="leadingMargin" id="zHz-LQ-796"/>
                         </constraints>
                     </view>
                     <connections>
