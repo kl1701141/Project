@@ -46,6 +46,7 @@ class MachinesTableViewController: UITableViewController, NSFetchedResultsContro
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
+        tableView.backgroundColor = UIColor.darkGray
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         tableView.estimatedRowHeight = 80.0
@@ -57,7 +58,7 @@ class MachinesTableViewController: UITableViewController, NSFetchedResultsContro
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search device..."
-        searchController.searchBar.barTintColor = UIColor(red: 131.0/255.0, green: 93.0/255.0, blue: 36.0/255.0, alpha: 1.0)
+        searchController.searchBar.barTintColor = UIColor.darkGray
         searchController.searchBar.tintColor = UIColor.white
     }
 
@@ -86,6 +87,8 @@ class MachinesTableViewController: UITableViewController, NSFetchedResultsContro
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MachinesTableViewCell
+        
+        cell.backgroundColor = UIColor(red: 70.0/255.0, green: 70.0/255.0, blue: 70.0/255.0, alpha: 1.0)
 
         // Configure the cell...
         

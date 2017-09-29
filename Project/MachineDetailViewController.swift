@@ -20,7 +20,7 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UITa
 
         // Do any additional setup after loading the view.
         machineImageView.image = UIImage(named: device.imageName)
-        tableView.backgroundColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 0.2)
+        tableView.backgroundColor = UIColor.darkGray
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.separatorColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 0.8)
         title = device.name
@@ -43,6 +43,7 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MachineDetailViewCell
+        cell.backgroundColor = UIColor.darkGray
         
         switch indexPath.row {
         case 0:

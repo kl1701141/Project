@@ -29,6 +29,8 @@ class DisplayingTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        tableView.backgroundColor = UIColor.darkGray
 
         title = "Displaying on " + device
     }
@@ -54,7 +56,8 @@ class DisplayingTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! DisplayingTableViewCell
-
+        
+        cell.backgroundColor = UIColor.darkGray
         // Configure the cell...
         
         let message = messages[indexPath.row]
