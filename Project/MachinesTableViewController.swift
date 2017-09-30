@@ -48,19 +48,34 @@ class MachinesTableViewController: UITableViewController, NSFetchedResultsContro
         
         tableView.backgroundColor = UIColor.darkGray
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search,  target: self, action: nil)
         
         tableView.estimatedRowHeight = 80.0
         tableView.rowHeight = UITableViewAutomaticDimension
         
         searchController = UISearchController(searchResultsController: nil)
         tableView.tableHeaderView = searchController.searchBar
-        
+
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search device..."
         searchController.searchBar.barTintColor = UIColor.darkGray
         searchController.searchBar.tintColor = UIColor.white
     }
+    
+//    @IBAction func searchAction(sender: UIBarButtonItem) {
+//        searchController = UISearchController(searchResultsController: nil)
+//        //tableView.tableHeaderView = searchController.searchBar
+//
+//        searchController.searchResultsUpdater = self
+//        searchController.dimsBackgroundDuringPresentation = false
+//        searchController.searchBar.placeholder = "Search device..."
+//        searchController.searchBar.barTintColor = UIColor.darkGray
+//        searchController.searchBar.tintColor = UIColor.white
+//
+//        //self.searchController.searchBar.delegate = self
+//        //presentedViewController(searchController, animated: true, completion: nil)
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -119,6 +134,10 @@ class MachinesTableViewController: UITableViewController, NSFetchedResultsContro
             }
         }
     }
+    
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 10
+//    }
     
 
     /*

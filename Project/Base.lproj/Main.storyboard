@@ -28,7 +28,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="IJm-Tk-ize">
-                                            <rect key="frame" x="14" y="10" width="353" height="60"/>
+                                            <rect key="frame" x="14" y="10" width="345" height="60"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Ae-eV-MXf">
                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -43,7 +43,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Ndc-IK-bh8">
-                                                    <rect key="frame" x="70" y="10" width="283" height="40.5"/>
+                                                    <rect key="frame" x="70" y="10" width="275" height="40.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhH-C7-dWc">
                                                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="20.5"/>
@@ -64,10 +64,10 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="IJm-Tk-ize" secondAttribute="bottom" constant="1.5" id="24g-rV-QmO"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="IJm-Tk-ize" secondAttribute="trailing" id="Ofp-iL-wSu"/>
-                                        <constraint firstItem="IJm-Tk-ize" firstAttribute="leading" secondItem="OGe-Wn-fZG" secondAttribute="leadingMargin" constant="6" id="cZh-BW-Sld"/>
-                                        <constraint firstItem="IJm-Tk-ize" firstAttribute="top" secondItem="OGe-Wn-fZG" secondAttribute="topMargin" constant="2" id="lT5-EG-cuo"/>
+                                        <constraint firstAttribute="trailing" secondItem="IJm-Tk-ize" secondAttribute="trailing" constant="16" id="CO3-Q0-YNE"/>
+                                        <constraint firstItem="IJm-Tk-ize" firstAttribute="top" secondItem="OGe-Wn-fZG" secondAttribute="top" constant="10" id="KF7-0y-5HN"/>
+                                        <constraint firstItem="IJm-Tk-ize" firstAttribute="leading" secondItem="OGe-Wn-fZG" secondAttribute="leading" constant="14" id="cnR-5y-AdC"/>
+                                        <constraint firstAttribute="bottom" secondItem="IJm-Tk-ize" secondAttribute="bottom" constant="9.5" id="et7-Ex-I77"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
