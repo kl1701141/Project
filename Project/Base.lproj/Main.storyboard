@@ -164,7 +164,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4G-h1-DAH">
                                                 <rect key="frame" x="0.0" y="0.0" width="164" height="32"/>
-                                                <color key="backgroundColor" red="0.51266735792160034" green="0.36470588235294116" blue="0.14283260703086853" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.29801362752914429" green="0.29805359244346619" blue="0.2980000376701355" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <state key="normal" title="插播內容">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -177,7 +177,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u2r-Ta-sy0">
                                                 <rect key="frame" x="179" y="0.0" width="164" height="32"/>
-                                                <color key="backgroundColor" red="0.51266735789999995" green="0.36470588240000001" blue="0.142832607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.29801362749999999" green="0.29805359240000001" blue="0.2980000377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <state key="normal" title="編輯內容">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -201,7 +201,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bo-oO-Z7o">
                                                 <rect key="frame" x="0.0" y="0.0" width="164" height="32"/>
-                                                <color key="backgroundColor" red="0.51266735789999995" green="0.36470588240000001" blue="0.142832607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.29801362749999999" green="0.29805359240000001" blue="0.2980000377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <state key="normal" title="刪除顯示行數">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -217,7 +217,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kc9-HG-H5X">
                                                 <rect key="frame" x="179" y="0.0" width="164" height="32"/>
-                                                <color key="backgroundColor" red="0.51266735789999995" green="0.36470588240000001" blue="0.142832607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.29801362749999999" green="0.29805359240000001" blue="0.2980000377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <state key="normal" title="恢復顯示行數">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -241,7 +241,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kSw-gR-cCT">
                                                 <rect key="frame" x="0.0" y="0.0" width="164" height="32"/>
-                                                <color key="backgroundColor" red="0.51266735789999995" green="0.36470588240000001" blue="0.142832607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.29801362749999999" green="0.29805359240000001" blue="0.2980000377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <state key="normal" title="欲顯示行數">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -257,7 +257,7 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjO-3H-Eks">
                                                 <rect key="frame" x="179" y="0.0" width="164" height="32"/>
-                                                <color key="backgroundColor" red="0.51266735789999995" green="0.36470588240000001" blue="0.142832607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.29801362749999999" green="0.29805359240000001" blue="0.2980000377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                                 <state key="normal" title="訂閱">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -357,13 +357,33 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="文字內容" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c4k-YU-RZS">
+                                <rect key="frame" x="16" y="122" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="文字屬性" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qos-4Y-wMv">
+                                <rect key="frame" x="16" y="244" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.33330518007278442" green="0.33334910869598389" blue="0.3332902193069458" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="c4k-YU-RZS" secondAttribute="trailing" id="4Ak-rf-ujH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Qos-4Y-wMv" secondAttribute="trailing" id="CMO-0X-UgY"/>
+                            <constraint firstItem="Qos-4Y-wMv" firstAttribute="top" secondItem="JAW-hA-KJc" secondAttribute="bottom" constant="50" id="GrR-mt-V43"/>
                             <constraint firstItem="erx-Oe-LaR" firstAttribute="top" secondItem="JAW-hA-KJc" secondAttribute="bottom" constant="473" id="HFw-ng-fXf"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JAW-hA-KJc" secondAttribute="trailing" id="L1h-0a-j3F"/>
+                            <constraint firstItem="erx-Oe-LaR" firstAttribute="top" secondItem="Qos-4Y-wMv" secondAttribute="bottom" constant="402" id="Lhh-Ru-EN5"/>
+                            <constraint firstItem="JAW-hA-KJc" firstAttribute="top" secondItem="c4k-YU-RZS" secondAttribute="bottom" constant="19" id="MhF-wJ-brl"/>
+                            <constraint firstItem="c4k-YU-RZS" firstAttribute="top" secondItem="Io9-44-KHk" secondAttribute="bottom" constant="58" id="SU2-6n-RV4"/>
                             <constraint firstItem="JAW-hA-KJc" firstAttribute="top" secondItem="Io9-44-KHk" secondAttribute="bottom" constant="98" id="VVA-N7-5Fj"/>
                             <constraint firstItem="JAW-hA-KJc" firstAttribute="leading" secondItem="GM8-zh-rYb" secondAttribute="leadingMargin" id="X4B-6j-VaW"/>
+                            <constraint firstItem="c4k-YU-RZS" firstAttribute="leading" secondItem="GM8-zh-rYb" secondAttribute="leadingMargin" id="f8X-3H-a7A"/>
+                            <constraint firstItem="Qos-4Y-wMv" firstAttribute="leading" secondItem="GM8-zh-rYb" secondAttribute="leadingMargin" id="uKr-on-REs"/>
                         </constraints>
                     </view>
                     <connections>

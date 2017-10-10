@@ -12,7 +12,7 @@ import CoreData
 class MachinesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     
     var devices:[Device] = [
-        Device(name: "A1", location: "EA-101", imageName: "doge.jpg", controller: "Andy Wang"),
+        Device(name: "A1", location: "EA-101", imageName: "marquee1.jpg", controller: "Andy Wang"),
         Device(name: "B4", location: "CS-104", imageName: "doge1.png", controller: "Peter Chen, Vava Yu, PG One, GAI Wang"),
         Device(name: "H8", location: "資工系館前", imageName: "doge2.png", controller: "Kevin Lin, Kiki Liu"),
         Device(name: "C5", location: "活動中心", imageName: "doge3.jpg", controller: "Kinny Fang, Sarah Lin, Michael Lin"),
