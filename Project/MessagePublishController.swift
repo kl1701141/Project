@@ -10,28 +10,30 @@ import UIKit
 
 class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate{
 
-    //var device:Device!
     var message:Message!
+    
+    // for publish host and port information
     var host = "192.168.15.122"
     var port = "51700"
+    
+    
+    // for function picker options
     var infunction = ["向左移入","向內捲入","向外捲入","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲入","向下捲入","立即顯現","同時出現","跳入","射入","動畫","續幕"]
-    
     var outfunction = ["向左移入","向內捲出","向外捲出","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲出","向下捲出","立即顯現","同時出現","跳入","射入","動畫","續幕"]
-    
     var colors = ["紅色", "黃色", "綠色"]
-    
     var fullHalf = ["全形中英數字 (上限5字)", "半形中英數字 (上限10字)", "上下兩行之半形英數字 (上限20字)"]
+    var times: [String] = []
     
-    var times = [""]
     
-    //for i in 1 ... 255
-    
+    // pickers
     @IBOutlet weak var colorPicker: UIPickerView!
     @IBOutlet weak var fullHalfPicker: UIPickerView!
     @IBOutlet weak var funcInPicker: UIPickerView!
     @IBOutlet weak var funcOutPicker: UIPickerView!
+    @IBOutlet weak var timePicker: UIPickerView!
     
     
+    // text fields
     @IBOutlet weak var colorTextField: UITextField!
     @IBOutlet weak var fullHalfTextField: UITextField!
     @IBOutlet weak var messageTextField: UITextField!
@@ -43,8 +45,6 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
-        
         title = "Edit line: " + message.line
         // Do any additional setup after loading the view.
         
@@ -52,6 +52,11 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         fullHalfPicker.backgroundColor = UIColor.white
         funcInPicker.backgroundColor = UIColor.white
         funcOutPicker.backgroundColor = UIColor.white
+        timePicker.backgroundColor = UIColor.white
+        
+        for i in 0...255 {
+            self.times.append("\(i)")
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,17 +66,20 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
     
     public func numberOfComponents(in pickerView: UIPickerView) -> Int{
         return 1
-        
     }
     
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
-        var rows: Int = infunction.count
-        if pickerView == funcOutPicker {
+        var rows: Int = times.count
+        if pickerView == funcInPicker {
+            rows = self.infunction.count
+        } else if pickerView == funcOutPicker {
             rows = self.outfunction.count
-        } else if pickerView == self.colorPicker {
+        } else if pickerView == colorPicker {
             rows = self.colors.count
-        } else if pickerView == self.fullHalfPicker {
+        } else if pickerView == fullHalfPicker {
             rows = self.fullHalf.count
+        } else if pickerView == timePicker {
+            rows = self.times.count
         }
         
         return rows
@@ -81,19 +89,21 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         
         let pickerLabel = UILabel()
         
-        pickerLabel.text = infunction[row]
-        self.view.endEditing(true)
-        if pickerView == funcOutPicker {
-            pickerLabel.text = self.outfunction[row]
-        } else if pickerView == self.colorPicker {
-            pickerLabel.text = self.colors[row]
-        } else if pickerView == self.fullHalfPicker {
-            pickerLabel.text = self.fullHalf[row]
+        if pickerView == funcInPicker {
+            pickerLabel.text = infunction[row]
+        } else if pickerView == funcOutPicker {
+            pickerLabel.text = outfunction[row]
+        } else if pickerView == colorPicker {
+            pickerLabel.text = colors[row]
+        } else if pickerView == fullHalfPicker {
+            pickerLabel.text = fullHalf[row]
+        } else if pickerView == timePicker {
+            pickerLabel.text = times[row]
         }
+        self.view.endEditing(true)
         
         pickerLabel.textColor = .darkGray
         pickerLabel.textAlignment = .center
-        //pickerLabel.text = String(self.degrees[row])
         pickerLabel.font = UIFont(name:"Helvetica", size: 17)
         
         return pickerLabel
@@ -104,11 +114,14 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
             self.funcInTextField.text = self.infunction[row]
         } else if pickerView == funcOutPicker {
             self.funcOutTextField.text = self.outfunction[row]
-        } else if pickerView == self.colorPicker {
+        } else if pickerView == colorPicker {
             self.colorTextField.text = self.colors[row]
-        } else if pickerView == self.fullHalfPicker {
+        } else if pickerView == fullHalfPicker {
             self.fullHalfTextField.text = self.fullHalf[row]
+        } else if pickerView == timePicker {
+            self.timeTextField.text = self.times[row]
         }
+        
         pickerView.isHidden = true
         
     }
@@ -127,32 +140,12 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         } else if textField == self.fullHalfTextField {
             self.fullHalfPicker.isHidden = false
             textField.endEditing(true)
+        } else if textField == self.timeTextField {
+            self.timePicker.isHidden = false
+            textField.endEditing(true)
         }
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     @IBAction func pulishMessage(_ sender: AnyObject) {
         let urlString: String = "http://\(host):\(port)/api/Default"

@@ -557,6 +557,16 @@
                                     <outlet property="delegate" destination="y3s-cn-dX6" id="MdF-04-FUS"/>
                                 </connections>
                             </pickerView>
+                            <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rFy-Pf-tBE">
+                                <rect key="frame" x="96" y="520" width="104" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="6vK-Ys-3GB"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="y3s-cn-dX6" id="Wkj-NR-5ce"/>
+                                    <outlet property="delegate" destination="y3s-cn-dX6" id="J2O-4y-CNM"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="0.33330518007278442" green="0.33334910869598389" blue="0.3332902193069458" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -568,6 +578,7 @@
                             <constraint firstItem="lcy-XV-Kki" firstAttribute="top" secondItem="c4k-YU-RZS" secondAttribute="bottom" constant="28.5" id="3b0-xN-3Bm"/>
                             <constraint firstItem="J01-Xk-Bzk" firstAttribute="centerX" secondItem="Vv5-SA-vj3" secondAttribute="centerX" id="50x-p7-WIh"/>
                             <constraint firstItem="fOL-sQ-Zhd" firstAttribute="top" secondItem="Qos-4Y-wMv" secondAttribute="bottom" constant="28.5" id="8KX-ez-iL4"/>
+                            <constraint firstItem="rFy-Pf-tBE" firstAttribute="width" secondItem="fJj-dF-svS" secondAttribute="width" id="ABa-PP-7il"/>
                             <constraint firstItem="c4k-YU-RZS" firstAttribute="top" secondItem="OTo-kk-QKT" secondAttribute="bottom" constant="40" id="Apc-ZW-diV"/>
                             <constraint firstItem="Qos-4Y-wMv" firstAttribute="top" secondItem="Io9-44-KHk" secondAttribute="bottom" constant="41" id="BhN-o6-n9S"/>
                             <constraint firstItem="gWm-BM-CH8" firstAttribute="centerX" secondItem="bSv-Dc-Trx" secondAttribute="centerX" id="DqR-en-bNV"/>
@@ -575,6 +586,7 @@
                             <constraint firstItem="Qos-4Y-wMv" firstAttribute="trailing" secondItem="GM8-zh-rYb" secondAttribute="trailingMargin" id="FGQ-dx-gqS"/>
                             <constraint firstItem="fOL-sQ-Zhd" firstAttribute="leading" secondItem="GM8-zh-rYb" secondAttribute="leadingMargin" id="GEu-Zb-6Uu"/>
                             <constraint firstItem="OTo-kk-QKT" firstAttribute="top" secondItem="fOL-sQ-Zhd" secondAttribute="bottom" constant="10" id="JRt-qx-5WW"/>
+                            <constraint firstItem="rFy-Pf-tBE" firstAttribute="top" secondItem="ouC-yS-1J6" secondAttribute="bottom" id="Kbq-Nl-AHD"/>
                             <constraint firstItem="KyM-aG-Gps" firstAttribute="width" secondItem="SP9-cA-vKL" secondAttribute="width" id="LY0-Jr-cnC"/>
                             <constraint firstItem="Usb-Lk-LtT" firstAttribute="leading" secondItem="GM8-zh-rYb" secondAttribute="leadingMargin" id="NNj-cb-qM1"/>
                             <constraint firstItem="AtQ-MH-Kez" firstAttribute="leading" secondItem="GM8-zh-rYb" secondAttribute="leadingMargin" id="Q4T-6L-peC"/>
@@ -594,6 +606,7 @@
                             <constraint firstItem="lcy-XV-Kki" firstAttribute="leading" secondItem="GM8-zh-rYb" secondAttribute="leadingMargin" id="og0-Qp-mnC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AtQ-MH-Kez" secondAttribute="trailing" id="par-Zh-bHO"/>
                             <constraint firstItem="AtQ-MH-Kez" firstAttribute="top" secondItem="Usb-Lk-LtT" secondAttribute="bottom" constant="28.5" id="s8d-ZC-ntl"/>
+                            <constraint firstItem="rFy-Pf-tBE" firstAttribute="centerX" secondItem="fJj-dF-svS" secondAttribute="centerX" id="seQ-gC-TyY"/>
                             <constraint firstItem="gWm-BM-CH8" firstAttribute="top" secondItem="fOL-sQ-Zhd" secondAttribute="bottom" id="t8q-rC-Y3S"/>
                             <constraint firstItem="KyM-aG-Gps" firstAttribute="top" secondItem="AtQ-MH-Kez" secondAttribute="bottom" id="tdf-gp-7AP"/>
                             <constraint firstItem="lcy-XV-Kki" firstAttribute="top" secondItem="c4k-YU-RZS" secondAttribute="bottom" constant="28.5" id="tnA-hH-Kb6"/>
@@ -614,6 +627,7 @@
                         <outlet property="funcOutPicker" destination="KyM-aG-Gps" id="O3r-hD-Eh2"/>
                         <outlet property="funcOutTextField" destination="SP9-cA-vKL" id="Hef-hK-hOl"/>
                         <outlet property="messageTextField" destination="9b8-ns-Mr9" id="duv-fe-dwd"/>
+                        <outlet property="timePicker" destination="rFy-Pf-tBE" id="Qcg-9x-GGK"/>
                         <outlet property="timeTextField" destination="fJj-dF-svS" id="GaN-ay-nlS"/>
                     </connections>
                 </viewController>
