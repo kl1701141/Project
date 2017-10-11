@@ -373,12 +373,15 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SP9-cA-vKL">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SP9-cA-vKL">
                                         <rect key="frame" x="223" y="0.0" width="120" height="30"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="y3s-cn-dX6" id="UwQ-aS-TyH"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -421,6 +424,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="y3s-cn-dX6" id="3fm-3K-m7g"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="秒  (範圍: 1~255秒)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yvc-tU-jAR">
                                         <rect key="frame" x="195" y="0.0" width="148" height="30"/>
@@ -446,7 +452,7 @@
                                 </connections>
                             </pickerView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="fOL-sQ-Zhd">
-                                <rect key="frame" x="16" y="160" width="343" height="30"/>
+                                <rect key="frame" x="16" y="160" width="160" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="顏色" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="guR-tn-EEm">
                                         <rect key="frame" x="0.0" y="0.0" width="35" height="30"/>
@@ -455,29 +461,38 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bSv-Dc-Trx">
-                                        <rect key="frame" x="46" y="0.0" width="297" height="30"/>
+                                        <rect key="frame" x="46" y="0.0" width="114" height="30"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="y3s-cn-dX6" id="ZXI-6C-euP"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="A7V-cE-m5q"/>
+                                </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="OTo-kk-QKT">
                                 <rect key="frame" x="16" y="200" width="343" height="30"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="全／半形與字數" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SeE-YI-Pqe">
-                                        <rect key="frame" x="0.0" y="0.0" width="121.5" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="全／半形" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SeE-YI-Pqe">
+                                        <rect key="frame" x="0.0" y="0.0" width="69.5" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b8C-Qz-jUf">
-                                        <rect key="frame" x="132.5" y="0.0" width="210.5" height="30"/>
+                                        <rect key="frame" x="80.5" y="0.0" width="262.5" height="30"/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="y3s-cn-dX6" id="mRq-2M-TJa"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -493,9 +508,12 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9b8-ns-Mr9">
                                         <rect key="frame" x="46" y="0.0" width="297" height="30"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="y3s-cn-dX6" id="mlG-qW-gzV"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -509,6 +527,36 @@
                                     <action selector="pulishMessage:" destination="y3s-cn-dX6" eventType="touchUpInside" id="2ah-mg-sEa"/>
                                 </connections>
                             </button>
+                            <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gWm-BM-CH8">
+                                <rect key="frame" x="62" y="190" width="114" height="85"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="85" id="Z0P-2Y-qiw"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="9"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="dataSource" destination="y3s-cn-dX6" id="HkJ-Wy-ecv"/>
+                                    <outlet property="delegate" destination="y3s-cn-dX6" id="XOl-Mo-jo6"/>
+                                </connections>
+                            </pickerView>
+                            <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icp-Ck-qg1">
+                                <rect key="frame" x="96" y="230" width="263" height="85"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="85" id="HQs-Ox-S85"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="9"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="dataSource" destination="y3s-cn-dX6" id="IHg-jI-aym"/>
+                                    <outlet property="delegate" destination="y3s-cn-dX6" id="MdF-04-FUS"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" red="0.33330518007278442" green="0.33334910869598389" blue="0.3332902193069458" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -522,6 +570,7 @@
                             <constraint firstItem="fOL-sQ-Zhd" firstAttribute="top" secondItem="Qos-4Y-wMv" secondAttribute="bottom" constant="28.5" id="8KX-ez-iL4"/>
                             <constraint firstItem="c4k-YU-RZS" firstAttribute="top" secondItem="OTo-kk-QKT" secondAttribute="bottom" constant="40" id="Apc-ZW-diV"/>
                             <constraint firstItem="Qos-4Y-wMv" firstAttribute="top" secondItem="Io9-44-KHk" secondAttribute="bottom" constant="41" id="BhN-o6-n9S"/>
+                            <constraint firstItem="gWm-BM-CH8" firstAttribute="centerX" secondItem="bSv-Dc-Trx" secondAttribute="centerX" id="DqR-en-bNV"/>
                             <constraint firstItem="c4k-YU-RZS" firstAttribute="top" secondItem="OTo-kk-QKT" secondAttribute="bottom" constant="40" id="EUA-WW-Sg1"/>
                             <constraint firstItem="Qos-4Y-wMv" firstAttribute="trailing" secondItem="GM8-zh-rYb" secondAttribute="trailingMargin" id="FGQ-dx-gqS"/>
                             <constraint firstItem="fOL-sQ-Zhd" firstAttribute="leading" secondItem="GM8-zh-rYb" secondAttribute="leadingMargin" id="GEu-Zb-6Uu"/>
@@ -530,6 +579,7 @@
                             <constraint firstItem="Usb-Lk-LtT" firstAttribute="leading" secondItem="GM8-zh-rYb" secondAttribute="leadingMargin" id="NNj-cb-qM1"/>
                             <constraint firstItem="AtQ-MH-Kez" firstAttribute="leading" secondItem="GM8-zh-rYb" secondAttribute="leadingMargin" id="Q4T-6L-peC"/>
                             <constraint firstItem="Usb-Lk-LtT" firstAttribute="top" secondItem="lcy-XV-Kki" secondAttribute="bottom" constant="40" id="Rfr-NX-TA7"/>
+                            <constraint firstItem="gWm-BM-CH8" firstAttribute="width" secondItem="bSv-Dc-Trx" secondAttribute="width" id="TNT-c3-AmA"/>
                             <constraint firstItem="ouC-yS-1J6" firstAttribute="top" secondItem="AtQ-MH-Kez" secondAttribute="bottom" constant="10" id="UD0-h2-Bfx"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ouC-yS-1J6" secondAttribute="trailing" id="UW3-Eb-33O"/>
                             <constraint firstItem="J01-Xk-Bzk" firstAttribute="top" secondItem="AtQ-MH-Kez" secondAttribute="bottom" id="WL5-jR-bSK"/>
@@ -537,22 +587,27 @@
                             <constraint firstAttribute="trailingMargin" secondItem="OTo-kk-QKT" secondAttribute="trailing" id="Yjk-Ix-qLo"/>
                             <constraint firstItem="Qos-4Y-wMv" firstAttribute="leading" secondItem="GM8-zh-rYb" secondAttribute="leadingMargin" id="aMA-dN-iKi"/>
                             <constraint firstItem="OTo-kk-QKT" firstAttribute="leading" secondItem="GM8-zh-rYb" secondAttribute="leadingMargin" id="eHJ-wf-Eqf"/>
+                            <constraint firstItem="icp-Ck-qg1" firstAttribute="width" secondItem="b8C-Qz-jUf" secondAttribute="width" id="eTB-Pz-8Gc"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lcy-XV-Kki" secondAttribute="trailing" id="f4q-8U-RXX"/>
                             <constraint firstItem="ouC-yS-1J6" firstAttribute="top" secondItem="AtQ-MH-Kez" secondAttribute="bottom" constant="10" id="hC3-2w-4so"/>
                             <constraint firstItem="c4k-YU-RZS" firstAttribute="leading" secondItem="GM8-zh-rYb" secondAttribute="leadingMargin" id="jyB-0k-KEx"/>
                             <constraint firstItem="lcy-XV-Kki" firstAttribute="leading" secondItem="GM8-zh-rYb" secondAttribute="leadingMargin" id="og0-Qp-mnC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="AtQ-MH-Kez" secondAttribute="trailing" id="par-Zh-bHO"/>
                             <constraint firstItem="AtQ-MH-Kez" firstAttribute="top" secondItem="Usb-Lk-LtT" secondAttribute="bottom" constant="28.5" id="s8d-ZC-ntl"/>
+                            <constraint firstItem="gWm-BM-CH8" firstAttribute="top" secondItem="fOL-sQ-Zhd" secondAttribute="bottom" id="t8q-rC-Y3S"/>
                             <constraint firstItem="KyM-aG-Gps" firstAttribute="top" secondItem="AtQ-MH-Kez" secondAttribute="bottom" id="tdf-gp-7AP"/>
                             <constraint firstItem="lcy-XV-Kki" firstAttribute="top" secondItem="c4k-YU-RZS" secondAttribute="bottom" constant="28.5" id="tnA-hH-Kb6"/>
+                            <constraint firstItem="icp-Ck-qg1" firstAttribute="centerX" secondItem="b8C-Qz-jUf" secondAttribute="centerX" id="x2W-ER-Sbd"/>
                             <constraint firstItem="AtQ-MH-Kez" firstAttribute="top" secondItem="Usb-Lk-LtT" secondAttribute="bottom" constant="28.5" id="xrD-3y-Tgp"/>
                             <constraint firstItem="J01-Xk-Bzk" firstAttribute="width" secondItem="Vv5-SA-vj3" secondAttribute="width" id="y0i-j9-E5D"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="fOL-sQ-Zhd" secondAttribute="trailing" id="ytI-5x-Vya"/>
+                            <constraint firstItem="icp-Ck-qg1" firstAttribute="top" secondItem="OTo-kk-QKT" secondAttribute="bottom" id="z4G-zE-Pp1"/>
                             <constraint firstItem="KyM-aG-Gps" firstAttribute="centerX" secondItem="SP9-cA-vKL" secondAttribute="centerX" id="zPB-tG-L64"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="colorPicker" destination="gWm-BM-CH8" id="UVK-MU-6GD"/>
                         <outlet property="colorTextField" destination="bSv-Dc-Trx" id="TUj-pt-uH7"/>
+                        <outlet property="fullHalfPicker" destination="icp-Ck-qg1" id="SZI-Za-hV6"/>
                         <outlet property="fullHalfTextField" destination="b8C-Qz-jUf" id="RgI-HE-VkM"/>
                         <outlet property="funcInPicker" destination="J01-Xk-Bzk" id="lEx-nP-OYx"/>
                         <outlet property="funcInTextField" destination="Vv5-SA-vj3" id="ZRh-Eo-fLu"/>

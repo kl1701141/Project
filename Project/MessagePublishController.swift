@@ -20,8 +20,14 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
     
     var colors = ["紅色", "黃色", "綠色"]
     
-    var fullHalf = [""]
+    var fullHalf = ["全形中英數字 (上限5字)", "半形中英數字 (上限10字)", "上下兩行之半形英數字 (上限20字)"]
     
+    var times = [""]
+    
+    //for i in 1 ... 255
+    
+    @IBOutlet weak var colorPicker: UIPickerView!
+    @IBOutlet weak var fullHalfPicker: UIPickerView!
     @IBOutlet weak var funcInPicker: UIPickerView!
     @IBOutlet weak var funcOutPicker: UIPickerView!
     
@@ -42,8 +48,10 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         title = "Edit line: " + message.line
         // Do any additional setup after loading the view.
         
-        
+        colorPicker.backgroundColor = UIColor.white
+        fullHalfPicker.backgroundColor = UIColor.white
         funcInPicker.backgroundColor = UIColor.white
+        funcOutPicker.backgroundColor = UIColor.white
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,22 +68,48 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         var rows: Int = infunction.count
         if pickerView == funcOutPicker {
             rows = self.outfunction.count
+        } else if pickerView == self.colorPicker {
+            rows = self.colors.count
+        } else if pickerView == self.fullHalfPicker {
+            rows = self.fullHalf.count
         }
         
         return rows
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
         
+        let pickerLabel = UILabel()
+        
+        pickerLabel.text = infunction[row]
         self.view.endEditing(true)
-        return infunction[row]
+        if pickerView == funcOutPicker {
+            pickerLabel.text = self.outfunction[row]
+        } else if pickerView == self.colorPicker {
+            pickerLabel.text = self.colors[row]
+        } else if pickerView == self.fullHalfPicker {
+            pickerLabel.text = self.fullHalf[row]
+        }
         
+        pickerLabel.textColor = .darkGray
+        pickerLabel.textAlignment = .center
+        //pickerLabel.text = String(self.degrees[row])
+        pickerLabel.font = UIFont(name:"Helvetica", size: 17)
+        
+        return pickerLabel
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
-        self.funcInTextField.text = self.infunction[row]
-        self.funcInPicker.isHidden = true
+        if pickerView == funcInPicker {
+            self.funcInTextField.text = self.infunction[row]
+        } else if pickerView == funcOutPicker {
+            self.funcOutTextField.text = self.outfunction[row]
+        } else if pickerView == self.colorPicker {
+            self.colorTextField.text = self.colors[row]
+        } else if pickerView == self.fullHalfPicker {
+            self.fullHalfTextField.text = self.fullHalf[row]
+        }
+        pickerView.isHidden = true
         
     }
     
@@ -84,12 +118,16 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         if textField == self.funcInTextField {
             self.funcInPicker.isHidden = false
             textField.endEditing(true)
-        }
-        else if textField == self.funcOutTextField {
-            self.funcOutTextField.isHidden = false
+        } else if textField == self.funcOutTextField {
+            self.funcOutPicker.isHidden = false
+            textField.endEditing(true)
+        } else if textField == self.colorTextField {
+            self.colorPicker.isHidden = false
+            textField.endEditing(true)
+        } else if textField == self.fullHalfTextField {
+            self.fullHalfPicker.isHidden = false
             textField.endEditing(true)
         }
-        
         
     }
     
