@@ -14,15 +14,26 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
     var message:Message!
     var host = "192.168.15.122"
     var port = "51700"
-    var IOfunction = ["向左移入","向內捲入","向外捲入","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲入","向下捲入","立即顯現","同時出現","跳入","射入","動畫","續幕"]
+    var infunction = ["向左移入","向內捲入","向外捲入","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲入","向下捲入","立即顯現","同時出現","跳入","射入","動畫","續幕"]
     
-    @IBOutlet weak var functionPicker: UIPickerView!
+    var outfunction = ["向左移入","向內捲出","向外捲出","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲出","向下捲出","立即顯現","同時出現","跳入","射入","動畫","續幕"]
     
-    @IBOutlet var textField: UITextField!
+    var colors = ["紅色", "黃色", "綠色"]
+    
+    var fullHalf = [""]
+    
+    @IBOutlet weak var funcInPicker: UIPickerView!
+    @IBOutlet weak var funcOutPicker: UIPickerView!
+    
+    
+    @IBOutlet weak var colorTextField: UITextField!
+    @IBOutlet weak var fullHalfTextField: UITextField!
+    @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var funcInTextField: UITextField!
     @IBOutlet weak var funcOutTextField: UITextField!
+    @IBOutlet weak var timeTextField: UITextField!
     
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -32,7 +43,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         // Do any additional setup after loading the view.
         
         
-        functionPicker.backgroundColor = UIColor.white
+        funcInPicker.backgroundColor = UIColor.white
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,33 +57,39 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int{
+        var rows: Int = infunction.count
+        if pickerView == funcOutPicker {
+            rows = self.outfunction.count
+        }
         
-        return IOfunction.count
-        
+        return rows
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         self.view.endEditing(true)
-        return IOfunction[row]
+        return infunction[row]
         
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        self.funcInTextField.text = self.IOfunction[row]
-        self.functionPicker.isHidden = true
+        self.funcInTextField.text = self.infunction[row]
+        self.funcInPicker.isHidden = true
         
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         
         if textField == self.funcInTextField {
-            self.functionPicker.isHidden = false
-            //if you dont want the users to se the keyboard type:
-            
+            self.funcInPicker.isHidden = false
             textField.endEditing(true)
         }
+        else if textField == self.funcOutTextField {
+            self.funcOutTextField.isHidden = false
+            textField.endEditing(true)
+        }
+        
         
     }
     
@@ -104,7 +121,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         let url = URL(string: urlString)!
         
         var request = URLRequest(url: url)
-        let body = "Topic=\(message.device)&Text=\(textField.text!)"
+        let body = "Topic=\(message.device)&Text=\(messageTextField.text!)"
         //print message.device
         
         let postData = body.data(using: String.Encoding.utf8)
@@ -129,7 +146,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         
         //print(urlString, body)
         
-        textField.text = nil
+        messageTextField.text = nil
         //self.dismiss(animated: true, completion: nil)
         _ = navigationController?.popViewController(animated: true)
         

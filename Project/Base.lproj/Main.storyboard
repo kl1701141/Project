@@ -552,10 +552,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="colorTextField" destination="bSv-Dc-Trx" id="TUj-pt-uH7"/>
+                        <outlet property="fullHalfTextField" destination="b8C-Qz-jUf" id="RgI-HE-VkM"/>
+                        <outlet property="funcInPicker" destination="J01-Xk-Bzk" id="lEx-nP-OYx"/>
                         <outlet property="funcInTextField" destination="Vv5-SA-vj3" id="ZRh-Eo-fLu"/>
+                        <outlet property="funcOutPicker" destination="KyM-aG-Gps" id="O3r-hD-Eh2"/>
                         <outlet property="funcOutTextField" destination="SP9-cA-vKL" id="Hef-hK-hOl"/>
-                        <outlet property="functionPicker" destination="J01-Xk-Bzk" id="1SX-Yx-Uv6"/>
-                        <outlet property="textField" destination="9b8-ns-Mr9" id="hg6-Bf-Kc9"/>
+                        <outlet property="messageTextField" destination="9b8-ns-Mr9" id="duv-fe-dwd"/>
+                        <outlet property="timeTextField" destination="fJj-dF-svS" id="GaN-ay-nlS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8sM-QW-laR" userLabel="First Responder" sceneMemberID="firstResponder"/>
