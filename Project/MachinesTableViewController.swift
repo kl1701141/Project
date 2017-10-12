@@ -61,6 +61,8 @@ class MachinesTableViewController: UITableViewController, NSFetchedResultsContro
         searchController.searchBar.placeholder = "Search device..."
         searchController.searchBar.barTintColor = UIColor.darkGray
         searchController.searchBar.tintColor = UIColor.white
+        
+        //view.backgroundColor = UIColor.darkGray
     }
     
 //    @IBAction func searchAction(sender: UIBarButtonItem) {

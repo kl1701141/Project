@@ -20,6 +20,10 @@
 		7689AE741F5ECD6700144FDC /* MachineDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7689AE731F5ECD6700144FDC /* MachineDetailViewCell.swift */; };
 		7689AE761F5FC42300144FDC /* MachinesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7689AE751F5FC42300144FDC /* MachinesTableViewController.swift */; };
 		7689AE781F5FCD6300144FDC /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7689AE771F5FCD6300144FDC /* Device.swift */; };
+		768C72171F8FCC0C00E99B75 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C72161F8FCC0C00E99B75 /* ProfileTableViewCell.swift */; };
+		768C72191F8FCC5400E99B75 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C72181F8FCC5400E99B75 /* ProfileViewController.swift */; };
+		768C721B1F8FCDEA00E99B75 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C721A1F8FCDEA00E99B75 /* User.swift */; };
+		768C721D1F8FEE3B00E99B75 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C721C1F8FEE3B00E99B75 /* LogInViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +42,10 @@
 		7689AE731F5ECD6700144FDC /* MachineDetailViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachineDetailViewCell.swift; sourceTree = "<group>"; };
 		7689AE751F5FC42300144FDC /* MachinesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MachinesTableViewController.swift; sourceTree = "<group>"; };
 		7689AE771F5FCD6300144FDC /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		768C72161F8FCC0C00E99B75 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		768C72181F8FCC5400E99B75 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		768C721A1F8FCDEA00E99B75 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		768C721C1F8FEE3B00E99B75 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +83,10 @@
 				7689AE601F5D6DC500144FDC /* Assets.xcassets */,
 				7689AE621F5D6DC500144FDC /* LaunchScreen.storyboard */,
 				7689AE651F5D6DC500144FDC /* Info.plist */,
+				768C721A1F8FCDEA00E99B75 /* User.swift */,
 				7689AE771F5FCD6300144FDC /* Device.swift */,
 				7670EBDB1F736ECA004C7FCC /* Message.swift */,
+				768C721C1F8FEE3B00E99B75 /* LogInViewController.swift */,
 				7689AE751F5FC42300144FDC /* MachinesTableViewController.swift */,
 				7689AE6D1F5E1F2500144FDC /* MachinesTableViewCell.swift */,
 				7689AE6F1F5E96DD00144FDC /* MachineDetailViewController.swift */,
@@ -84,6 +94,8 @@
 				7670EBD91F7367EA004C7FCC /* DisplayingTableViewController.swift */,
 				7670EBDD1F7384EE004C7FCC /* DisplayingTableViewCell.swift */,
 				761792741F61EA2900C8B6BE /* MessagePublishController.swift */,
+				768C72181F8FCC5400E99B75 /* ProfileViewController.swift */,
+				768C72161F8FCC0C00E99B75 /* ProfileTableViewCell.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -160,14 +172,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				768C721B1F8FCDEA00E99B75 /* User.swift in Sources */,
 				761792751F61EA2900C8B6BE /* MessagePublishController.swift in Sources */,
 				7670EBDA1F7367EA004C7FCC /* DisplayingTableViewController.swift in Sources */,
 				7689AE741F5ECD6700144FDC /* MachineDetailViewCell.swift in Sources */,
 				7670EBDC1F736ECA004C7FCC /* Message.swift in Sources */,
 				7689AE5A1F5D6DC500144FDC /* AppDelegate.swift in Sources */,
 				7670EBDE1F7384EE004C7FCC /* DisplayingTableViewCell.swift in Sources */,
+				768C72191F8FCC5400E99B75 /* ProfileViewController.swift in Sources */,
 				7689AE701F5E96DD00144FDC /* MachineDetailViewController.swift in Sources */,
 				7689AE781F5FCD6300144FDC /* Device.swift in Sources */,
+				768C721D1F8FEE3B00E99B75 /* LogInViewController.swift in Sources */,
+				768C72171F8FCC0C00E99B75 /* ProfileTableViewCell.swift in Sources */,
 				7689AE6E1F5E1F2500144FDC /* MachinesTableViewCell.swift in Sources */,
 				7689AE761F5FC42300144FDC /* MachinesTableViewController.swift in Sources */,
 			);

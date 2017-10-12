@@ -26,6 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
         
         
+        
+        UITabBar.appearance()
+        
+        
         return true
     }
 

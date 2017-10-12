@@ -147,6 +147,15 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         
     }
     
+    @IBAction func clearAllTextField(_ sender: AnyObject) {
+        colorTextField.text = nil
+        fullHalfTextField.text = nil
+        messageTextField.text = nil
+        funcInTextField.text = nil
+        funcOutTextField.text = nil
+        timeTextField.text = nil
+    }
+    
     @IBAction func pulishMessage(_ sender: AnyObject) {
         let urlString: String = "http://\(host):\(port)/api/Default"
         let url = URL(string: urlString)!
