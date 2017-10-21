@@ -23,7 +23,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
     var infunction = ["向左移入","向內捲入","向外捲入","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲入","向下捲入","立即顯現","同時出現","跳入","射入","動畫","續幕"]
     var outfunction = ["向左移入","向內捲出","向外捲出","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲出","向下捲出","立即顯現","同時出現","跳入","射入","動畫","續幕"]
     var colors = ["紅色", "黃色", "綠色"]
-    var fullHalf = ["全形中英數字 (上限5字)", "一行半形中英數字 (上限10字)", "兩行半形英數字 (上限20字)"]
+    var fullHalf = ["一行半形中英數字 (上限10字)", "兩行半形英數字 (上限20字)", "全形中英數字 (上限5字)"]
     var times: [String] = []
     
     
@@ -55,6 +55,14 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         funcInPicker.backgroundColor = UIColor.white
         funcOutPicker.backgroundColor = UIColor.white
         timePicker.backgroundColor = UIColor.white
+        
+        colorTextField.text = "紅色"
+        fullHalfTextField.text = "一行半形中英數字 (上限10字)"
+        funcInTextField.text = "向左移入"
+        funcOutTextField.text = "向左移入"
+        timeTextField.text = "0"
+        
+        //timeTextField.accesso
         
         for i in 0...255 {
             self.times.append("\(i)")
@@ -283,7 +291,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         }
         
         
-        let body = "Topic=\(message.device)&Type=\(type)&Text=\(line),\(time!),\(funcIn),\(mode),\(colorMode),\(text!),\(funcOut)&Date=\(dateFormatter.string(from: now))"
+        let body = "Topic=\(message.device)&Type=\(type)&Data=\(line),\(time!),\(funcIn),\(mode),\(colorMode),\(text!),\(funcOut)&Date=\(dateFormatter.string(from: now))"
         //let body = "Topic=\(message.device)&Text=\(messageTextField.text!)"
         
         print (body)

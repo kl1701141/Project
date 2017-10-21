@@ -71,6 +71,14 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UITa
         if segue.identifier == "showDisplayingLines" {
             let destinationController = segue.destination as! DisplayingTableViewController
             destinationController.device = device.name
+        } else if segue.identifier == "enableLines" {
+            let destinationController = segue.destination as! PickUpLinesTableViewController
+            destinationController.device = device.name
+            destinationController.type = "B6"
+        } else if segue.identifier == "disableLines" {
+            let destinationController = segue.destination as! PickUpLinesTableViewController
+            destinationController.device = device.name
+            destinationController.type = "B7"
         }
     }
 

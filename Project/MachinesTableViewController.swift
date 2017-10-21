@@ -46,7 +46,7 @@ class MachinesTableViewController: UITableViewController, NSFetchedResultsContro
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        tableView.backgroundColor = UIColor.darkGray
+        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search,  target: self, action: nil)
         
@@ -62,6 +62,7 @@ class MachinesTableViewController: UITableViewController, NSFetchedResultsContro
         searchController.searchBar.barTintColor = UIColor.darkGray
         searchController.searchBar.tintColor = UIColor.white
         
+        tableView.backgroundColor = UIColor.darkGray
         //view.backgroundColor = UIColor.darkGray
     }
     

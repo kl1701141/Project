@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		761792751F61EA2900C8B6BE /* MessagePublishController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761792741F61EA2900C8B6BE /* MessagePublishController.swift */; };
+		764A51F01F9B560C007623F5 /* PickUpLinesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764A51EF1F9B560C007623F5 /* PickUpLinesTableViewController.swift */; };
+		764A51F21F9B5623007623F5 /* PickUpLinesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 764A51F11F9B5623007623F5 /* PickUpLinesTableViewCell.swift */; };
 		7670EBDA1F7367EA004C7FCC /* DisplayingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7670EBD91F7367EA004C7FCC /* DisplayingTableViewController.swift */; };
 		7670EBDC1F736ECA004C7FCC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7670EBDB1F736ECA004C7FCC /* Message.swift */; };
 		7670EBDE1F7384EE004C7FCC /* DisplayingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7670EBDD1F7384EE004C7FCC /* DisplayingTableViewCell.swift */; };
@@ -28,6 +30,8 @@
 
 /* Begin PBXFileReference section */
 		761792741F61EA2900C8B6BE /* MessagePublishController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagePublishController.swift; sourceTree = "<group>"; };
+		764A51EF1F9B560C007623F5 /* PickUpLinesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpLinesTableViewController.swift; sourceTree = "<group>"; };
+		764A51F11F9B5623007623F5 /* PickUpLinesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickUpLinesTableViewCell.swift; sourceTree = "<group>"; };
 		7670EBD91F7367EA004C7FCC /* DisplayingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayingTableViewController.swift; sourceTree = "<group>"; };
 		7670EBDB1F736ECA004C7FCC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7670EBDD1F7384EE004C7FCC /* DisplayingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayingTableViewCell.swift; sourceTree = "<group>"; };
@@ -96,6 +100,8 @@
 				761792741F61EA2900C8B6BE /* MessagePublishController.swift */,
 				768C72181F8FCC5400E99B75 /* ProfileViewController.swift */,
 				768C72161F8FCC0C00E99B75 /* ProfileTableViewCell.swift */,
+				764A51EF1F9B560C007623F5 /* PickUpLinesTableViewController.swift */,
+				764A51F11F9B5623007623F5 /* PickUpLinesTableViewCell.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -175,6 +181,7 @@
 				768C721B1F8FCDEA00E99B75 /* User.swift in Sources */,
 				761792751F61EA2900C8B6BE /* MessagePublishController.swift in Sources */,
 				7670EBDA1F7367EA004C7FCC /* DisplayingTableViewController.swift in Sources */,
+				764A51F21F9B5623007623F5 /* PickUpLinesTableViewCell.swift in Sources */,
 				7689AE741F5ECD6700144FDC /* MachineDetailViewCell.swift in Sources */,
 				7670EBDC1F736ECA004C7FCC /* Message.swift in Sources */,
 				7689AE5A1F5D6DC500144FDC /* AppDelegate.swift in Sources */,
@@ -186,6 +193,7 @@
 				768C72171F8FCC0C00E99B75 /* ProfileTableViewCell.swift in Sources */,
 				7689AE6E1F5E1F2500144FDC /* MachinesTableViewCell.swift in Sources */,
 				7689AE761F5FC42300144FDC /* MachinesTableViewController.swift in Sources */,
+				764A51F01F9B560C007623F5 /* PickUpLinesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
