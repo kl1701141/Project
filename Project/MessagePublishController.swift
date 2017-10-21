@@ -11,17 +11,19 @@ import UIKit
 class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate{
 
     var message:Message!
+    var type = "B1"
     
     // for publish host and port information
-    var host = "192.168.15.122"
-    var port = "51700"
+    var host = "192.168.15.110"
+    var port = "51320"
     
+    //dFormatter.dateFormat = "yyyy年ＭＭ月dd日 HH:mm:ss"
     
     // for function picker options
     var infunction = ["向左移入","向內捲入","向外捲入","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲入","向下捲入","立即顯現","同時出現","跳入","射入","動畫","續幕"]
     var outfunction = ["向左移入","向內捲出","向外捲出","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲出","向下捲出","立即顯現","同時出現","跳入","射入","動畫","續幕"]
     var colors = ["紅色", "黃色", "綠色"]
-    var fullHalf = ["全形中英數字 (上限5字)", "半形中英數字 (上限10字)", "上下兩行之半形英數字 (上限20字)"]
+    var fullHalf = ["全形中英數字 (上限5字)", "一行半形中英數字 (上限10字)", "兩行半形英數字 (上限20字)"]
     var times: [String] = []
     
     
@@ -157,12 +159,134 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
     }
     
     @IBAction func pulishMessage(_ sender: AnyObject) {
-        let urlString: String = "http://\(host):\(port)/api/Default"
+        let urlString: String = "http://\(host):\(port)/api/Mqtt"
         let url = URL(string: urlString)!
         
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
         var request = URLRequest(url: url)
-        let body = "Topic=\(message.device)&Text=\(messageTextField.text!)"
-        //print message.device
+        
+        let line = message.line
+        let time = timeTextField.text
+        var funcIn = funcInTextField.text!
+        switch funcIn {
+        case "向左移入":
+            funcIn = "A"
+        case "向內捲入":
+            funcIn = "B"
+        case "向外捲入":
+            funcIn = "C"
+        case "覆蓋向左":
+            funcIn = "D"
+        case "覆蓋向右":
+            funcIn = "E"
+        case "覆蓋向上":
+            funcIn = "F"
+        case "覆蓋向下":
+            funcIn = "G"
+        case "覆蓋向內":
+            funcIn = "H"
+        case "覆蓋向外":
+            funcIn = "I"
+        case "覆蓋 ↑↓":
+            funcIn = "J"
+        case "覆蓋 ↓↑":
+            funcIn = "K"
+        case "向上捲入":
+            funcIn = "L"
+        case "向下捲入":
+            funcIn = "M"
+        case "立即顯現":
+            funcIn = "N"
+        case "同時出現":
+            funcIn = "O"
+        case "跳入":
+            funcIn = "P"
+        case "射入":
+            funcIn = "Q"
+        case "動畫":
+            funcIn = "R"
+        case "續幕":
+            funcIn = "S"
+        default:
+            funcIn = "A"
+        }
+        
+        var mode = "C0"
+        if fullHalfTextField.text == "兩行半形英數字 (上限20字)" {
+            mode = "C1"
+        }
+        
+        var colorMode = ""
+        if colorTextField.text == "紅色" {
+            colorMode = "01"
+            if fullHalfTextField.text == "全形中英數字 (上限5字)" {
+                colorMode = "21"
+            }
+        } else if colorTextField.text == "綠色" {
+            colorMode = "04"
+            if fullHalfTextField.text == "全形中英數字 (上限5字)" {
+                colorMode = "24"
+            }
+        } else if colorTextField.text == "黃色" {
+            colorMode = "05"
+            if fullHalfTextField.text == "全形中英數字 (上限5字)" {
+                colorMode = "25"
+            }
+        }
+        
+        let text = messageTextField.text
+        var funcOut = funcOutTextField.text!
+        switch funcOut {
+        case "向左移入":
+            funcOut = "A"
+        case "向內捲出":
+            funcOut = "B"
+        case "向外捲出":
+            funcOut = "C"
+        case "覆蓋向左":
+            funcOut = "D"
+        case "覆蓋向右":
+            funcOut = "E"
+        case "覆蓋向上":
+            funcOut = "F"
+        case "覆蓋向下":
+            funcOut = "G"
+        case "覆蓋向內":
+            funcOut = "H"
+        case "覆蓋向外":
+            funcOut = "I"
+        case "覆蓋 ↑↓":
+            funcOut = "J"
+        case "覆蓋 ↓↑":
+            funcOut = "K"
+        case "向上捲出":
+            funcOut = "L"
+        case "向下捲出":
+            funcOut = "M"
+        case "立即顯現":
+            funcOut = "N"
+        case "同時出現":
+            funcOut = "O"
+        case "跳入":
+            funcOut = "P"
+        case "射入":
+            funcOut = "Q"
+        case "動畫":
+            funcOut = "R"
+        case "續幕":
+            funcOut = "S"
+        default:
+            funcOut = "A"
+        }
+        
+        
+        let body = "Topic=\(message.device)&Type=\(type)&Text=\(line),\(time!),\(funcIn),\(mode),\(colorMode),\(text!),\(funcOut)&Date=\(dateFormatter.string(from: now))"
+        //let body = "Topic=\(message.device)&Text=\(messageTextField.text!)"
+        
+        print (body)
         
         let postData = body.data(using: String.Encoding.utf8)
         

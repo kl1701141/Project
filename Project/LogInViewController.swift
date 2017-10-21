@@ -12,7 +12,7 @@ class LogInViewController: UIViewController {
 
     @IBOutlet weak var accountTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
+    //var user: User!
     
     
     
@@ -27,24 +27,22 @@ class LogInViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    /*
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         let now = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy年ＭＭ月dd日 HH:mm:ss"
+        dateFormatter.dateFormat = "yyyy/M/dd HH:mm:ss"
         
         if segue.identifier == "loginToProfile" {
-            user.devices = "A1"
-            user.loginTime = "\(dateFormatter.string(from: now))"
-            user.UID = "403410068"
-            user.name = accountTextField.text!
-            var user: User = User(name: "kl1701141", UID: "403410068", loginTime: "2017-10-13 00:37:35", devices: "A1")
-            let destinationController = segue.destination as! ProfileViewController
-            destinationController.user = user
+            let user: User = User(name: "\(accountTextField.text!)", UID: "403410068", loginTime: "\(dateFormatter.string(from: now))", devices: "A1")
+            let barViewControllers = segue.destination as! UITabBarController
+            let nav = barViewControllers.viewControllers![1] as! UINavigationController
+            let destinationViewController = nav.viewControllers[0] as! ProfileViewController
+            destinationViewController.user = user
         }
-    }*/
+    }
     
 
     /*

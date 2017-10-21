@@ -9,8 +9,8 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var user: User = User(name: "kl1701141", UID: "403410068", loginTime: "2017-10-13 00:37:35", devices: "A1")
-    //var user: User!
+    //var user: User = User(name: "kl1701141", UID: "403410068", loginTime: "2017-10-13 00:37:35", devices: "A1")
+    var user: User!
     @IBOutlet weak var tableView: UITableView!
     
     

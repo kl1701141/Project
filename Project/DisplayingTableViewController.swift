@@ -77,6 +77,7 @@ class DisplayingTableViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! MessagePublishController
                 destinationController.message = messages[indexPath.row]
+                destinationController.type = "B1"
             }
         }
     }
