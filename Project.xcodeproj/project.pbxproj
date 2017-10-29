@@ -26,6 +26,7 @@
 		768C72191F8FCC5400E99B75 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C72181F8FCC5400E99B75 /* ProfileViewController.swift */; };
 		768C721B1F8FCDEA00E99B75 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C721A1F8FCDEA00E99B75 /* User.swift */; };
 		768C721D1F8FEE3B00E99B75 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C721C1F8FEE3B00E99B75 /* LogInViewController.swift */; };
+		76CF66371FA6325E00448B7C /* Handy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CF66361FA6325E00448B7C /* Handy.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		768C72181F8FCC5400E99B75 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		768C721A1F8FCDEA00E99B75 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		768C721C1F8FEE3B00E99B75 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		76CF66361FA6325E00448B7C /* Handy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handy.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				768C72161F8FCC0C00E99B75 /* ProfileTableViewCell.swift */,
 				764A51EF1F9B560C007623F5 /* PickUpLinesTableViewController.swift */,
 				764A51F11F9B5623007623F5 /* PickUpLinesTableViewCell.swift */,
+				76CF66361FA6325E00448B7C /* Handy.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				761792751F61EA2900C8B6BE /* MessagePublishController.swift in Sources */,
 				7670EBDA1F7367EA004C7FCC /* DisplayingTableViewController.swift in Sources */,
 				764A51F21F9B5623007623F5 /* PickUpLinesTableViewCell.swift in Sources */,
+				76CF66371FA6325E00448B7C /* Handy.swift in Sources */,
 				7689AE741F5ECD6700144FDC /* MachineDetailViewCell.swift in Sources */,
 				7670EBDC1F736ECA004C7FCC /* Message.swift in Sources */,
 				7689AE5A1F5D6DC500144FDC /* AppDelegate.swift in Sources */,

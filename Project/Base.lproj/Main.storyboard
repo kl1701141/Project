@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -472,13 +472,13 @@
                                 <rect key="frame" x="16" y="450" width="343" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="進場" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VGC-8d-fxn">
-                                        <rect key="frame" x="0.0" y="0.0" width="35" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vv5-SA-vj3">
-                                        <rect key="frame" x="46" y="0.0" width="120" height="30"/>
+                                        <rect key="frame" x="11" y="0.0" width="155" height="30"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -488,13 +488,13 @@
                                         </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="出場" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0y5-qe-qmA">
-                                        <rect key="frame" x="177" y="0.0" width="35" height="30"/>
+                                        <rect key="frame" x="177" y="0.0" width="0.0" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SP9-cA-vKL">
-                                        <rect key="frame" x="223" y="0.0" width="120" height="30"/>
+                                        <rect key="frame" x="188" y="0.0" width="155" height="30"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -515,7 +515,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KyM-aG-Gps">
-                                <rect key="frame" x="239" y="480" width="120" height="130"/>
+                                <rect key="frame" x="204" y="480" width="155" height="130"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="130" id="1mQ-Nt-kfA"/>
                                 </constraints>
@@ -557,7 +557,7 @@
                                 </subviews>
                             </stackView>
                             <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J01-Xk-Bzk">
-                                <rect key="frame" x="62" y="480" width="120" height="130"/>
+                                <rect key="frame" x="27" y="480" width="155" height="130"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="130" id="h4a-CT-FdB"/>
                                 </constraints>
@@ -575,13 +575,13 @@
                                 <rect key="frame" x="16" y="160" width="160" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="顏色" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="guR-tn-EEm">
-                                        <rect key="frame" x="0.0" y="0.0" width="35" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bSv-Dc-Trx">
-                                        <rect key="frame" x="46" y="0.0" width="114" height="30"/>
+                                        <rect key="frame" x="11" y="0.0" width="149" height="30"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -599,13 +599,13 @@
                                 <rect key="frame" x="16" y="200" width="343" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="全／半形" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SeE-YI-Pqe">
-                                        <rect key="frame" x="0.0" y="0.0" width="69.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="12.5" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b8C-Qz-jUf">
-                                        <rect key="frame" x="80.5" y="0.0" width="262.5" height="30"/>
+                                        <rect key="frame" x="23.5" y="0.0" width="319.5" height="30"/>
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -625,7 +625,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9b8-ns-Mr9">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="9b8-ns-Mr9">
                                         <rect key="frame" x="46" y="0.0" width="297" height="30"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <nil key="textColor"/>
@@ -638,7 +638,7 @@
                                 </subviews>
                             </stackView>
                             <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gWm-BM-CH8">
-                                <rect key="frame" x="62" y="190" width="114" height="85"/>
+                                <rect key="frame" x="27" y="190" width="149" height="85"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="85" id="Z0P-2Y-qiw"/>
                                 </constraints>
@@ -653,7 +653,7 @@
                                 </connections>
                             </pickerView>
                             <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="icp-Ck-qg1">
-                                <rect key="frame" x="96" y="230" width="263" height="85"/>
+                                <rect key="frame" x="39" y="230" width="320" height="85"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="85" id="HQs-Ox-S85"/>
                                 </constraints>
@@ -667,8 +667,8 @@
                                     <outlet property="delegate" destination="y3s-cn-dX6" id="MdF-04-FUS"/>
                                 </connections>
                             </pickerView>
-                            <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rFy-Pf-tBE">
-                                <rect key="frame" x="96" y="520" width="104" height="110"/>
+                            <pickerView hidden="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="rFy-Pf-tBE">
+                                <rect key="frame" x="96.5" y="520" width="103.5" height="110"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="110" id="6vK-Ys-3GB"/>
                                 </constraints>
@@ -687,7 +687,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lws-xE-0lF">
                                         <rect key="frame" x="0.0" y="0.0" width="62" height="30"/>
-                                        <state key="normal" title="清除重填">
+                                        <state key="normal" title="恢復預設">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>

@@ -57,12 +57,11 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         timePicker.backgroundColor = UIColor.white
         
         colorTextField.text = "紅色"
-        fullHalfTextField.text = "一行半形中英數字 (上限10字)"
+        fullHalfTextField.text = "一行半形英數字 (上限10字)"
         funcInTextField.text = "向左移入"
         funcOutTextField.text = "向左移入"
         timeTextField.text = "0"
-        
-        //timeTextField.accesso
+        messageTextField.maxLength = 10;
         
         for i in 0...255 {
             self.times.append("\(i)")
@@ -153,17 +152,27 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         } else if textField == self.timeTextField {
             self.timePicker.isHidden = false
             textField.endEditing(true)
+        } else if textField == self.messageTextField {
+            if fullHalfTextField.text == "一行半形英數字 (上限10字)" {
+                messageTextField.maxLength = 10
+            } else if fullHalfTextField.text == "兩行半形英數字 (上限20字)" {
+                messageTextField.maxLength = 20
+            } else if fullHalfTextField.text == "全形中英數字 (上限5字)" {
+                messageTextField.maxLength = 5
+            }
+            //print(messageTextField.maxLength)
         }
         
     }
     
     @IBAction func clearAllTextField(_ sender: AnyObject) {
-        colorTextField.text = nil
-        fullHalfTextField.text = nil
+        colorTextField.text = "紅色"
+        fullHalfTextField.text = "一行半形英數字 (上限10字)"
+        funcInTextField.text = "向左移入"
+        funcOutTextField.text = "向左移入"
+        timeTextField.text = "0"
         messageTextField.text = nil
-        funcInTextField.text = nil
-        funcOutTextField.text = nil
-        timeTextField.text = nil
+        messageTextField.maxLength = 10;
     }
     
     @IBAction func pulishMessage(_ sender: AnyObject) {
@@ -245,7 +254,11 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
             }
         }
         
+        while (messageTextField.text?.count)! < messageTextField.maxLength {
+            messageTextField.text?.append(" ")
+        }
         let text = messageTextField.text
+        
         var funcOut = funcOutTextField.text!
         switch funcOut {
         case "向左移入":
@@ -291,10 +304,12 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         }
         
         
-        let body = "Topic=\(message.device)&Type=\(type)&Data=\(line),\(time!),\(funcIn),\(mode),\(colorMode),\(text!),\(funcOut)&Date=\(dateFormatter.string(from: now))"
-        //let body = "Topic=\(message.device)&Text=\(messageTextField.text!)"
         
-        print (body)
+        
+        let body = "Topic=\(message.device)&Type=\(type)&Data=\(line),\(time!),\(funcIn),\(mode),\(colorMode),\(text!),\(funcOut)&Date=\(dateFormatter.string(from: now))"
+        
+        
+        //print (body)
         
         let postData = body.data(using: String.Encoding.utf8)
         
