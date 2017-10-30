@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import CoreData
+//import CoreData
 
-class MachinesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
+class MachinesTableViewController: UITableViewController, UISearchResultsUpdating {
     
     var devices:[Device] = [
         Device(name: "A1", location: "EA-101", imageName: "marquee1.jpg", controller: "Andy Wang"),

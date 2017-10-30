@@ -30,6 +30,7 @@ class PickUpLinesTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.trash,  target: self, action: nil)
         
         tableView.backgroundColor = UIColor.darkGray
         
@@ -68,9 +69,16 @@ class PickUpLinesTableViewController: UITableViewController {
         cell.typeLabel.text = "Line: " + message.line
         cell.valueLabel.text = ": " + message.text
         
-        cell.accessoryType = .disclosureIndicator
+        //cell.accessoryType = .disclosureIndicator
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.accessoryType = .checkmark
+        
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 
     /*
