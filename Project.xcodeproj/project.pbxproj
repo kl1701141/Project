@@ -13,6 +13,7 @@
 		7670EBDA1F7367EA004C7FCC /* DisplayingTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7670EBD91F7367EA004C7FCC /* DisplayingTableViewController.swift */; };
 		7670EBDC1F736ECA004C7FCC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7670EBDB1F736ECA004C7FCC /* Message.swift */; };
 		7670EBDE1F7384EE004C7FCC /* DisplayingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7670EBDD1F7384EE004C7FCC /* DisplayingTableViewCell.swift */; };
+		768574D91FA71AE20070D5D3 /* DisplayLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768574D81FA71AE20070D5D3 /* DisplayLinesView.swift */; };
 		7689AE5A1F5D6DC500144FDC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7689AE591F5D6DC500144FDC /* AppDelegate.swift */; };
 		7689AE5F1F5D6DC500144FDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7689AE5D1F5D6DC500144FDC /* Main.storyboard */; };
 		7689AE611F5D6DC500144FDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7689AE601F5D6DC500144FDC /* Assets.xcassets */; };
@@ -36,6 +37,7 @@
 		7670EBD91F7367EA004C7FCC /* DisplayingTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayingTableViewController.swift; sourceTree = "<group>"; };
 		7670EBDB1F736ECA004C7FCC /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		7670EBDD1F7384EE004C7FCC /* DisplayingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayingTableViewCell.swift; sourceTree = "<group>"; };
+		768574D81FA71AE20070D5D3 /* DisplayLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayLinesView.swift; sourceTree = "<group>"; };
 		7689AE561F5D6DC500144FDC /* Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Project.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7689AE591F5D6DC500144FDC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7689AE5E1F5D6DC500144FDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				764A51EF1F9B560C007623F5 /* PickUpLinesTableViewController.swift */,
 				764A51F11F9B5623007623F5 /* PickUpLinesTableViewCell.swift */,
 				76CF66361FA6325E00448B7C /* Handy.swift */,
+				768574D81FA71AE20070D5D3 /* DisplayLinesView.swift */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				768C721B1F8FCDEA00E99B75 /* User.swift in Sources */,
 				761792751F61EA2900C8B6BE /* MessagePublishController.swift in Sources */,
 				7670EBDA1F7367EA004C7FCC /* DisplayingTableViewController.swift in Sources */,
+				768574D91FA71AE20070D5D3 /* DisplayLinesView.swift in Sources */,
 				764A51F21F9B5623007623F5 /* PickUpLinesTableViewCell.swift in Sources */,
 				76CF66371FA6325E00448B7C /* Handy.swift in Sources */,
 				7689AE741F5ECD6700144FDC /* MachineDetailViewCell.swift in Sources */,
