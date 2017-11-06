@@ -44,6 +44,8 @@ class PickUpLinesTableViewController: UITableViewController {
         Message(device: "A1", line: "12", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01")
     ]
     
+    var lineSelected = Array(repeatElement(false, count: 254))
+    
     var setOfLines = Set<Int>()
     
     override func viewDidLoad() {
@@ -68,6 +70,8 @@ class PickUpLinesTableViewController: UITableViewController {
             title = "Disable Lines On " + device
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.trash,  target: self, action: #selector(PickUpLinesTableViewController.editAction))
         }
+        
+        //cell?.tintColor = .white
         
         
     }
@@ -101,6 +105,12 @@ class PickUpLinesTableViewController: UITableViewController {
         cell.valueLabel.text = ": " + message.text
         
         //cell.accessoryType = .disclosureIndicator
+        if lineSelected[indexPath.row] {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
+        cell.tintColor = .white
         
         return cell
     }
@@ -109,6 +119,7 @@ class PickUpLinesTableViewController: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.tintColor = .white
         cell?.accessoryType = .checkmark
+        self.lineSelected[indexPath.row] = true
         
         setOfLines.insert(indexPath.row)
     }
@@ -117,6 +128,7 @@ class PickUpLinesTableViewController: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath)
         cell?.tintColor = .white
         cell?.accessoryType = .none
+        self.lineSelected[indexPath.row] = false
         
         setOfLines.remove(indexPath.row)
     }
