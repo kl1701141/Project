@@ -175,7 +175,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         messageTextField.maxLength = 10;
     }
     
-    @IBAction func pulishMessage(_ sender: AnyObject) {
+    @IBAction func publishMessage(_ sender: AnyObject) {
         let urlString: String = "http://\(host):\(port)/api/Mqtt"
         let url = URL(string: urlString)!
         
@@ -309,7 +309,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         let body = "Topic=\(message.device)&Type=\(type)&Data=\(line),\(time!),\(funcIn),\(mode),\(colorMode),\(text!),\(funcOut)&Date=\(dateFormatter.string(from: now))"
         
         
-        //print (body)
+        print (body)
         
         let postData = body.data(using: String.Encoding.utf8)
         

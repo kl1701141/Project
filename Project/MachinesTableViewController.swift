@@ -9,15 +9,7 @@
 import UIKit
 //import CoreData
 
-class MachinesTableViewController: UITableViewController, UISearchResultsUpdating, UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 254
-    }
-    
+class MachinesTableViewController: UITableViewController, UISearchResultsUpdating {
     
     var devices:[Device] = [
         Device(name: "A1", location: "EA-101", imageName: "marquee1.jpg", controller: "Andy Wang"),

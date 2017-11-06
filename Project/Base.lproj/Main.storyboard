@@ -354,7 +354,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="164" height="32"/>
                                                 <color key="backgroundColor" red="0.29801362749999999" green="0.29805359240000001" blue="0.2980000377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                <state key="normal" title="欲顯示行數">
+                                                <state key="normal" title="調整顯示行數">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
@@ -362,6 +362,9 @@
                                                         <integer key="value" value="12"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="dusplayLineFunc:" destination="mBz-Gm-3D4" eventType="touchUpInside" id="8Yh-Ba-zGN"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xjO-3H-Eks">
                                                 <rect key="frame" x="179" y="0.0" width="164" height="32"/>
@@ -383,7 +386,7 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8G-rA-KSA">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y8G-rA-KSA">
                                 <rect key="frame" x="16" y="234" width="343" height="213"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="調整顯示行數" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wWI-DE-hit">
@@ -404,7 +407,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FPt-ca-KPR">
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FPt-ca-KPR">
                                                 <rect key="frame" x="8" y="0.0" width="147.5" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -419,7 +422,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l2s-TH-Ivq">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l2s-TH-Ivq">
                                                 <rect key="frame" x="171.5" y="0.0" width="147.5" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -446,8 +449,11 @@
                                             <constraint firstAttribute="height" constant="30" id="OdU-gS-DCZ"/>
                                         </constraints>
                                         <state key="normal" title="確定"/>
+                                        <connections>
+                                            <action selector="publishMessage:" destination="mBz-Gm-3D4" eventType="touchUpInside" id="cKO-1N-hwx"/>
+                                        </connections>
                                     </button>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Ad-rc-DxT">
+                                    <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Ad-rc-DxT">
                                         <rect key="frame" x="16" y="47" width="147.5" height="170"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="170" id="UPZ-zh-KpP"/>
@@ -457,7 +463,7 @@
                                             <outlet property="delegate" destination="mBz-Gm-3D4" id="eye-xL-jOW"/>
                                         </connections>
                                     </pickerView>
-                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dir-cJ-B9v">
+                                    <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dir-cJ-B9v">
                                         <rect key="frame" x="179.5" y="47" width="147.5" height="170"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="170" id="SXF-LE-4v5"/>
@@ -488,6 +494,11 @@
                                     <constraint firstItem="zB0-vL-uw4" firstAttribute="top" secondItem="91G-DM-kN3" secondAttribute="bottom" constant="28" id="k6D-NC-27M"/>
                                     <constraint firstItem="dir-cJ-B9v" firstAttribute="centerY" secondItem="l2s-TH-Ivq" secondAttribute="centerY" id="yjd-xq-wpX"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="12"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.33330518009999999" green="0.33334910870000001" blue="0.33329021930000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -507,8 +518,13 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="displaLinesView" destination="Y8G-rA-KSA" id="FqU-i7-dYJ"/>
+                        <outlet property="fromPicker" destination="1Ad-rc-DxT" id="arH-VW-W9p"/>
+                        <outlet property="fromTextField" destination="FPt-ca-KPR" id="fCT-3G-UED"/>
                         <outlet property="machineImageView" destination="Ymf-dD-MEC" id="0WV-UW-5mG"/>
                         <outlet property="tableView" destination="96D-gA-A8d" id="4cc-sA-WhG"/>
+                        <outlet property="toPicker" destination="dir-cJ-B9v" id="I9d-D0-aQL"/>
+                        <outlet property="toTextField" destination="l2s-TH-Ivq" id="af4-Ds-xpz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8uB-JC-QB9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -831,7 +847,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="pulishMessage:" destination="y3s-cn-dX6" eventType="touchUpInside" id="2ah-mg-sEa"/>
+                                            <action selector="publishMessage:" destination="y3s-cn-dX6" eventType="touchUpInside" id="bFs-aG-mTS"/>
                                         </connections>
                                     </button>
                                 </subviews>

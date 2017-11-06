@@ -8,12 +8,26 @@
 
 import UIKit
 
-class MachineDetailViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate {
+    
+    // for publish host and port information
+    var host = "192.168.15.110"
+    var port = "51320"
 
+    @IBOutlet weak var displaLinesView: UIView!
+    
     @IBOutlet var machineImageView: UIImageView!
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet weak var fromPicker: UIPickerView!
+    @IBOutlet weak var toPicker: UIPickerView!
+    
+    @IBOutlet weak var fromTextField: UITextField!
+    @IBOutlet weak var toTextField: UITextField!
+    
     var device:Device!
+    
+    var lineNum:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,11 +44,115 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UITa
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
+        for i in 1...255 {
+            self.lineNum.append("\(i)")
+        }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return lineNum.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        let pickerLabel = UILabel()
+        
+        pickerLabel.text = lineNum[row]
+        
+        self.view.endEditing(true)
+        
+        pickerLabel.textColor = .darkGray
+        pickerLabel.textAlignment = .center
+        pickerLabel.font = UIFont(name:"Helvetica", size: 17)
+        
+        return pickerLabel
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == fromPicker {
+            self.fromTextField.text = self.lineNum[row]
+        } else if pickerView == toPicker {
+            self.toTextField.text = self.lineNum[row]
+        }
+        
+        pickerView.isHidden = true
+        
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        if textField == self.fromTextField {
+            self.fromPicker.isHidden = false
+            textField.endEditing(true)
+        } else if textField == self.toTextField {
+            self.toPicker.isHidden = false
+            textField.endEditing(true)
+        }
+        
+    }
+    
+    @IBAction func dusplayLineFunc(_ sender: AnyObject) {
+        fromTextField.text = "1"
+        toTextField.text = "255"
+        displaLinesView.isHidden = false
+    }
+    
+    @IBAction func publishMessage(_ sender: AnyObject) {
+        let urlString: String = "http://\(host):\(port)/api/Mqtt"
+        let url = URL(string: urlString)!
+        
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        var request = URLRequest(url: url)
+        
+        let from = fromTextField.text!
+        let to = toTextField.text!
+        let type = "B8"
+
+        let body = "Topic=\(device.name)&Type=\(type)&Data=\(from),\(to)&Date=\(dateFormatter.string(from: now))"
+        
+        
+        print (body)
+        
+        let postData = body.data(using: String.Encoding.utf8)
+        
+        request.httpMethod = "POST"
+        request.httpBody = postData
+        
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error as Any)
+            } else {
+                guard let data = data else {return}
+                print(data)
+            }
+            
+        }
+        task.resume()
+        
+        //var response: URLResponse?
+        
+        //print(urlString, body)
+        
+        //messageTextField.text = nil
+        //self.dismiss(animated: true, completion: nil)
+        //_ = navigationController?.popViewController(animated: true)
+        displaLinesView.isHidden = true
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
