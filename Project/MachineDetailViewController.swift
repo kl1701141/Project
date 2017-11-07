@@ -14,7 +14,9 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
     var host = "192.168.15.110"
     var port = "51320"
 
-    @IBOutlet weak var displaLinesView: UIView!
+    
+    @IBOutlet weak var displayLinesView: UIView!
+    
     
     @IBOutlet var machineImageView: UIImageView!
     @IBOutlet var tableView: UITableView!
@@ -82,8 +84,10 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == fromPicker {
             self.fromTextField.text = self.lineNum[row]
+            fromTextField.textAlignment = .center
         } else if pickerView == toPicker {
             self.toTextField.text = self.lineNum[row]
+            toTextField.textAlignment = .center
         }
         
         pickerView.isHidden = true
@@ -102,10 +106,23 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
         
     }
     
-    @IBAction func dusplayLineFunc(_ sender: AnyObject) {
+    @IBAction func displayLineFunc(_ sender: AnyObject) {
+        // set default value
         fromTextField.text = "1"
         toTextField.text = "255"
-        displaLinesView.isHidden = false
+        
+        // set text into center
+        fromTextField.textAlignment = .center
+        toTextField.textAlignment = .center
+        
+        // set picker's color
+        fromPicker.backgroundColor = .white
+        toPicker.backgroundColor = .white
+        
+        //setDisplayingLineView.layer.borderWidth = 10
+        //setDisplayingLineView.layer.borderColor = CGColor.typeID.
+        // launch
+        displayLinesView.isHidden = false
     }
     
     @IBAction func publishMessage(_ sender: AnyObject) {
@@ -152,7 +169,11 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
         //messageTextField.text = nil
         //self.dismiss(animated: true, completion: nil)
         //_ = navigationController?.popViewController(animated: true)
-        displaLinesView.isHidden = true
+        displayLinesView.isHidden = true
+    }
+    
+    @IBAction func cancelDisplayLineFunc(_ sender: AnyObject) {
+        displayLinesView.isHidden = true
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
