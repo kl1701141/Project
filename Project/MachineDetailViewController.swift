@@ -39,12 +39,14 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
         tableView.backgroundColor = UIColor.darkGray
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.separatorColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 0.8)
-        title = device.name
+        title = device.name + ": 裝置編輯"
         
         tableView.estimatedRowHeight = 36.0
         tableView.rowHeight = UITableViewAutomaticDimension
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
+        displayLinesView.transform = CGAffineTransform.init(scaleX: 0, y: 0)
         
         for i in 1...255 {
             self.lineNum.append("\(i)")
@@ -123,6 +125,9 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
         //setDisplayingLineView.layer.borderColor = CGColor.typeID.
         // launch
         displayLinesView.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: {
+            self.displayLinesView.transform = CGAffineTransform.identity
+        })
     }
     
     @IBAction func publishMessage(_ sender: AnyObject) {
@@ -169,11 +174,17 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
         //messageTextField.text = nil
         //self.dismiss(animated: true, completion: nil)
         //_ = navigationController?.popViewController(animated: true)
+        UIView.animate(withDuration: 10, animations: {
+            self.displayLinesView.transform = CGAffineTransform.init(scaleX: 0, y: 0)
+        })
         displayLinesView.isHidden = true
     }
     
     @IBAction func cancelDisplayLineFunc(_ sender: AnyObject) {
         displayLinesView.isHidden = true
+        UIView.animate(withDuration: 0.3, animations: {
+            self.displayLinesView.transform = CGAffineTransform.init(scaleX: 0, y: 0)
+        })
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -189,7 +200,7 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
             cell.typeLabel.text = "裝置位置"
             cell.valueLabel.text = device.location
         case 1:
-            cell.typeLabel.text = "裝置名稱"
+            cell.typeLabel.text = "裝置站號"
             cell.valueLabel.text = device.name
         case 2:
             cell.typeLabel.text = "管理者"

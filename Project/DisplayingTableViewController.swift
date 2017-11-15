@@ -17,6 +17,11 @@ class DisplayingTableViewController: UITableViewController {
         Message(device: "A1", line: "2", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
         Message(device: "A1", line: "3", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
         Message(device: "A1", line: "4", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01"),
+        Message(device: "A1", line: "5", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),
+        Message(device: "A1", line: "6", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
+        Message(device: "A1", line: "7", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
+        Message(device: "A1", line: "8", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01"),
+        Message(device: "A1", line: "9", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01"),
         Message(device: "A1", line: "10", displayTime: "2", funcIn: "A", funcOut: "A", text: "Doge", color: "01")
     ]
     
@@ -32,7 +37,7 @@ class DisplayingTableViewController: UITableViewController {
         
         tableView.backgroundColor = UIColor.darkGray
 
-        title = "Displaying on " + device
+        title = device + ": 編輯內容"
     }
 
     override func didReceiveMemoryWarning() {

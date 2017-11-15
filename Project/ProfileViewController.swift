@@ -33,7 +33,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.typeLabel.text = "管理裝置"
             cell.valueLabel.text = user.devices
         case 3:
-            cell.typeLabel.text = "登陸時間"
+            cell.typeLabel.text = "登錄時間"
             cell.valueLabel.text = user.loginTime
         default:
             cell.typeLabel.text = ""
@@ -49,6 +49,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         
         tableView.backgroundColor = UIColor(red: 85.0/255.0, green: 85.0/255.0, blue: 85.0/255.0, alpha: 1.0)
+        title = "用戶資料"
         // Do any additional setup after loading the view.
     }
 

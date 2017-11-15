@@ -47,7 +47,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        title = "Edit line: " + message.line
+        title = "編輯第 " + message.line + " 行"
         // Do any additional setup after loading the view.
         
         colorPicker.backgroundColor = UIColor.white

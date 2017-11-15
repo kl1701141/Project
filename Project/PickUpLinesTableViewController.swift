@@ -30,18 +30,18 @@ class PickUpLinesTableViewController: UITableViewController {
         Message(device: "A1", line: "10", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
         Message(device: "A1", line: "11", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
         Message(device: "A1", line: "12", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01"),
-        Message(device: "A1", line: "1", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),
-        Message(device: "A1", line: "2", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
-        Message(device: "A1", line: "3", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
-        Message(device: "A1", line: "4", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01"),
-        Message(device: "A1", line: "5", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),
-        Message(device: "A1", line: "6", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
-        Message(device: "A1", line: "7", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
-        Message(device: "A1", line: "8", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01"),
-        Message(device: "A1", line: "9", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),
-        Message(device: "A1", line: "10", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
-        Message(device: "A1", line: "11", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
-        Message(device: "A1", line: "12", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01")
+        Message(device: "A1", line: "13", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),
+        Message(device: "A1", line: "14", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
+        Message(device: "A1", line: "15", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
+        Message(device: "A1", line: "16", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01"),
+        Message(device: "A1", line: "17", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),
+        Message(device: "A1", line: "18", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
+        Message(device: "A1", line: "19", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
+        Message(device: "A1", line: "20", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01"),
+        Message(device: "A1", line: "21", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),
+        Message(device: "A1", line: "22", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
+        Message(device: "A1", line: "23", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
+        Message(device: "A1", line: "24", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01")
     ]
     
     var lineSelected = Array(repeatElement(false, count: 254))
@@ -64,10 +64,10 @@ class PickUpLinesTableViewController: UITableViewController {
         
         
         if type == "B6" {
-            title = "Enable Lines On " + device
+            title = device + ": 啟用行號"
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add,  target: self, action: #selector(PickUpLinesTableViewController.editAction))
         } else if type == "B7" {
-            title = "Disable Lines On " + device
+            title = device + ": 停用行號"
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.trash,  target: self, action: #selector(PickUpLinesTableViewController.editAction))
         }
         

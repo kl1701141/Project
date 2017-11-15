@@ -9,7 +9,7 @@
 import UIKit
 //import CoreData
 
-class MachinesTableViewController: UITableViewController, UISearchResultsUpdating {
+class MachinesTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
     
     var devices:[Device] = [
         Device(name: "A1", location: "EA-101", imageName: "marquee1.jpg", controller: "Andy Wang"),
@@ -23,20 +23,6 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
     var searchController: UISearchController!
     var searchResults:[Device] = []
     
-    func updateSearchResults(for searchController: UISearchController) {
-        if let keyword = searchController.searchBar.text {
-            filterContent(for: keyword)
-            tableView.reloadData()
-        }
-    }
-    
-    func filterContent(for keyword: String) {
-        searchResults = devices.filter({ (device) -> Bool in
-            let isMatch = device.location.localizedCaseInsensitiveContains(keyword)
-            return isMatch
-        })
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,41 +34,62 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
         
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search,  target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search,  target: self, action: #selector(MachinesTableViewController.searchBarActivate))
+        title = "所有裝置"
         
         tableView.estimatedRowHeight = 80.0
         tableView.rowHeight = UITableViewAutomaticDimension
         
         searchController = UISearchController(searchResultsController: nil)
-        tableView.tableHeaderView = searchController.searchBar
-
+        
+        
+        searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search device..."
+        searchController.searchBar.placeholder = "搜尋裝置..."
         searchController.searchBar.barTintColor = UIColor.darkGray
         searchController.searchBar.tintColor = UIColor.white
+        searchController.hidesNavigationBarDuringPresentation = false
         
         tableView.backgroundColor = UIColor.darkGray
         //view.backgroundColor = UIColor.darkGray
     }
     
-//    @IBAction func searchAction(sender: UIBarButtonItem) {
-//        searchController = UISearchController(searchResultsController: nil)
-//        //tableView.tableHeaderView = searchController.searchBar
-//
-//        searchController.searchResultsUpdater = self
-//        searchController.dimsBackgroundDuringPresentation = false
-//        searchController.searchBar.placeholder = "Search device..."
-//        searchController.searchBar.barTintColor = UIColor.darkGray
-//        searchController.searchBar.tintColor = UIColor.white
-//
-//        //self.searchController.searchBar.delegate = self
-//        //presentedViewController(searchController, animated: true, completion: nil)
-//    }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func searchBarActivate() {
+        present(searchController, animated: true, completion: nil)
+        searchController.isActive = true
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        if let keyword = searchController.searchBar.text {
+            if keyword != "" {
+                filterContent(for: keyword)
+                tableView.reloadData()
+            }
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        searchBar.showsCancelButton = false
+        searchBar.endEditing(true)
+        self.tableView.reloadData()
+    }
+    
+    func filterContent(for keyword: String) {
+        searchResults = devices.filter({ (device) -> Bool in
+            let isMatch = device.location.localizedCaseInsensitiveContains(keyword)
+            if keyword == "" {
+                return true
+            }
+            return isMatch
+        })
     }
 
     // MARK: - Table view data source
@@ -95,7 +102,11 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if searchController.isActive {
-            return searchResults.count
+            if searchController.searchBar.text == "" {
+                return devices.count
+            } else {
+                return searchResults.count
+            }
         } else {
             return devices.count
         }
@@ -106,11 +117,11 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MachinesTableViewCell
         
-        cell.backgroundColor = UIColor(red: 70.0/255.0, green: 70.0/255.0, blue: 70.0/255.0, alpha: 1.0)
+        cell.backgroundColor = UIColor(red: 75.0/255.0, green: 75.0/255.0, blue: 75.0/255.0, alpha: 1.0)
 
         // Configure the cell...
         
-        let device = (searchController.isActive) ? searchResults[indexPath.row] : devices[indexPath.row]
+        let device = (searchController.isActive) ? ((searchController.searchBar.text == "") ? devices[indexPath.row] : searchResults[indexPath.row]) : devices[indexPath.row]
         
         cell.nameLabel.text = device.name
         cell.locationLabel.text = device.location
@@ -132,8 +143,7 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
         if segue.identifier == "showMachineDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! MachineDetailViewController
-                destinationController.device = (searchController.isActive) ? searchResults[indexPath.row] :  devices[indexPath.row]
-                searchController.isActive = false
+                destinationController.device = (searchController.isActive) ? ((searchController.searchBar.text == "") ? devices[indexPath.row] : searchResults[indexPath.row]) :  devices[indexPath.row]
             }
         }
     }

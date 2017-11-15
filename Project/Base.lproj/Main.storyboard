@@ -109,6 +109,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexBackgroundColor" red="0.32546260952949524" green="0.32550567388534546" blue="0.32544797658920288" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="gray" indentationWidth="10" reuseIdentifier="Cell" rowHeight="80" id="A2p-wB-CoM" customClass="MachinesTableViewCell" customModule="Project" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="80"/>
@@ -310,27 +311,11 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="K3C-yf-dzC">
                                         <rect key="frame" x="0.0" y="42" width="343" height="32"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bo-oO-Z7o">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kc9-HG-H5X">
                                                 <rect key="frame" x="0.0" y="0.0" width="164" height="32"/>
                                                 <color key="backgroundColor" red="0.29801362749999999" green="0.29805359240000001" blue="0.2980000377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                <state key="normal" title="刪除顯示行數">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                        <integer key="value" value="12"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <segue destination="V30-X4-HLs" kind="show" identifier="disableLines" id="PHT-Bk-znc"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kc9-HG-H5X">
-                                                <rect key="frame" x="179" y="0.0" width="164" height="32"/>
-                                                <color key="backgroundColor" red="0.29801362749999999" green="0.29805359240000001" blue="0.2980000377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                                <state key="normal" title="恢復顯示行數">
+                                                <state key="normal" title="啟用行號">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
@@ -340,6 +325,22 @@
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <segue destination="V30-X4-HLs" kind="show" identifier="enableLines" id="cnK-k5-Kvo"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2bo-oO-Z7o">
+                                                <rect key="frame" x="179" y="0.0" width="164" height="32"/>
+                                                <color key="backgroundColor" red="0.29801362749999999" green="0.29805359240000001" blue="0.2980000377" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <state key="normal" title="停用行號">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <segue destination="V30-X4-HLs" kind="show" identifier="disableLines" id="PHT-Bk-znc"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1015,11 +1016,11 @@
             </objects>
             <point key="canvasLocation" x="1703" y="932"/>
         </scene>
-        <!--All Devices-->
+        <!--所有裝置-->
         <scene sceneID="tzJ-E7-Ybm">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0Ot-CH-gae" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="All Devices" image="icons8-Database View-30" id="0Ua-qY-ZWS"/>
+                    <tabBarItem key="tabBarItem" title="所有裝置" image="icons8-Database View-30" id="0Ua-qY-ZWS"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cxL-cY-8en">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -1151,11 +1152,11 @@
             </objects>
             <point key="canvasLocation" x="816.79999999999995" y="-628.33583208395805"/>
         </scene>
-        <!--Profile-->
+        <!--用戶資料-->
         <scene sceneID="vkp-TU-RiO">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lAN-XT-SS2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Profile" image="icons8-Customer Filled-30" id="UzH-sr-Req"/>
+                    <tabBarItem key="tabBarItem" title="用戶資料" image="icons8-Customer Filled-30" id="UzH-sr-Req"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8W0-ng-khy">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
