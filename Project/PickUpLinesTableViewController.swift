@@ -106,28 +106,35 @@ class PickUpLinesTableViewController: UITableViewController {
         
         //cell.accessoryType = .disclosureIndicator
         if lineSelected[indexPath.row] {
-            cell.accessoryType = .checkmark
+            cell.ifChecked.image = UIImage(named: "icons8-checked-checkbox-white-50.png")
         } else {
-            cell.accessoryType = .none
+            cell.ifChecked.image = UIImage(named: "icons8-unchecked-checkbox-white-50.png")
         }
         cell.tintColor = .white
+        cell.ifChecked.tintColor = .white
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.tintColor = .white
-        cell?.accessoryType = .checkmark
+        //let cellIdentifier = "Cell"
+        let cell = tableView.cellForRow(at: indexPath) as! PickUpLinesTableViewCell
+        cell.tintColor = .white
+        cell.ifChecked.image = UIImage(named: "icons8-checked-checkbox-white-50.png")
+        cell.ifChecked.tintColor = .white
+        
         self.lineSelected[indexPath.row] = true
         
         setOfLines.insert(indexPath.row)
     }
     
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.tintColor = .white
-        cell?.accessoryType = .none
+        //let cellIdentifier = "Cell"
+        let cell = tableView.cellForRow(at: indexPath) as! PickUpLinesTableViewCell
+        cell.tintColor = .white
+        cell.ifChecked.image = UIImage(named: "icons8-unchecked-checkbox-white-50.png")
+        cell.ifChecked.tintColor = .white
+        
         self.lineSelected[indexPath.row] = false
         
         setOfLines.remove(indexPath.row)

@@ -576,31 +576,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" id="3UL-YV-Ey4" customClass="PickUpLinesTableViewCell" customModule="Project" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="Cell" rowHeight="50" id="3UL-YV-Ey4" customClass="PickUpLinesTableViewCell" customModule="Project" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3UL-YV-Ey4" id="26G-6T-2YX">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="uxy-GX-yaD">
-                                            <rect key="frame" x="16" y="14" width="343" height="15"/>
+                                            <rect key="frame" x="16" y="14" width="343" height="21"/>
                                             <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="myC-N3-bMt">
+                                                    <rect key="frame" x="0.0" y="0.0" width="21" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="Whr-I8-oMh"/>
+                                                        <constraint firstAttribute="width" constant="21" id="mFy-mP-SBs"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nnq-L6-WbT">
-                                                    <rect key="frame" x="0.0" y="0.0" width="94.5" height="15"/>
+                                                    <rect key="frame" x="33" y="0.0" width="69" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TaR-vY-3Yo">
-                                                    <rect key="frame" x="106.5" y="0.0" width="236.5" height="15"/>
+                                                    <rect key="frame" x="114" y="0.0" width="229" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Nnq-L6-WbT" firstAttribute="width" secondItem="TaR-vY-3Yo" secondAttribute="width" multiplier="0.4" id="K9J-gP-MTV"/>
+                                                <constraint firstItem="Nnq-L6-WbT" firstAttribute="width" secondItem="TaR-vY-3Yo" secondAttribute="width" multiplier="0.3" id="K9J-gP-MTV"/>
                                             </constraints>
                                         </stackView>
                                     </subviews>
@@ -612,6 +619,7 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="ifChecked" destination="myC-N3-bMt" id="6Ue-jz-rms"/>
                                     <outlet property="typeLabel" destination="Nnq-L6-WbT" id="RuP-dT-Ybj"/>
                                     <outlet property="valueLabel" destination="TaR-vY-3Yo" id="2D7-Ce-8H9"/>
                                 </connections>
@@ -625,7 +633,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eLo-RO-r2M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2660" y="61"/>
+            <point key="canvasLocation" x="2660" y="60.719640179910051"/>
         </scene>
         <!--Message Publish Controller-->
         <scene sceneID="Mab-0T-seR">

@@ -10,6 +10,8 @@ import UIKit
 
 class PickUpLinesTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var ifChecked: UIImageView!
+    
     @IBOutlet var typeLabel: UILabel!
     @IBOutlet var valueLabel: UILabel!
     

@@ -85,9 +85,25 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == fromPicker {
+            let numInFromTextField = 0 + Int(self.lineNum[row])!
+            let numInToTextField = 0 + Int(self.toTextField.text!)!
+            if numInFromTextField > numInToTextField {
+                let alertMessage = UIAlertController(title: "溫馨提醒", message: "起始行號必須小於結束行號!\n將調整結束行號", preferredStyle: .alert)
+                alertMessage.addAction(UIAlertAction(title: "我知道了", style: .default, handler: nil))
+                self.present(alertMessage, animated: true, completion: nil)
+                self.toTextField.text = self.lineNum[row]
+            }
             self.fromTextField.text = self.lineNum[row]
             fromTextField.textAlignment = .center
         } else if pickerView == toPicker {
+            let numInFromTextField = 0 + Int(self.fromTextField.text!)!
+            let numInToTextField = 0 + Int(self.lineNum[row])!
+            if numInToTextField < numInFromTextField {
+                let alertMessage = UIAlertController(title: "溫馨提醒", message: "結束行號必須大於起始行號!\n將調整起始行號", preferredStyle: .alert)
+                alertMessage.addAction(UIAlertAction(title: "我知道了", style: .default, handler: nil))
+                self.present(alertMessage, animated: true, completion: nil)
+                self.fromTextField.text = self.lineNum[row]
+            }
             self.toTextField.text = self.lineNum[row]
             toTextField.textAlignment = .center
         }
