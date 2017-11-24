@@ -144,6 +144,7 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! MachineDetailViewController
                 destinationController.device = (searchController.isActive) ? ((searchController.searchBar.text == "") ? devices[indexPath.row] : searchResults[indexPath.row]) :  devices[indexPath.row]
+                //searchController.searchBar.
             }
         }
     }

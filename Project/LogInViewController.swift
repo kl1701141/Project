@@ -14,6 +14,7 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     //var user: User!
     
+    @IBOutlet weak var logInButton: UIButton!
     
     
     //dFormatter.dateFormat = "yyyy年ＭＭ月dd日 HH:mm:ss"
@@ -41,6 +42,20 @@ class LogInViewController: UIViewController {
             let nav = barViewControllers.viewControllers![1] as! UINavigationController
             let destinationViewController = nav.viewControllers[0] as! ProfileViewController
             destinationViewController.user = user
+        }
+    }
+    
+    @IBAction func logInAction(_ sender: AnyObject) {
+        if accountTextField.text == "" {
+            let alertMessage = UIAlertController(title: nil, message: "請輸入帳號!", preferredStyle: .alert)
+            alertMessage.addAction(UIAlertAction(title: "我知道了", style: .default, handler: nil))
+            self.present(alertMessage, animated: true, completion: nil)
+        } else if passwordTextField.text == "" {
+            let alertMessage = UIAlertController(title: nil, message: "請輸入密碼!", preferredStyle: .alert)
+            alertMessage.addAction(UIAlertAction(title: "我知道了", style: .default, handler: nil))
+            self.present(alertMessage, animated: true, completion: nil)
+        } else {
+            self.performSegue(withIdentifier: "loginToProfile", sender: self)
         }
     }
     

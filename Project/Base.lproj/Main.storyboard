@@ -52,7 +52,7 @@
                                             <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         </state>
                                         <connections>
-                                            <segue destination="g6w-o4-Gv3" kind="show" identifier="loginToProfile" id="3uC-YH-yoc"/>
+                                            <action selector="logInAction:" destination="L0y-dU-gGr" eventType="touchUpInside" id="sUz-py-haB"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -70,7 +70,8 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ItC-XG-SWh" firstAttribute="leading" secondItem="jkY-Mv-8Ja" secondAttribute="leadingMargin" constant="51" id="PpD-4R-Roi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ItC-XG-SWh" secondAttribute="trailing" constant="51" id="WDR-1Q-hjs"/>
@@ -93,7 +94,9 @@
                     <navigationItem key="navigationItem" id="CWL-Ed-gYl"/>
                     <connections>
                         <outlet property="accountTextField" destination="Yk5-Z0-f64" id="GY7-j9-Xey"/>
+                        <outlet property="logInButton" destination="6y5-WM-lTt" id="60T-bb-mYL"/>
                         <outlet property="passwordTextField" destination="ItC-XG-SWh" id="Ymf-gb-wIn"/>
+                        <segue destination="g6w-o4-Gv3" kind="show" identifier="loginToProfile" id="A7R-eG-8SC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wwb-iC-1nn" userLabel="First Responder" sceneMemberID="firstResponder"/>
