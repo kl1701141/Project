@@ -10,6 +10,7 @@ import UIKit
 
 class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate{
 
+    var user: User!
     var message:Message!
     var type = "B1"
     
@@ -153,6 +154,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
             self.timePicker.isHidden = false
             textField.endEditing(true)
         } else if textField == self.messageTextField {
+            let txtCnt = (messageTextField.text?.count)!
             if fullHalfTextField.text == "一行半形英數字 (上限10字)" {
                 messageTextField.maxLength = 10
             } else if fullHalfTextField.text == "兩行半形英數字 (上限20字)" {
@@ -160,7 +162,6 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
             } else if fullHalfTextField.text == "全形中英數字 (上限5字)" {
                 messageTextField.maxLength = 5
             }
-            //print(messageTextField.maxLength)
         }
         
     }
@@ -231,9 +232,11 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
             funcIn = "A"
         }
         
-        var mode = "C0"
+        var mode = "C00"
         if fullHalfTextField.text == "兩行半形英數字 (上限20字)" {
             mode = "C1"
+        } else if fullHalfTextField.text == "全形中英數字 (上限5字)" {
+            mode = "C01"
         }
         
         var colorMode = ""
@@ -257,7 +260,21 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         while (messageTextField.text?.count)! < messageTextField.maxLength {
             messageTextField.text?.append(" ")
         }
-        let text = messageTextField.text
+        var text = messageTextField.text
+        
+        if mode == "C00" {
+            if (messageTextField.text?.count)! > 10 {
+                text = String(describing: text!.dropLast((messageTextField.text?.count)! - 10))
+            }
+        } else if mode == "C01" {
+            if (messageTextField.text?.count)! > 5 {
+                text = String(describing: text!.dropLast((messageTextField.text?.count)! - 5))
+            }
+        } else if mode == "C1" {
+            if (messageTextField.text?.count)! > 20 {
+                text = String(describing: text!.dropLast((messageTextField.text?.count)! - 20))
+            }
+        }
         
         var funcOut = funcOutTextField.text!
         switch funcOut {
@@ -317,13 +334,16 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         request.httpBody = postData
         
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
+        //print(user.token)
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if error != nil {
                 print(error as Any)
             } else {
                 guard let data = data else {return}
-                print(data)
+                let outputStr  = String(data: data, encoding: String.Encoding.utf8) as String!
+                print(outputStr!)
             }
         
         }

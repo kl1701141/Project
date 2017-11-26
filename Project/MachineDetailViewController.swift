@@ -13,6 +13,8 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
     // for publish host and port information
     var host = "192.168.15.110"
     var port = "51320"
+    
+    var user: User!
 
     
     @IBOutlet weak var displayLinesView: UIView!
@@ -35,6 +37,10 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        
+        
+        
         machineImageView.image = UIImage(named: device.imageName)
         tableView.backgroundColor = UIColor.darkGray
         tableView.tableFooterView = UIView(frame: CGRect.zero)
@@ -171,6 +177,7 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
         request.httpBody = postData
         
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
         
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if error != nil {
@@ -237,13 +244,16 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
         if segue.identifier == "showDisplayingLines" {
             let destinationController = segue.destination as! DisplayingTableViewController
             destinationController.device = device.name
+            destinationController.user = user
         } else if segue.identifier == "enableLines" {
             let destinationController = segue.destination as! PickUpLinesTableViewController
             destinationController.device = device.name
+            destinationController.user = user
             destinationController.type = "B6"
         } else if segue.identifier == "disableLines" {
             let destinationController = segue.destination as! PickUpLinesTableViewController
             destinationController.device = device.name
+            destinationController.user = user
             destinationController.type = "B7"
         }
     }

@@ -13,11 +13,13 @@ class User {
     var UID = ""
     var loginTime = ""
     var devices = ""
+    var token = ""
     
-    init(name: String, UID: String, loginTime: String, devices: String) {
+    init(name: String, UID: String, loginTime: String, devices: String, token: String) {
         self.name = name
         self.UID = UID
         self.loginTime = loginTime
         self.devices = devices
+        self.token = token
     }
 }

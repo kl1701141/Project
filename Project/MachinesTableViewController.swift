@@ -11,6 +11,7 @@ import UIKit
 
 class MachinesTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
     
+    var user: User!
     var devices:[Device] = [
         Device(name: "A1", location: "EA-101", imageName: "marquee1.jpg", controller: "Andy Wang"),
         Device(name: "B4", location: "CS-104", imageName: "doge1.png", controller: "Peter Chen, Vava Yu, PG One, GAI Wang"),
@@ -52,7 +53,17 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
         searchController.hidesNavigationBarDuringPresentation = false
         
         tableView.backgroundColor = UIColor.darkGray
+        
+        if searchController.isActive {
+            searchController.searchBar.isHidden = false
+        }
         //view.backgroundColor = UIColor.darkGray
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if searchController.isActive {
+            searchController.searchBar.isHidden = false
+        }
     }
     
     
@@ -144,7 +155,13 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! MachineDetailViewController
                 destinationController.device = (searchController.isActive) ? ((searchController.searchBar.text == "") ? devices[indexPath.row] : searchResults[indexPath.row]) :  devices[indexPath.row]
-                //searchController.searchBar.
+                destinationController.user = user
+//                searchController.searchBar.text = ""
+//                tableView.reloadData()
+//                searchController.isActive = false
+                if searchController.isActive {
+                    searchController.searchBar.isHidden = true
+                }
             }
         }
     }

@@ -11,6 +11,7 @@ import UIKit
 class DisplayingTableViewController: UITableViewController {
 
     var device: String!
+    var user: User!
     
     var messages:[Message] = [
         Message(device: "A1", line: "1", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),
@@ -82,6 +83,7 @@ class DisplayingTableViewController: UITableViewController {
             if let indexPath = tableView.indexPathForSelectedRow {
                 let destinationController = segue.destination as! MessagePublishController
                 destinationController.message = messages[indexPath.row]
+                destinationController.user = user
                 destinationController.type = "B1"
             }
         }

@@ -12,6 +12,7 @@ class PickUpLinesTableViewController: UITableViewController {
 
     var type: String!
     var device: String!
+    var user: User!
     
     // for publish host and port information
     var host = "192.168.15.110"
@@ -176,6 +177,8 @@ class PickUpLinesTableViewController: UITableViewController {
             request.httpBody = postData
             
             request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+            request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
+            //request.setValue(user.token, forHTTPHeaderField: "Authorization")
             
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 if error != nil {

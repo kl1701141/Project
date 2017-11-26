@@ -1,60 +1,34 @@
 //
-//  LogInViewController.swift
+//  RegisterViewController.swift
 //  Project
 //
-//  Created by Kevin Lin on 2017/10/13.
+//  Created by Kevin Lin on 2017/11/26.
 //  Copyright © 2017年 Kevin Lin. All rights reserved.
 //
 
 import UIKit
 
-class LogInViewController: UIViewController {
+class RegisterViewController: UIViewController {
 
+    
     @IBOutlet weak var accountTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    //var user: User!
+    @IBOutlet weak var confirmPasswordTextField: UITextField!
     
-    @IBOutlet weak var logInButton: UIButton!
+    @IBOutlet weak var register: UIButton!
     
-    var userToken: String = ""
     var host = "192.168.15.110"
     var port = "51320"
     
-    //let semaphore = DispatchSemaphore(value: 1)
-    
-    
-    //dFormatter.dateFormat = "yyyy年ＭＭ月dd日 HH:mm:ss"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        let now = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/M/dd HH:mm:ss"
-        
-        if segue.identifier == "loginToProfile" {
-            let user: User = User(name: "\(accountTextField.text!)", UID: "403410068", loginTime: "\(dateFormatter.string(from: now))", devices: "A1", token: userToken)
-            let barViewControllers = segue.destination as! UITabBarController
-            
-            let navToProfile = barViewControllers.viewControllers![1] as! UINavigationController
-            let navToMachines = barViewControllers.viewControllers![0] as! UINavigationController
-            
-            let profileViewController = navToProfile.viewControllers[0] as! ProfileViewController
-            let machineViewController = navToMachines.viewControllers[0] as! MachinesTableViewController
-
-            profileViewController.user = user
-            machineViewController.user = user
-        }
     }
     
     @IBAction func logInAction(_ sender: AnyObject) {
@@ -69,11 +43,11 @@ class LogInViewController: UIViewController {
             self.present(alertMessage, animated: true, completion: nil)
         } else {
             // API CALLED, returns a token store into userToken
-            let urlString: String = "http://\(host):\(port)/api/Account/Token"
+            let urlString: String = "http://\(host):\(port)/api/Account/Register"
             let url = URL(string: urlString)!
-
+            
             var request = URLRequest(url: url)
-            let body = "Email=\(accountTextField.text!)&Password=\(passwordTextField.text!)"
+            let body = "Email=\(accountTextField.text!)&Password=\(passwordTextField.text!)&ConfirmPassword=\(confirmPasswordTextField.text!)"
             
             let postData = body.data(using: String.Encoding.utf8)
             
@@ -90,9 +64,12 @@ class LogInViewController: UIViewController {
                     guard let data = data else {return}
                     let outputStr = String(data: data, encoding: String.Encoding.utf8) as String!
                     
-                    self.userToken = String(describing: outputStr!.dropLast())
-                    self.userToken = String(describing: self.userToken.dropFirst())
+                    //print(outputStr)
+                    print(outputStr!)
+                    //self.userToken = String(describing: outputStr!.dropLast())
+                    //self.userToken = String(describing: self.userToken.dropFirst())
                     
+                    //print(self.userToken + "  123")
                 }
                 semaphore.signal()
             }
@@ -101,7 +78,7 @@ class LogInViewController: UIViewController {
             //print(userToken + "  159")
             semaphore.wait()
             //print(userToken + "  456")
-            self.performSegue(withIdentifier: "loginToProfile", sender: self)
+            
         }
     }
     
