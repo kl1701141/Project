@@ -9,14 +9,14 @@
 import Foundation
 
 class User {
-    var name = ""
+    var account = ""
     var UID = ""
     var loginTime = ""
     var devices = ""
     var token = ""
     
-    init(name: String, UID: String, loginTime: String, devices: String, token: String) {
-        self.name = name
+    init(account: String, UID: String, loginTime: String, devices: String, token: String) {
+        self.account = account
         self.UID = UID
         self.loginTime = loginTime
         self.devices = devices

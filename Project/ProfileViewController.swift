@@ -28,7 +28,7 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
             cell.valueLabel.text = user.UID
         case 1:
             cell.typeLabel.text = "用戶名"
-            cell.valueLabel.text = user.token
+            cell.valueLabel.text = user.account
         case 2:
             cell.typeLabel.text = "管理裝置"
             cell.valueLabel.text = user.devices

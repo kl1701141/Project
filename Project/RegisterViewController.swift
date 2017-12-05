@@ -16,9 +16,9 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var confirmPasswordTextField: UITextField!
     
     @IBOutlet weak var register: UIButton!
+    @IBOutlet weak var back: UIButton!
     
-    var host = "192.168.15.110"
-    var port = "51320"
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,8 +78,13 @@ class RegisterViewController: UIViewController {
             //print(userToken + "  159")
             semaphore.wait()
             //print(userToken + "  456")
+            self.performSegue(withIdentifier: "backToLoginPage", sender: self)
             
         }
+    }
+    
+    @IBAction func backToLoginPage(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "backToLoginPage", sender: self)
     }
     
 

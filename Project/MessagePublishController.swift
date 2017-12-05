@@ -14,9 +14,9 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
     var message:Message!
     var type = "B1"
     
-    // for publish host and port information
-    var host = "192.168.15.110"
-    var port = "51320"
+    
+
+
     
     //dFormatter.dateFormat = "yyyy年ＭＭ月dd日 HH:mm:ss"
     
@@ -154,7 +154,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
             self.timePicker.isHidden = false
             textField.endEditing(true)
         } else if textField == self.messageTextField {
-            let txtCnt = (messageTextField.text?.count)!
+            //let txtCnt = (messageTextField.text?.count)!
             if fullHalfTextField.text == "一行半形英數字 (上限10字)" {
                 messageTextField.maxLength = 10
             } else if fullHalfTextField.text == "兩行半形英數字 (上限20字)" {

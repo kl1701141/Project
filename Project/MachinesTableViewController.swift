@@ -11,6 +11,7 @@ import UIKit
 
 class MachinesTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
     
+    
     var user: User!
     var devices:[Device] = [
         Device(name: "A1", location: "EA-101", imageName: "marquee1.jpg", controller: "Andy Wang"),

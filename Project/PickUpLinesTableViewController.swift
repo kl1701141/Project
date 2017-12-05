@@ -14,9 +14,6 @@ class PickUpLinesTableViewController: UITableViewController {
     var device: String!
     var user: User!
     
-    // for publish host and port information
-    var host = "192.168.15.110"
-    var port = "51320"
     
     var messages:[Message] = [
         Message(device: "A1", line: "1", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),

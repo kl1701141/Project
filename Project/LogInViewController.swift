@@ -12,16 +12,12 @@ class LogInViewController: UIViewController {
 
     @IBOutlet weak var accountTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    //var user: User!
+   
     
     @IBOutlet weak var logInButton: UIButton!
     
     var userToken: String = ""
-    var host = "192.168.15.110"
-    var port = "51320"
-    
-    //let semaphore = DispatchSemaphore(value: 1)
-    
+
     
     //dFormatter.dateFormat = "yyyy年ＭＭ月dd日 HH:mm:ss"
     
@@ -43,7 +39,46 @@ class LogInViewController: UIViewController {
         dateFormatter.dateFormat = "yyyy/M/dd HH:mm:ss"
         
         if segue.identifier == "loginToProfile" {
-            let user: User = User(name: "\(accountTextField.text!)", UID: "403410068", loginTime: "\(dateFormatter.string(from: now))", devices: "A1", token: userToken)
+            let urlString: String = "http://\(host):\(port)/api/Owners"
+            let url = URL(string: urlString)!
+            
+            var request = URLRequest(url: url)
+            
+            request.httpMethod = "GET"
+            
+            request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+            request.setValue("bearer " + userToken, forHTTPHeaderField: "Authorization")
+            
+            var userDevices: String = ""
+            let semaphore = DispatchSemaphore(value: 0)
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if error != nil {
+                    print(error as Any)
+                } else {
+                    guard let data = data else {return}
+                    let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [Dictionary<String, Any>]
+                    //print(json!)
+                    var cnt = 0
+                    for object in json! {
+                        if object["Uid"] as! Int == 1 {
+                            cnt += 1
+                            if cnt == 1 {
+                                userDevices.append(object["Station"]! as! String)
+                            } else {
+                                userDevices.append(", ")
+                                userDevices.append(object["Station"]! as! String)
+                            }
+                        }
+                    }
+                    //print(userDevices)
+                }
+                semaphore.signal()
+            }
+            
+            task.resume()
+            semaphore.wait()
+
+            let user: User = User(account: "\(accountTextField.text!)", UID: "1", loginTime: "\(dateFormatter.string(from: now))", devices: userDevices, token: userToken)
             let barViewControllers = segue.destination as! UITabBarController
             
             let navToProfile = barViewControllers.viewControllers![1] as! UINavigationController
@@ -98,9 +133,8 @@ class LogInViewController: UIViewController {
             }
             
             task.resume()
-            //print(userToken + "  159")
             semaphore.wait()
-            //print(userToken + "  456")
+            
             self.performSegue(withIdentifier: "loginToProfile", sender: self)
         }
     }

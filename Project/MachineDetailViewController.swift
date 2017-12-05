@@ -10,9 +10,7 @@ import UIKit
 
 class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate {
     
-    // for publish host and port information
-    var host = "192.168.15.110"
-    var port = "51320"
+
     
     var user: User!
 
