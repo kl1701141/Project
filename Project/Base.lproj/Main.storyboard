@@ -734,20 +734,20 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nnq-L6-WbT">
-                                                    <rect key="frame" x="33" y="0.0" width="69" height="21"/>
+                                                    <rect key="frame" x="33" y="0.0" width="80.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TaR-vY-3Yo">
-                                                    <rect key="frame" x="114" y="0.0" width="229" height="21"/>
+                                                    <rect key="frame" x="125.5" y="0.0" width="217.5" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Nnq-L6-WbT" firstAttribute="width" secondItem="TaR-vY-3Yo" secondAttribute="width" multiplier="0.3" id="K9J-gP-MTV"/>
+                                                <constraint firstItem="Nnq-L6-WbT" firstAttribute="width" secondItem="TaR-vY-3Yo" secondAttribute="width" multiplier="0.37" id="K9J-gP-MTV"/>
                                             </constraints>
                                         </stackView>
                                     </subviews>
