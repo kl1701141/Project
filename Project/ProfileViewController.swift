@@ -9,10 +9,9 @@
 import UIKit
 
 class ProfileViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    //var user: User = User(name: "kl1701141", UID: "403410068", loginTime: "2017-10-13 00:37:35", devices: "A1")
+
     var user: User!
     @IBOutlet weak var tableView: UITableView!
-    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
@@ -43,7 +42,6 @@ class ProfileViewController: UIViewController, UITableViewDataSource, UITableVie
         cell.backgroundColor = UIColor.clear
         return cell
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()

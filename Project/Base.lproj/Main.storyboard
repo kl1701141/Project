@@ -204,7 +204,7 @@
                                             <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         </state>
                                         <connections>
-                                            <action selector="logInAction:" destination="eOa-9h-k8d" eventType="touchUpInside" id="BHe-3b-Opn"/>
+                                            <action selector="registerAction:" destination="eOa-9h-k8d" eventType="touchUpInside" id="NKT-hA-bps"/>
                                         </connections>
                                     </button>
                                 </subviews>

@@ -14,11 +14,8 @@ class PickUpLinesTableViewController: UITableViewController {
     var device: String!
     var user: User!
     
-    
     var messages:[Message] = []
-    
     var lineSelected = Array(repeatElement(false, count: 254))
-    
     var setOfLines = Set<Int>()
     
     override func viewDidLoad() {
@@ -29,24 +26,20 @@ class PickUpLinesTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        
-        
-        tableView.backgroundColor = UIColor.darkGray
-        
-        
         
         if type == "B6" {
             title = device + ": 啟用行號"
+            // button for enable selected lines in this marquee
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add,  target: self, action: #selector(PickUpLinesTableViewController.editAction))
         } else if type == "B7" {
             title = device + ": 停用行號"
+            // button for disable selected lines in this marquee
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.trash,  target: self, action: #selector(PickUpLinesTableViewController.editAction))
         }
         
-        //cell?.tintColor = .white
-        
-        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        tableView.backgroundColor = UIColor.darkGray
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,7 +70,6 @@ class PickUpLinesTableViewController: UITableViewController {
         cell.typeLabel.text = "Line: " + message.line
         cell.valueLabel.text = ": " + message.text
         
-        //cell.accessoryType = .disclosureIndicator
         if lineSelected[indexPath.row] {
             cell.ifChecked.image = UIImage(named: "icons8-checked-checkbox-white-50.png")
         } else {
@@ -90,7 +82,6 @@ class PickUpLinesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //let cellIdentifier = "Cell"
         let cell = tableView.cellForRow(at: indexPath) as! PickUpLinesTableViewCell
         cell.tintColor = .white
         cell.ifChecked.image = UIImage(named: "icons8-checked-checkbox-white-50.png")
@@ -102,7 +93,6 @@ class PickUpLinesTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        //let cellIdentifier = "Cell"
         let cell = tableView.cellForRow(at: indexPath) as! PickUpLinesTableViewCell
         cell.tintColor = .white
         cell.ifChecked.image = UIImage(named: "icons8-unchecked-checkbox-white-50.png")
@@ -113,17 +103,21 @@ class PickUpLinesTableViewController: UITableViewController {
         setOfLines.remove(indexPath.row)
     }
     
+    // function for enable/disable lines in this marquee
     func editAction() {
         if setOfLines.count != 0 {
+            // API format
             let urlString: String = "http://\(host):\(port)/api/Mqtt"
             let url = URL(string: urlString)!
+            var request = URLRequest(url: url)
             
+            // Date format
             let now = Date()
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
             
-            var request = URLRequest(url: url)
             
+            // modify a string for selected lines
             let count = setOfLines.count
             
             let linesToEdit = setOfLines.sorted()
@@ -133,35 +127,32 @@ class PickUpLinesTableViewController: UITableViewController {
                 if line == linesToEdit[0] {
                     continue
                 }
-                
                 lineNumbers += ",\(line+1)"
             }
             
-            
+            // POST body data
             let body = "Topic=\(device!)&Type=\(type!)&Data=\(count)," + lineNumbers + "&Date=\(dateFormatter.string(from: now))"
-            
-            
-            print (body)
-            
             let postData = body.data(using: String.Encoding.utf8)
             
+            // use POST method
             request.httpMethod = "POST"
             request.httpBody = postData
             
+            // set headers
             request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
-            //request.setValue(user.token, forHTTPHeaderField: "Authorization")
             
+            let semaphore = DispatchSemaphore(value: 0)
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 if error != nil {
                     print(error as Any)
                 } else {
-                    guard let data = data else {return}
-                    print(data)
+                    guard data != nil else {return}
                 }
-                
+                semaphore.signal()
             }
             task.resume()
+            semaphore.wait()
             
         }
         

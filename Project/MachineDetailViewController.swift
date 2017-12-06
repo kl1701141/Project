@@ -10,16 +10,16 @@ import UIKit
 
 class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate {
     
-
-    
     var user: User!
-
-    
-    @IBOutlet weak var displayLinesView: UIView!
+    var device:Device!
+    var lineNum:[String] = []
     
     
     @IBOutlet var machineImageView: UIImageView!
     @IBOutlet var tableView: UITableView!
+    
+    
+    @IBOutlet weak var displayLinesView: UIView!
     
     @IBOutlet weak var fromPicker: UIPickerView!
     @IBOutlet weak var toPicker: UIPickerView!
@@ -27,24 +27,17 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
     @IBOutlet weak var fromTextField: UITextField!
     @IBOutlet weak var toTextField: UITextField!
     
-    var device:Device!
-    
-    var lineNum:[String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-        
-        
-        
         machineImageView.image = UIImage(named: device.imageName)
+        
+        title = device.name + ": 裝置編輯"
         tableView.backgroundColor = UIColor.darkGray
         tableView.tableFooterView = UIView(frame: CGRect.zero)
         tableView.separatorColor = UIColor(red: 240.0/255.0, green: 240.0/255.0, blue: 240.0/255.0, alpha: 0.8)
-        title = device.name + ": 裝置編輯"
-        
         tableView.estimatedRowHeight = 36.0
         tableView.rowHeight = UITableViewAutomaticDimension
         
@@ -52,11 +45,10 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
         
         displayLinesView.transform = CGAffineTransform.init(scaleX: 0, y: 0)
         
+        // initial lineNum array from 1 to 255 for from/toPickerView
         for i in 1...255 {
             self.lineNum.append("\(i)")
         }
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,6 +84,7 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
             let numInFromTextField = 0 + Int(self.lineNum[row])!
             let numInToTextField = 0 + Int(self.toTextField.text!)!
             if numInFromTextField > numInToTextField {
+                // from must less than to
                 let alertMessage = UIAlertController(title: "溫馨提醒", message: "起始行號必須小於結束行號!\n將調整結束行號", preferredStyle: .alert)
                 alertMessage.addAction(UIAlertAction(title: "我知道了", style: .default, handler: nil))
                 self.present(alertMessage, animated: true, completion: nil)
@@ -103,6 +96,7 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
             let numInFromTextField = 0 + Int(self.fromTextField.text!)!
             let numInToTextField = 0 + Int(self.lineNum[row])!
             if numInToTextField < numInFromTextField {
+                // from must less than to
                 let alertMessage = UIAlertController(title: "溫馨提醒", message: "結束行號必須大於起始行號!\n將調整起始行號", preferredStyle: .alert)
                 alertMessage.addAction(UIAlertAction(title: "我知道了", style: .default, handler: nil))
                 self.present(alertMessage, animated: true, completion: nil)
@@ -128,6 +122,7 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
         
     }
     
+    // Action & initial something for Function: 調整顯示行數
     @IBAction func displayLineFunc(_ sender: AnyObject) {
         // set default value
         fromTextField.text = "1"
@@ -140,67 +135,59 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
         // set picker's color
         fromPicker.backgroundColor = .white
         toPicker.backgroundColor = .white
-        
-        //setDisplayingLineView.layer.borderWidth = 10
-        //setDisplayingLineView.layer.borderColor = CGColor.typeID.
-        // launch
+
         displayLinesView.isHidden = false
         UIView.animate(withDuration: 0.3, animations: {
             self.displayLinesView.transform = CGAffineTransform.identity
         })
     }
     
+    // publish for adjust displaying lines
     @IBAction func publishMessage(_ sender: AnyObject) {
+        // API format
         let urlString: String = "http://\(host):\(port)/api/Mqtt"
         let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
         
         let now = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
-        var request = URLRequest(url: url)
-        
         let from = fromTextField.text!
         let to = toTextField.text!
         let type = "B8"
-
+        
+        // POST body data
         let body = "Topic=\(device.name)&Type=\(type)&Data=\(from),\(to)&Date=\(dateFormatter.string(from: now))"
-        
-        
-        print (body)
-        
         let postData = body.data(using: String.Encoding.utf8)
         
+        // use POST method
         request.httpMethod = "POST"
         request.httpBody = postData
         
+        // set headers
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
         
+        let semaphore = DispatchSemaphore(value: 0)
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if error != nil {
                 print(error as Any)
             } else {
-                guard let data = data else {return}
-                print(data)
+                guard data != nil else {return}
             }
-            
+            semaphore.signal()
         }
         task.resume()
-        
-        //var response: URLResponse?
-        
-        //print(urlString, body)
-        
-        //messageTextField.text = nil
-        //self.dismiss(animated: true, completion: nil)
-        //_ = navigationController?.popViewController(animated: true)
+        semaphore.wait()
+
         UIView.animate(withDuration: 10, animations: {
             self.displayLinesView.transform = CGAffineTransform.init(scaleX: 0, y: 0)
         })
         displayLinesView.isHidden = true
     }
     
+    // Action for cancel adjusting displaying lines and go back
     @IBAction func cancelDisplayLineFunc(_ sender: AnyObject) {
         displayLinesView.isHidden = true
         UIView.animate(withDuration: 0.3, animations: {

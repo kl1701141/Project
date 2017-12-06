@@ -13,13 +13,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
     var user: User!
     var message:Message!
     var type = "B1"
-    
-    
 
-
-    
-    //dFormatter.dateFormat = "yyyy年ＭＭ月dd日 HH:mm:ss"
-    
     // for function picker options
     var infunction = ["向左移入","向內捲入","向外捲入","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲入","向下捲入","立即顯現","同時出現","跳入","射入","動畫","續幕"]
     var outfunction = ["向左移入","向內捲出","向外捲出","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲出","向下捲出","立即顯現","同時出現","跳入","射入","動畫","續幕"]
@@ -57,6 +51,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         funcOutPicker.backgroundColor = UIColor.white
         timePicker.backgroundColor = UIColor.white
         
+        // default value when publish a message
         colorTextField.text = "紅色"
         fullHalfTextField.text = "一行半形英數字 (上限10字)"
         funcInTextField.text = "向左移入"
@@ -64,6 +59,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         timeTextField.text = "0"
         messageTextField.maxLength = 10;
         
+        // initial lineNum array from 1 to 255 for timePicker
         for i in 0...255 {
             self.times.append("\(i)")
         }
@@ -154,7 +150,6 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
             self.timePicker.isHidden = false
             textField.endEditing(true)
         } else if textField == self.messageTextField {
-            //let txtCnt = (messageTextField.text?.count)!
             if fullHalfTextField.text == "一行半形英數字 (上限10字)" {
                 messageTextField.maxLength = 10
             } else if fullHalfTextField.text == "兩行半形英數字 (上限20字)" {
@@ -166,6 +161,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         
     }
     
+    // Action for set all the Text Field to the default setting
     @IBAction func clearAllTextField(_ sender: AnyObject) {
         colorTextField.text = "紅色"
         fullHalfTextField.text = "一行半形英數字 (上限10字)"
@@ -176,55 +172,23 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         messageTextField.maxLength = 10;
     }
     
-    func putBackToDB (Id: String, Station: String, PreFunc: String, PostFunc: String, Date: String, Line: String, Text: String) {
-        let urlString: String = "http://\(host):\(port)/api/Contents/\(Id)"
-        let url = URL(string: urlString)!
-
-        
-        var request = URLRequest(url: url)
-        
-        let body = "Id=\(Id)&Station=\(Station)&PreFunc=\(PreFunc)&PostFunc=\(PostFunc)&Date=\(Date)&Line=\(Line)&Text=\(Text)"
-        
-        
-        print (body)
-        
-        let putData = body.data(using: String.Encoding.utf8)
-        
-        request.httpMethod = "PUT"
-        request.httpBody = putData
-        
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
-        //print(user.token)
-        
-        let semaphore = DispatchSemaphore(value: 0)
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if error != nil {
-                print(error as Any)
-            } else {
-                guard let data = data else {return}
-                //let outputStr  = String(data: data, encoding: String.Encoding.utf8) as String!
-                //print(outputStr!)
-            }
-            semaphore.signal()
-        }
-        task.resume()
-        semaphore.wait()
-        
-    }
-    
+    // Action for publish a content
     @IBAction func publishMessage(_ sender: AnyObject) {
+        // API format
         let urlString: String = "http://\(host):\(port)/api/Mqtt"
         let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
         
+        // Date format
         let now = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
-        var request = URLRequest(url: url)
-        
+        // body variables setting here
         let line = message.line
+        
         let time = timeTextField.text
+        
         var funcIn = funcInTextField.text!
         switch funcIn {
         case "向左移入":
@@ -356,24 +320,21 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         default:
             funcOut = "A"
         }
+
         
-        
-        
-        
+        // POST body data
         let body = "Topic=\(message.device)&Type=\(type)&Data=\(line),\(time!),\(funcIn),\(mode),\(colorMode),\(text!),\(funcOut)&Date=\(dateFormatter.string(from: now))"
-        
-        
-        //print (body)
-        
         let postData = body.data(using: String.Encoding.utf8)
         
+        // use POST method
         request.httpMethod = "POST"
         request.httpBody = postData
         
+        // set headers
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
-        //print(user.token)
         
+        let semaphore = DispatchSemaphore(value: 0)
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             if error != nil {
                 print(error as Any)
@@ -382,23 +343,51 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
                 let outputStr  = String(data: data, encoding: String.Encoding.utf8) as String!
                 print(outputStr!)
             }
-        
+            semaphore.signal()
         }
         task.resume()
+        semaphore.wait()
         
+        // update DB
         putBackToDB(Id: message.id, Station: message.device, PreFunc: funcIn, PostFunc: funcOut, Date: dateFormatter.string(from: now), Line: message.line, Text: text!)
         
-        //var response: URLResponse?
-        
-        //print(urlString, body)
-        
         messageTextField.text = nil
-        //self.dismiss(animated: true, completion: nil)
         _ = navigationController?.popViewController(animated: true)
+    }
+    
+    // When publish complete, update this content DATA in DB
+    func putBackToDB (Id: String, Station: String, PreFunc: String, PostFunc: String, Date: String, Line: String, Text: String) {
+        // API format
+        let urlString: String = "http://\(host):\(port)/api/Contents/\(Id)"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        
+        // PUT body data
+        let body = "Id=\(Id)&Station=\(Station)&PreFunc=\(PreFunc)&PostFunc=\(PostFunc)&Date=\(Date)&Line=\(Line)&Text=\(Text)"
+        let putData = body.data(using: String.Encoding.utf8)
+        
+        // use PUT method
+        request.httpMethod = "PUT"
+        request.httpBody = putData
+        
+        // set headers
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error as Any)
+            } else {
+                guard data != nil else {return}
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait()
         
     }
     
-
     /*
     // MARK: - Navigation
 

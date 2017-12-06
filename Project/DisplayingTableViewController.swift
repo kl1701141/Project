@@ -10,8 +10,8 @@ import UIKit
 
 class DisplayingTableViewController: UITableViewController {
 
-    var device: String!
     var user: User!
+    var device: String!
     
     var messages:[Message] = []
     
@@ -24,39 +24,34 @@ class DisplayingTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
+        // initial the max line message set, because DB only stores th modified lines
         for i in 1...255 {
             self.messages.append(Message(device: device, line: "\(i)", funcIn: "", funcOut: "", text: "", id: "0"))
         }
         
-        
-        
-        //loadContentsFromServer()
-        
-        
-        
-        
+        title = device + ": 編輯內容"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         tableView.backgroundColor = UIColor.darkGray
-        
-        
-
-        title = device + ": 編輯內容"
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        // when view ever appears, do these
         loadContentsFromServer()
         tableView.reloadData()
     }
     
+    // To load all contents in this marquee from server
     func loadContentsFromServer () {
+        // API format
         let urlString: String = "http://\(host):\(port)/api/Contents"
         let url = URL(string: urlString)!
-        
         var request = URLRequest(url: url)
         
+        // use GET method
         request.httpMethod = "GET"
         
+        // set headers
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
         
@@ -66,18 +61,13 @@ class DisplayingTableViewController: UITableViewController {
                 print(error as Any)
             } else {
                 guard let data = data else {return}
+                // parse response json to an Array with Dictionary<String, Any> elements
                 let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [Dictionary<String, Any>]
-                //print(json!)
-                //var cnt = 0
                 for object in json! {
                     if object["Station"] as! String == self.device {
-                        //print(object)
-                        
                         self.messages[(object["Line"] as! Int) - 1] = Message(device: object["Station"] as! String, line: "\(object["Line"] as! Int)", funcIn: object["PreFunc"] as! String, funcOut: object["PostFunc"] as! String, text: object["Text"] as! String, id: "\(object["Id"] as! Int)")
-                        
                     }
                 }
-                //print(userDevices)
             }
             semaphore.signal()
         }

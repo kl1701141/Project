@@ -7,10 +7,8 @@
 //
 
 import UIKit
-//import CoreData
 
 class MachinesTableViewController: UITableViewController, UISearchResultsUpdating, UISearchBarDelegate {
-    
     
     var user: User!
     var devices:[Device] = []
@@ -27,51 +25,19 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        let urlString: String = "http://\(host):\(port)/api/Marquees"
-        let url = URL(string: urlString)!
-        
-        var request = URLRequest(url: url)
-        
-        request.httpMethod = "GET"
-        
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
-        
-        let semaphore = DispatchSemaphore(value: 0)
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if error != nil {
-                print(error as Any)
-            } else {
-                guard let data = data else {return}
-                let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [Dictionary<String, Any>]
-
-                //var cnt = 0
-                for object in json! {
-                    self.devices.append(Device(name: object["Station"] as! String, location: object["Location"] as! String, imageName: "marquee1.png"))
-                }
-                //print(userDevices)
-            }
-            semaphore.signal()
-        }
-        
-        task.resume()
-        semaphore.wait()
+        initialMarqueesTableFromServer()
         
         
-        
-        
-        
-        
-        
+        title = "所有裝置"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search,  target: self, action: #selector(MachinesTableViewController.searchBarActivate))
-        title = "所有裝置"
         
         tableView.estimatedRowHeight = 80.0
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.backgroundColor = UIColor.darkGray
+        
         
         searchController = UISearchController(searchResultsController: nil)
-        
         
         searchController.searchBar.delegate = self
         searchController.searchResultsUpdater = self
@@ -81,27 +47,58 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
         searchController.searchBar.tintColor = UIColor.white
         searchController.hidesNavigationBarDuringPresentation = false
         
-        tableView.backgroundColor = UIColor.darkGray
-        
         if searchController.isActive {
             searchController.searchBar.isHidden = false
         }
         //view.backgroundColor = UIColor.darkGray
     }
     
-    
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    // get all the marquees from server
+    func initialMarqueesTableFromServer () {
+        // API format
+        let urlString: String = "http://\(host):\(port)/api/Marquees"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        
+        // use GET method
+        request.httpMethod = "GET"
+        
+        // set headers
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error as Any)
+            } else {
+                guard let data = data else {return}
+                // parse response json to an Array with Dictionary<String, Any> elements
+                let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [Dictionary<String, Any>]
+                
+                for object in json! {
+                    self.devices.append(Device(name: object["Station"] as! String, location: object["Location"] as! String, imageName: "marquee1.png"))
+                }
+            }
+            semaphore.signal()
+        }
+        
+        task.resume()
+        semaphore.wait()
+    }
+    
+    // activate searchBar with button in NavigationBar
     func searchBarActivate() {
         present(searchController, animated: true, completion: nil)
         searchController.isActive = true
     }
     
+    // update table data when keyword changes
     func updateSearchResults(for searchController: UISearchController) {
         if let keyword = searchController.searchBar.text {
             if keyword != "" {
@@ -111,6 +108,7 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
         }
     }
     
+    // action to do when searchBar's Cancel button clicked
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = nil
         searchBar.showsCancelButton = false
@@ -118,6 +116,7 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
         self.tableView.reloadData()
     }
     
+    // check and get the data if match the keyword
     func filterContent(for keyword: String) {
         searchResults = devices.filter({ (device) -> Bool in
             let isMatch = device.location.localizedCaseInsensitiveContains(keyword)
@@ -127,7 +126,7 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
             return isMatch
         })
     }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -148,7 +147,6 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
         }
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "Cell"
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MachinesTableViewCell
@@ -164,12 +162,7 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
         cell.thumbnailImageView.image = UIImage(named: device.imageName)
         cell.accessoryType = .disclosureIndicator
         
-        
         return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, commit edittingStyle:UITableViewCellEditingStyle, forRowAt indexPath: IndexPath ) {
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -184,7 +177,6 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
                 searchController.searchBar.text = ""
                 tableView.reloadData()
                 searchController.isActive = false
-                
             }
         }
     }
