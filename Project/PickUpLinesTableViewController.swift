@@ -15,32 +15,7 @@ class PickUpLinesTableViewController: UITableViewController {
     var user: User!
     
     
-    var messages:[Message] = [
-        Message(device: "A1", line: "1", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),
-        Message(device: "A1", line: "2", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
-        Message(device: "A1", line: "3", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
-        Message(device: "A1", line: "4", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01"),
-        Message(device: "A1", line: "5", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),
-        Message(device: "A1", line: "6", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
-        Message(device: "A1", line: "7", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
-        Message(device: "A1", line: "8", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01"),
-        Message(device: "A1", line: "9", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),
-        Message(device: "A1", line: "10", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
-        Message(device: "A1", line: "11", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
-        Message(device: "A1", line: "12", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01"),
-        Message(device: "A1", line: "13", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),
-        Message(device: "A1", line: "14", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
-        Message(device: "A1", line: "15", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
-        Message(device: "A1", line: "16", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01"),
-        Message(device: "A1", line: "17", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),
-        Message(device: "A1", line: "18", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
-        Message(device: "A1", line: "19", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
-        Message(device: "A1", line: "20", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01"),
-        Message(device: "A1", line: "21", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),
-        Message(device: "A1", line: "22", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
-        Message(device: "A1", line: "23", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
-        Message(device: "A1", line: "24", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01")
-    ]
+    var messages:[Message] = []
     
     var lineSelected = Array(repeatElement(false, count: 254))
     
@@ -187,6 +162,7 @@ class PickUpLinesTableViewController: UITableViewController {
                 
             }
             task.resume()
+            
         }
         
         _ = navigationController?.popViewController(animated: true)

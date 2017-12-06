@@ -11,19 +11,17 @@ import Foundation
 class Message {
     var device = ""
     var line = ""
-    var displayTime = ""
     var funcIn = ""
     var funcOut = ""
     var text = ""
-    var color = ""
+    var id = ""
     
-    init(device: String, line: String, displayTime: String, funcIn: String, funcOut: String, text: String, color: String){
+    init(device: String, line: String, funcIn: String, funcOut: String, text: String, id: String){
         self.device = device
         self.line = line
-        self.displayTime = displayTime
         self.funcIn = funcIn
         self.funcOut = funcOut
         self.text = text
-        self.color = color
+        self.id = id
     }
 }

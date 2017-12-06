@@ -13,4 +13,8 @@ var host: String = "192.168.150.27"
 var port: String = "51320"
 
 
+// for max Lines number
+var maxLine: Int = 255
+
+
 

@@ -176,6 +176,43 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         messageTextField.maxLength = 10;
     }
     
+    func putBackToDB (Id: String, Station: String, PreFunc: String, PostFunc: String, Date: String, Line: String, Text: String) {
+        let urlString: String = "http://\(host):\(port)/api/Contents/\(Id)"
+        let url = URL(string: urlString)!
+
+        
+        var request = URLRequest(url: url)
+        
+        let body = "Id=\(Id)&Station=\(Station)&PreFunc=\(PreFunc)&PostFunc=\(PostFunc)&Date=\(Date)&Line=\(Line)&Text=\(Text)"
+        
+        
+        print (body)
+        
+        let putData = body.data(using: String.Encoding.utf8)
+        
+        request.httpMethod = "PUT"
+        request.httpBody = putData
+        
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
+        //print(user.token)
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error as Any)
+            } else {
+                guard let data = data else {return}
+                //let outputStr  = String(data: data, encoding: String.Encoding.utf8) as String!
+                //print(outputStr!)
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait()
+        
+    }
+    
     @IBAction func publishMessage(_ sender: AnyObject) {
         let urlString: String = "http://\(host):\(port)/api/Mqtt"
         let url = URL(string: urlString)!
@@ -326,7 +363,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         let body = "Topic=\(message.device)&Type=\(type)&Data=\(line),\(time!),\(funcIn),\(mode),\(colorMode),\(text!),\(funcOut)&Date=\(dateFormatter.string(from: now))"
         
         
-        print (body)
+        //print (body)
         
         let postData = body.data(using: String.Encoding.utf8)
         
@@ -348,6 +385,8 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         
         }
         task.resume()
+        
+        putBackToDB(Id: message.id, Station: message.device, PreFunc: funcIn, PostFunc: funcOut, Date: dateFormatter.string(from: now), Line: message.line, Text: text!)
         
         //var response: URLResponse?
         

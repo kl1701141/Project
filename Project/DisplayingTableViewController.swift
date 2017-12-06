@@ -13,18 +13,7 @@ class DisplayingTableViewController: UITableViewController {
     var device: String!
     var user: User!
     
-    var messages:[Message] = [
-        Message(device: "A1", line: "1", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),
-        Message(device: "A1", line: "2", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
-        Message(device: "A1", line: "3", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
-        Message(device: "A1", line: "4", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01"),
-        Message(device: "A1", line: "5", displayTime: "2", funcIn: "A", funcOut: "A", text: "WOW", color: "01"),
-        Message(device: "A1", line: "6", displayTime: "2", funcIn: "A", funcOut: "A", text: "YOO", color: "01"),
-        Message(device: "A1", line: "7", displayTime: "2", funcIn: "A", funcOut: "A", text: "Such", color: "01"),
-        Message(device: "A1", line: "8", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01"),
-        Message(device: "A1", line: "9", displayTime: "2", funcIn: "A", funcOut: "A", text: "Display", color: "01"),
-        Message(device: "A1", line: "10", displayTime: "2", funcIn: "A", funcOut: "A", text: "Doge", color: "01")
-    ]
+    var messages:[Message] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +23,67 @@ class DisplayingTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        for i in 1...255 {
+            self.messages.append(Message(device: device, line: "\(i)", funcIn: "", funcOut: "", text: "", id: "0"))
+        }
+        
+        
+        
+        //loadContentsFromServer()
+        
+        
+        
+        
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         tableView.backgroundColor = UIColor.darkGray
+        
+        
 
         title = device + ": 編輯內容"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadContentsFromServer()
+        tableView.reloadData()
+    }
+    
+    func loadContentsFromServer () {
+        let urlString: String = "http://\(host):\(port)/api/Contents"
+        let url = URL(string: urlString)!
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error as Any)
+            } else {
+                guard let data = data else {return}
+                let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [Dictionary<String, Any>]
+                //print(json!)
+                //var cnt = 0
+                for object in json! {
+                    if object["Station"] as! String == self.device {
+                        //print(object)
+                        
+                        self.messages[(object["Line"] as! Int) - 1] = Message(device: object["Station"] as! String, line: "\(object["Line"] as! Int)", funcIn: object["PreFunc"] as! String, funcOut: object["PostFunc"] as! String, text: object["Text"] as! String, id: "\(object["Id"] as! Int)")
+                        
+                    }
+                }
+                //print(userDevices)
+            }
+            semaphore.signal()
+        }
+        
+        task.resume()
+        semaphore.wait()
     }
 
     override func didReceiveMemoryWarning() {

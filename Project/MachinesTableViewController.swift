@@ -13,14 +13,7 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
     
     
     var user: User!
-    var devices:[Device] = [
-        Device(name: "A1", location: "EA-101", imageName: "marquee1.jpg", controller: "Andy Wang"),
-        Device(name: "B4", location: "CS-104", imageName: "doge1.png", controller: "Peter Chen, Vava Yu, PG One, GAI Wang"),
-        Device(name: "H8", location: "資工系館前", imageName: "doge2.png", controller: "Kevin Lin, Kiki Liu"),
-        Device(name: "C5", location: "活動中心", imageName: "doge3.jpg", controller: "Kinny Fang, Sarah Lin, Michael Lin"),
-        Device(name: "D7", location: "資工系辦", imageName: "hibiki.jpg",controller: "Cathy Lin, Jeremy Huang"),
-        Device(name: "A2", location: "EA-206", imageName: "hibiki2.jpg", controller: "Doge Chen")
-    ]
+    var devices:[Device] = []
     
     var searchController: UISearchController!
     var searchResults:[Device] = []
@@ -33,6 +26,41 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        let urlString: String = "http://\(host):\(port)/api/Marquees"
+        let url = URL(string: urlString)!
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error as Any)
+            } else {
+                guard let data = data else {return}
+                let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [Dictionary<String, Any>]
+
+                //var cnt = 0
+                for object in json! {
+                    self.devices.append(Device(name: object["Station"] as! String, location: object["Location"] as! String, imageName: "marquee1.png"))
+                }
+                //print(userDevices)
+            }
+            semaphore.signal()
+        }
+        
+        task.resume()
+        semaphore.wait()
+        
+        
+        
+        
+        
         
         
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
@@ -61,11 +89,7 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
         //view.backgroundColor = UIColor.darkGray
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        if searchController.isActive {
-            searchController.searchBar.isHidden = false
-        }
-    }
+    
     
     
     override func didReceiveMemoryWarning() {
@@ -157,12 +181,10 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
                 let destinationController = segue.destination as! MachineDetailViewController
                 destinationController.device = (searchController.isActive) ? ((searchController.searchBar.text == "") ? devices[indexPath.row] : searchResults[indexPath.row]) :  devices[indexPath.row]
                 destinationController.user = user
-//                searchController.searchBar.text = ""
-//                tableView.reloadData()
-//                searchController.isActive = false
-                if searchController.isActive {
-                    searchController.searchBar.isHidden = true
-                }
+                searchController.searchBar.text = ""
+                tableView.reloadData()
+                searchController.isActive = false
+                
             }
         }
     }

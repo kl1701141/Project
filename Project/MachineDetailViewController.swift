@@ -209,7 +209,7 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -223,9 +223,9 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
         case 1:
             cell.typeLabel.text = "裝置站號"
             cell.valueLabel.text = device.name
-        case 2:
-            cell.typeLabel.text = "管理者"
-            cell.valueLabel.text = device.controller
+//        case 2:
+//            cell.typeLabel.text = "管理者"
+//            cell.valueLabel.text = device.controller
         default:
             cell.typeLabel.text = ""
             cell.valueLabel.text = ""
