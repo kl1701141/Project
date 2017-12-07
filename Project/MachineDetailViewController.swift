@@ -50,6 +50,11 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
             self.lineNum.append("\(i)")
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        // when view ever appears, do these
+        reloadDeviceData()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -120,6 +125,38 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
             textField.endEditing(true)
         }
         
+    }
+    
+    func reloadDeviceData() {
+        // API format
+        let urlString: String = "http://\(host):\(port)/api/Marquees/\(device.Did)"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        
+        // use GET method
+        request.httpMethod = "GET"
+        
+        // set headers
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error as Any)
+            } else {
+                guard let data = data else {return}
+                
+                // parse response json to an Array with Dictionary<String, Any> elements
+                let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [Dictionary<String, Any>]
+                for object in json! {
+                    self.device = Device(name: object["Station"] as! String, location: object["Location"] as! String, imageName: "marquee01.png", status: object["Status"] as! String, Did: "\(object["Id"] as! Int)")
+                }
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait()
     }
     
     // Action & initial something for Function: 調整顯示行數
@@ -232,12 +269,12 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
             destinationController.user = user
         } else if segue.identifier == "enableLines" {
             let destinationController = segue.destination as! PickUpLinesTableViewController
-            destinationController.device = device.name
+            destinationController.device = device
             destinationController.user = user
             destinationController.type = "B6"
         } else if segue.identifier == "disableLines" {
             let destinationController = segue.destination as! PickUpLinesTableViewController
-            destinationController.device = device.name
+            destinationController.device = device
             destinationController.user = user
             destinationController.type = "B7"
         } else if segue.identifier == "interludePublish" {

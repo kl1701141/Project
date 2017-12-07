@@ -27,6 +27,8 @@
 		768C72191F8FCC5400E99B75 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C72181F8FCC5400E99B75 /* ProfileViewController.swift */; };
 		768C721B1F8FCDEA00E99B75 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C721A1F8FCDEA00E99B75 /* User.swift */; };
 		768C721D1F8FEE3B00E99B75 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768C721C1F8FEE3B00E99B75 /* LogInViewController.swift */; };
+		7698B2E51FD9409200B5C559 /* MyMachinesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698B2E41FD9409200B5C559 /* MyMachinesTableViewController.swift */; };
+		7698B2E71FD941D900B5C559 /* MyMachinesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7698B2E61FD941D900B5C559 /* MyMachinesTableViewCell.swift */; };
 		76CF66371FA6325E00448B7C /* Handy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76CF66361FA6325E00448B7C /* Handy.swift */; };
 		76E96AA91FCA7ABE003A769D /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E96AA81FCA7ABE003A769D /* RegisterViewController.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +56,8 @@
 		768C72181F8FCC5400E99B75 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		768C721A1F8FCDEA00E99B75 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		768C721C1F8FEE3B00E99B75 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		7698B2E41FD9409200B5C559 /* MyMachinesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMachinesTableViewController.swift; sourceTree = "<group>"; };
+		7698B2E61FD941D900B5C559 /* MyMachinesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMachinesTableViewCell.swift; sourceTree = "<group>"; };
 		76CF66361FA6325E00448B7C /* Handy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Handy.swift; sourceTree = "<group>"; };
 		76E96AA81FCA7ABE003A769D /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,6 +107,8 @@
 				768C72161F8FCC0C00E99B75 /* ProfileTableViewCell.swift */,
 				7689AE751F5FC42300144FDC /* MachinesTableViewController.swift */,
 				7689AE6D1F5E1F2500144FDC /* MachinesTableViewCell.swift */,
+				7698B2E41FD9409200B5C559 /* MyMachinesTableViewController.swift */,
+				7698B2E61FD941D900B5C559 /* MyMachinesTableViewCell.swift */,
 				7689AE6F1F5E96DD00144FDC /* MachineDetailViewController.swift */,
 				7689AE731F5ECD6700144FDC /* MachineDetailViewCell.swift */,
 				7670EBD91F7367EA004C7FCC /* DisplayingTableViewController.swift */,
@@ -190,6 +196,7 @@
 				768C721B1F8FCDEA00E99B75 /* User.swift in Sources */,
 				761792751F61EA2900C8B6BE /* MessagePublishController.swift in Sources */,
 				766DE8C31FD6DAFA00593C89 /* global.swift in Sources */,
+				7698B2E51FD9409200B5C559 /* MyMachinesTableViewController.swift in Sources */,
 				7670EBDA1F7367EA004C7FCC /* DisplayingTableViewController.swift in Sources */,
 				764A51F21F9B5623007623F5 /* PickUpLinesTableViewCell.swift in Sources */,
 				76CF66371FA6325E00448B7C /* Handy.swift in Sources */,
@@ -206,6 +213,7 @@
 				7689AE6E1F5E1F2500144FDC /* MachinesTableViewCell.swift in Sources */,
 				7689AE761F5FC42300144FDC /* MachinesTableViewController.swift in Sources */,
 				764A51F01F9B560C007623F5 /* PickUpLinesTableViewController.swift in Sources */,
+				7698B2E71FD941D900B5C559 /* MyMachinesTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

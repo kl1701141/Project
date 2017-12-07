@@ -12,10 +12,14 @@ class Device {
     var name = ""
     var location = ""
     var imageName = ""
+    var status = ""
+    var Did = ""
     
-    init(name: String, location: String, imageName: String) {
+    init(name: String, location: String, imageName: String, status: String, Did: String) {
         self.name = name
         self.location = location
         self.imageName = imageName
+        self.status = status
+        self.Did = Did
     }
 }

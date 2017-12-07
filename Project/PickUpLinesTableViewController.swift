@@ -11,15 +11,13 @@ import UIKit
 class PickUpLinesTableViewController: UITableViewController {
 
     var type: String!
-    var device: String!
+    var device: Device!
     var user: User!
     
     var messages:[Message] = []
     var lineSelected = Array(repeatElement(false, count: 254))
     var setOfLines = Set<Int>()
     
-    // if API complete, use API to get
-    var lineStatus: String = "111111111110010011111110011100111111111111111111110000000000111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111000000000011111111110000000000111111110011111111111111111111111111111111111111111111111111111110101010101"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,29 +29,29 @@ class PickUpLinesTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
         if type == "B6" {
-            title = device + ": 啟用行號"
+            title = device.name + ": 啟用行號"
             // button for enable selected lines in this marquee
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add,  target: self, action: #selector(PickUpLinesTableViewController.editAction))
             
             // initial display enable or disable line
             for i in 0...254 {
-                let index = lineStatus.index(lineStatus.startIndex, offsetBy: i)
-                if lineStatus[index] == "0" {
-                    self.messages.append(Message(device: device, line: "\(i+1)", funcIn: "", funcOut: "", text: "", id: "0"))
+                let index = device.status.index(device.status.startIndex, offsetBy: i)
+                if device.status[index] == "0" {
+                    self.messages.append(Message(device: device.name, line: "\(i+1)", funcIn: "", funcOut: "", text: "", id: "0"))
                 } else {
                     continue
                 }
             }
         } else if type == "B7" {
-            title = device + ": 停用行號"
+            title = device.name + ": 停用行號"
             // button for disable selected lines in this marquee
             navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.trash,  target: self, action: #selector(PickUpLinesTableViewController.editAction))
             
             // initial display enable or disable line
             for i in 0...254 {
-                let index = lineStatus.index(lineStatus.startIndex, offsetBy: i)
-                if lineStatus[index] == "1" {
-                    self.messages.append(Message(device: device, line: "\(i+1)", funcIn: "", funcOut: "", text: "", id: "0"))
+                let index = device.status.index(device.status.startIndex, offsetBy: i)
+                if device.status[index] == "1" {
+                    self.messages.append(Message(device: device.name, line: "\(i+1)", funcIn: "", funcOut: "", text: "", id: "0"))
                 } else {
                     continue
                 }
@@ -66,6 +64,7 @@ class PickUpLinesTableViewController: UITableViewController {
         tableView.backgroundColor = UIColor.darkGray
 
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -95,10 +94,10 @@ class PickUpLinesTableViewController: UITableViewController {
                 // parse response json to an Array with Dictionary<String, Any> elements
                 let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [Dictionary<String, Any>]
                 for object in json! {
-                    if object["Station"] as! String == self.device {
+                    if object["Station"] as! String == self.device.name {
                         if self.type == "B6" {
-                            let index = self.lineStatus.index(self.lineStatus.startIndex, offsetBy: (object["Line"] as! Int - 1))
-                            if self.lineStatus[index] == "0" {
+                            let index = self.device.status.index(self.device.status.startIndex, offsetBy: (object["Line"] as! Int - 1))
+                            if self.device.status[index] == "0" {
                                 for i in 0...self.messages.count {
                                     if self.messages[i].line == "\(object["Line"] as! Int)" {
                                         self.messages[i] = Message(device: object["Station"] as! String, line: "\(object["Line"] as! Int)", funcIn: object["PreFunc"] as! String, funcOut: object["PostFunc"] as! String, text: object["Text"] as! String, id: "\(object["Id"] as! Int)")
@@ -109,8 +108,8 @@ class PickUpLinesTableViewController: UITableViewController {
                                 continue
                             }
                         } else if self.type == "B7" {
-                            let index = self.lineStatus.index(self.lineStatus.startIndex, offsetBy: (object["Line"] as! Int - 1))
-                            if self.lineStatus[index] == "1" {
+                            let index = self.device.status.index(self.device.status.startIndex, offsetBy: (object["Line"] as! Int - 1))
+                            if self.device.status[index] == "1" {
                                 for i in 0...self.messages.count {
                                     if self.messages[i].line == "\(object["Line"] as! Int)" {
                                         self.messages[i] = Message(device: object["Station"] as! String, line: "\(object["Line"] as! Int)", funcIn: object["PreFunc"] as! String, funcOut: object["PostFunc"] as! String, text: object["Text"] as! String, id: "\(object["Id"] as! Int)")
@@ -217,7 +216,7 @@ class PickUpLinesTableViewController: UITableViewController {
             }
             
             // POST body data
-            let body = "Topic=\(device!)&Type=\(type!)&Data=\(count)," + lineNumbers + "&Date=\(dateFormatter.string(from: now))"
+            let body = "Topic=\(device.name)&Type=\(type!)&Data=\(count)," + lineNumbers + "&Date=\(dateFormatter.string(from: now))"
             let postData = body.data(using: String.Encoding.utf8)
             print(body)
             // use POST method
@@ -239,10 +238,65 @@ class PickUpLinesTableViewController: UITableViewController {
             }
             task.resume()
             semaphore.wait()
+            setStatusBackToDB()
             
         }
         
         _ = navigationController?.popViewController(animated: true)
+    }
+    
+    func setStatusBackToDB() {
+        // API format
+        let urlString: String = "http://\(host):\(port)/api/Marquees/\(device.Did)"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        
+        var lineStatus:[String] = []
+        
+        for i in 1...device.status.count {
+            let index = device.status.index(device.status.startIndex, offsetBy: (i-1))
+            lineStatus.append("\(device.status[index])")
+        }
+        // modify a string for selected lines
+        let linesToEdit = setOfLines.sorted()
+        for line in linesToEdit {
+            if type == "B6" {
+                lineStatus[line-1] = "1"
+            } else if type == "B7" {
+                lineStatus[line-1] = "0"
+            }
+        }
+        
+        var newStatus: String = ""
+        for i in lineStatus {
+            newStatus.append(i)
+        }
+        //print(newStatus)
+        
+        // POST body data
+        let body = "Id=\(device.Did)&Station=\(device.name)&Location=\(device.location)&Status=\(newStatus)"
+        let putData = body.data(using: String.Encoding.utf8)
+        print(body)
+        // use PUT method
+        request.httpMethod = "PUT"
+        request.httpBody = putData
+        
+        // set headers
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error as Any)
+            } else {
+                guard data != nil else {return}
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait()
+        
     }
     
 

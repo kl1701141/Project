@@ -10,7 +10,7 @@ import Foundation
 
 // for web API host and port information
 // All semaphore when api called is for waiting server response
-var host: String = "192.168.150.27"
+var host: String = "192.168.15.199"
 var port: String = "51320"
 
 

@@ -42,12 +42,17 @@ class LogInViewController: UIViewController {
             // segue to profile view and machine view for passing user data
             let barViewControllers = segue.destination as! UITabBarController
             
-            let navToProfile = barViewControllers.viewControllers![1] as! UINavigationController
+            let navToMyMachine = barViewControllers.viewControllers![1] as! UINavigationController
+            let navToProfile = barViewControllers.viewControllers![2] as! UINavigationController
             let navToMachines = barViewControllers.viewControllers![0] as! UINavigationController
             
+            
+            let myMachineViewController = navToMyMachine.viewControllers[0] as! MyMachinesTableViewController
             let profileViewController = navToProfile.viewControllers[0] as! ProfileViewController
             let machineViewController = navToMachines.viewControllers[0] as! MachinesTableViewController
-
+            
+            
+            myMachineViewController.user = user
             profileViewController.user = user
             machineViewController.user = user
         }
@@ -74,7 +79,9 @@ class LogInViewController: UIViewController {
             if error != nil {
                 print(error as Any)
             } else {
+                
                 guard let data = data else {return}
+                
                 // parse response json to an Array with Dictionary<String, Any> elements
                 let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [Dictionary<String, Any>]
                 var cnt = 0
@@ -114,7 +121,13 @@ class LogInViewController: UIViewController {
         } else {
             // API CALLED, returns a token store into userToken
             logInAndGetToken ()
-            self.performSegue(withIdentifier: "loginToProfile", sender: self)
+            if userToken == "帳號或密碼錯誤" {
+                let alertMessage = UIAlertController(title: nil, message: "帳號或密碼錯誤", preferredStyle: .alert)
+                alertMessage.addAction(UIAlertAction(title: "我知道了", style: .default, handler: nil))
+                self.present(alertMessage, animated: true, completion: nil)
+            } else {
+                self.performSegue(withIdentifier: "loginToProfile", sender: self)
+            }
         }
     }
     
