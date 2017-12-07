@@ -148,10 +148,8 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
                 guard let data = data else {return}
                 
                 // parse response json to an Array with Dictionary<String, Any> elements
-                let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [Dictionary<String, Any>]
-                for object in json! {
-                    self.device = Device(name: object["Station"] as! String, location: object["Location"] as! String, imageName: "marquee01.png", status: object["Status"] as! String, Did: "\(object["Id"] as! Int)")
-                }
+                let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                self.device = Device(name: json!["Station"] as! String, location: json!["Location"] as! String, imageName: "marquee01.png", status: json!["Status"] as! String, Did: "\(json!["Id"] as! Int)")
             }
             semaphore.signal()
         }
