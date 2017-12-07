@@ -14,6 +14,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
     var message:Message!
     var device: String!
     var type: String!
+    var lineNotEmpty: [String] = []
 
     // for function picker options
     var infunction = ["向左移入","向內捲入","向外捲入","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲入","向下捲入","立即顯現","同時出現","跳入","射入","動畫","續幕"]
@@ -391,12 +392,56 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         semaphore.wait()
         
         // update DB
+        var newLine: Int = 1
         if type == "B1" {
-            putBackToDB(Id: message.id, Station: message.device, PreFunc: funcIn, PostFunc: funcOut, Date: dateFormatter.string(from: now), Line: message.line, Text: text!)
+            for i in lineNotEmpty {
+                if message.line == i {
+                    newLine = 0
+                    break
+                }
+            }
+            
+            if newLine == 1 {
+                newLinePostToDB(Station: message.device, PreFunc: funcIn, PostFunc: funcOut, Date: dateFormatter.string(from: now), Line: message.line, Text: text!)
+            } else if newLine == 0 {
+                putBackToDB(Id: message.id, Station: message.device, PreFunc: funcIn, PostFunc: funcOut, Date: dateFormatter.string(from: now), Line: message.line, Text: text!)
+            }
         }
         
         messageTextField.text = nil
         _ = navigationController?.popViewController(animated: true)
+    }
+    
+    func newLinePostToDB(Station: String, PreFunc: String, PostFunc: String, Date: String, Line: String, Text: String) {
+        // API format
+        let urlString: String = "http://\(host):\(port)/api/Contents/"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        
+        // POST body data
+        let body = "Station=\(Station)&PreFunc=\(PreFunc)&PostFunc=\(PostFunc)&Date=\(Date)&Line=\(Line)&Text=\(Text)"
+        let postData = body.data(using: String.Encoding.utf8)
+        
+        // use POST method
+        request.httpMethod = "POST"
+        request.httpBody = postData
+        
+        // set headers
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error as Any)
+            } else {
+                guard data != nil else {return}
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait()
+        
     }
     
     // When publish complete, update this content DATA in DB

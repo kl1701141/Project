@@ -12,6 +12,7 @@ class DisplayingTableViewController: UITableViewController {
 
     var user: User!
     var device: String!
+    var lineNotEmpty: [String] = []
     
     var messages:[Message] = []
     
@@ -66,6 +67,7 @@ class DisplayingTableViewController: UITableViewController {
                 for object in json! {
                     if object["Station"] as! String == self.device {
                         self.messages[(object["Line"] as! Int) - 1] = Message(device: object["Station"] as! String, line: "\(object["Line"] as! Int)", funcIn: object["PreFunc"] as! String, funcOut: object["PostFunc"] as! String, text: object["Text"] as! String, id: "\(object["Id"] as! Int)")
+                        self.lineNotEmpty.append("\(object["Line"] as! Int)")
                     }
                 }
             }
@@ -120,6 +122,7 @@ class DisplayingTableViewController: UITableViewController {
                 destinationController.message = messages[indexPath.row]
                 destinationController.user = user
                 destinationController.type = "B1"
+                destinationController.lineNotEmpty = lineNotEmpty
             }
         }
     }

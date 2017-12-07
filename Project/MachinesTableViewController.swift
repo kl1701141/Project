@@ -25,8 +25,6 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        initialMarqueesTableFromServer()
-        
         
         title = "所有裝置"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)

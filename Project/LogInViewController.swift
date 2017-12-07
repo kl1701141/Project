@@ -29,6 +29,7 @@ class LogInViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Date format
         let now = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy/M/dd HH:mm:ss"
@@ -52,6 +53,7 @@ class LogInViewController: UIViewController {
             let machineViewController = navToMachines.viewControllers[0] as! MachinesTableViewController
             
             
+            // pass user data if login success
             myMachineViewController.user = user
             profileViewController.user = user
             machineViewController.user = user
@@ -59,7 +61,7 @@ class LogInViewController: UIViewController {
     }
     
     // return marquees under this users controll as a String
-    func getMarquees () -> String{
+    func getMarquees () -> String {
         // API format
         let urlString: String = "http://\(host):\(port)/api/Owners"
         let url = URL(string: urlString)!
@@ -79,7 +81,6 @@ class LogInViewController: UIViewController {
             if error != nil {
                 print(error as Any)
             } else {
-                
                 guard let data = data else {return}
                 
                 // parse response json to an Array with Dictionary<String, Any> elements
@@ -113,11 +114,13 @@ class LogInViewController: UIViewController {
             let alertMessage = UIAlertController(title: nil, message: "您尚未輸入帳號", preferredStyle: .alert)
             alertMessage.addAction(UIAlertAction(title: "我知道了", style: .default, handler: nil))
             self.present(alertMessage, animated: true, completion: nil)
+            
         } else if passwordTextField.text == "" {
             // alert for empty password text field
             let alertMessage = UIAlertController(title: nil, message: "您尚未輸入密碼", preferredStyle: .alert)
             alertMessage.addAction(UIAlertAction(title: "我知道了", style: .default, handler: nil))
             self.present(alertMessage, animated: true, completion: nil)
+            
         } else {
             // API CALLED, returns a token store into userToken
             logInAndGetToken ()

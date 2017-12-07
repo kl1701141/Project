@@ -218,7 +218,6 @@ class PickUpLinesTableViewController: UITableViewController {
             // POST body data
             let body = "Topic=\(device.name)&Type=\(type!)&Data=\(count)," + lineNumbers + "&Date=\(dateFormatter.string(from: now))"
             let postData = body.data(using: String.Encoding.utf8)
-            print(body)
             // use POST method
             request.httpMethod = "POST"
             request.httpBody = postData
@@ -271,12 +270,10 @@ class PickUpLinesTableViewController: UITableViewController {
         for i in lineStatus {
             newStatus.append(i)
         }
-        //print(newStatus)
         
         // POST body data
         let body = "Id=\(device.Did)&Station=\(device.name)&Location=\(device.location)&Status=\(newStatus)"
         let putData = body.data(using: String.Encoding.utf8)
-        print(body)
         // use PUT method
         request.httpMethod = "PUT"
         request.httpBody = putData

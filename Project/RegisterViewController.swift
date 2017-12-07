@@ -33,11 +33,13 @@ class RegisterViewController: UIViewController {
             let alertMessage = UIAlertController(title: nil, message: "您尚未輸入帳號", preferredStyle: .alert)
             alertMessage.addAction(UIAlertAction(title: "我知道了", style: .default, handler: nil))
             self.present(alertMessage, animated: true, completion: nil)
+            
         } else if passwordTextField.text == "" {
             // alert for empty password text field
             let alertMessage = UIAlertController(title: nil, message: "您尚未輸入密碼", preferredStyle: .alert)
             alertMessage.addAction(UIAlertAction(title: "我知道了", style: .default, handler: nil))
             self.present(alertMessage, animated: true, completion: nil)
+            
         } else if confirmPasswordTextField.text == "" {
             // alert for empty confirmPassword text field
             let alertMessage = UIAlertController(title: nil, message: "您尚未輸入確認密碼", preferredStyle: .alert)
@@ -59,7 +61,7 @@ class RegisterViewController: UIViewController {
             request.httpMethod = "POST"
             request.httpBody = postData
             
-            // set header
+            // set Header
             request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             
             let semaphore = DispatchSemaphore(value: 0)

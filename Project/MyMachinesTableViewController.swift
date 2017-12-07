@@ -27,9 +27,6 @@ class MyMachinesTableViewController: UITableViewController, UISearchResultsUpdat
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        initialMarqueesTableFromServer()
-        
-        
         title = "我的裝置"
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search,  target: self, action: #selector(MachinesTableViewController.searchBarActivate))
@@ -88,7 +85,6 @@ class MyMachinesTableViewController: UITableViewController, UISearchResultsUpdat
                 guard let data = data else {return}
                 // parse response json to an Array with Dictionary<String, Any> elements
                 let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [Dictionary<String, Any>]
-                //print("wow")
                 
                 for object in json! {
                     for station in self.self.myMachines {
