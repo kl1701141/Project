@@ -12,13 +12,15 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
 
     var user: User!
     var message:Message!
-    var type = "B1"
+    var device: String!
+    var type: String!
 
     // for function picker options
     var infunction = ["向左移入","向內捲入","向外捲入","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲入","向下捲入","立即顯現","同時出現","跳入","射入","動畫","續幕"]
     var outfunction = ["向左移入","向內捲出","向外捲出","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲出","向下捲出","立即顯現","同時出現","跳入","射入","動畫","續幕"]
     var colors = ["紅色", "黃色", "綠色"]
-    var fullHalf = ["一行半形中英數字 (上限10字)", "兩行半形英數字 (上限20字)", "全形中英數字 (上限5字)"]
+    var fullHalf = ["一行半形英數字 (上限10字)", "兩行半形英數字 (上限20字)", "全形中英數字 (上限5字)"]
+    var fullHalfForB2 = ["一行半形英數字 (上限25字)", "全形中英數字 (上限12字)"]
     var times: [String] = []
     
     
@@ -42,7 +44,12 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        title = "編輯第 " + message.line + " 行"
+        if type == "B1" {
+            title = "編輯第 " + message.line + " 行"
+        } else if type == "B2" {
+            title = "插播"
+        }
+        
         // Do any additional setup after loading the view.
         
         colorPicker.backgroundColor = UIColor.white
@@ -53,11 +60,18 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         
         // default value when publish a message
         colorTextField.text = "紅色"
-        fullHalfTextField.text = "一行半形英數字 (上限10字)"
+        if type == "B1" {
+            fullHalfTextField.text = "一行半形英數字 (上限10字)"
+            messageTextField.maxLength = 10;
+        } else if type == "B2" {
+            fullHalfTextField.text = "一行半形英數字 (上限25字)"
+            messageTextField.maxLength = 25;
+        }
+        
         funcInTextField.text = "向左移入"
         funcOutTextField.text = "向左移入"
         timeTextField.text = "0"
-        messageTextField.maxLength = 10;
+        
         
         // initial lineNum array from 1 to 255 for timePicker
         for i in 0...255 {
@@ -84,6 +98,9 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
             rows = self.colors.count
         } else if pickerView == fullHalfPicker {
             rows = self.fullHalf.count
+            if type == "B2" {
+                rows = self.fullHalfForB2.count
+            }
         } else if pickerView == timePicker {
             rows = self.times.count
         }
@@ -102,7 +119,11 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         } else if pickerView == colorPicker {
             pickerLabel.text = colors[row]
         } else if pickerView == fullHalfPicker {
-            pickerLabel.text = fullHalf[row]
+            if type == "B1" {
+                pickerLabel.text = fullHalf[row]
+            } else if type == "B2" {
+                pickerLabel.text = fullHalfForB2[row]
+            }
         } else if pickerView == timePicker {
             pickerLabel.text = times[row]
         }
@@ -123,7 +144,11 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         } else if pickerView == colorPicker {
             self.colorTextField.text = self.colors[row]
         } else if pickerView == fullHalfPicker {
-            self.fullHalfTextField.text = self.fullHalf[row]
+            if type == "B1" {
+                self.fullHalfTextField.text = self.fullHalf[row]
+            } else if type == "B2" {
+                self.fullHalfTextField.text = self.fullHalfForB2[row]
+            }
         } else if pickerView == timePicker {
             self.timeTextField.text = self.times[row]
         }
@@ -156,6 +181,10 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
                 messageTextField.maxLength = 20
             } else if fullHalfTextField.text == "全形中英數字 (上限5字)" {
                 messageTextField.maxLength = 5
+            } else if fullHalfTextField.text == "一行半形英數字 (上限25字)" {
+                messageTextField.maxLength = 25
+            } else if fullHalfTextField.text == "全形中英數字 (上限12字)" {
+                messageTextField.maxLength = 12
             }
         }
         
@@ -164,12 +193,17 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
     // Action for set all the Text Field to the default setting
     @IBAction func clearAllTextField(_ sender: AnyObject) {
         colorTextField.text = "紅色"
-        fullHalfTextField.text = "一行半形英數字 (上限10字)"
+        if type == "B1" {
+            fullHalfTextField.text = "一行半形英數字 (上限10字)"
+            messageTextField.maxLength = 10;
+        } else if type == "B2" {
+            fullHalfTextField.text = "一行半形英數字 (上限25字)"
+            messageTextField.maxLength = 25;
+        }
         funcInTextField.text = "向左移入"
         funcOutTextField.text = "向左移入"
         timeTextField.text = "0"
         messageTextField.text = nil
-        messageTextField.maxLength = 10;
     }
     
     // Action for publish a content
@@ -185,7 +219,10 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
         // body variables setting here
-        let line = message.line
+        var line: String = ""
+        if type == "B1" {
+            line = message.line
+        }
         
         let time = timeTextField.text
         
@@ -236,24 +273,24 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         var mode = "C00"
         if fullHalfTextField.text == "兩行半形英數字 (上限20字)" {
             mode = "C1"
-        } else if fullHalfTextField.text == "全形中英數字 (上限5字)" {
+        } else if ((fullHalfTextField.text == "全形中英數字 (上限5字)") || (fullHalfTextField.text == "全形中英數字 (上限12字)")) {
             mode = "C01"
         }
         
         var colorMode = ""
         if colorTextField.text == "紅色" {
             colorMode = "01"
-            if fullHalfTextField.text == "全形中英數字 (上限5字)" {
+            if ((fullHalfTextField.text == "全形中英數字 (上限5字)") || (fullHalfTextField.text == "全形中英數字 (上限12字)")) {
                 colorMode = "21"
             }
         } else if colorTextField.text == "綠色" {
             colorMode = "04"
-            if fullHalfTextField.text == "全形中英數字 (上限5字)" {
+            if ((fullHalfTextField.text == "全形中英數字 (上限5字)") || (fullHalfTextField.text == "全形中英數字 (上限12字)")) {
                 colorMode = "24"
             }
         } else if colorTextField.text == "黃色" {
             colorMode = "05"
-            if fullHalfTextField.text == "全形中英數字 (上限5字)" {
+            if ((fullHalfTextField.text == "全形中英數字 (上限5字)") || (fullHalfTextField.text == "全形中英數字 (上限12字)")) {
                 colorMode = "25"
             }
         }
@@ -323,7 +360,14 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
 
         
         // POST body data
-        let body = "Topic=\(message.device)&Type=\(type)&Data=\(line),\(time!),\(funcIn),\(mode),\(colorMode),\(text!),\(funcOut)&Date=\(dateFormatter.string(from: now))"
+        
+        var body: String = ""
+        if type == "B1" {
+            body = "Topic=\(message.device)&Type=\(type!)&Data=\(line),\(time!),\(funcIn),\(mode),\(colorMode),\(text!),\(funcOut)&Date=\(dateFormatter.string(from: now))"
+        } else if type == "B2" {
+            body = "Topic=\(device!)&Type=\(type!)&Data=\(time!),\(time!),\(funcIn),\(mode),\(colorMode),\(text!),\(funcOut)&Date=\(dateFormatter.string(from: now))"
+        }
+
         let postData = body.data(using: String.Encoding.utf8)
         
         // use POST method
@@ -339,9 +383,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
             if error != nil {
                 print(error as Any)
             } else {
-                guard let data = data else {return}
-                let outputStr  = String(data: data, encoding: String.Encoding.utf8) as String!
-                print(outputStr!)
+                guard data != nil else {return}
             }
             semaphore.signal()
         }
@@ -349,7 +391,9 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         semaphore.wait()
         
         // update DB
-        putBackToDB(Id: message.id, Station: message.device, PreFunc: funcIn, PostFunc: funcOut, Date: dateFormatter.string(from: now), Line: message.line, Text: text!)
+        if type == "B1" {
+            putBackToDB(Id: message.id, Station: message.device, PreFunc: funcIn, PostFunc: funcOut, Date: dateFormatter.string(from: now), Line: message.line, Text: text!)
+        }
         
         messageTextField.text = nil
         _ = navigationController?.popViewController(animated: true)

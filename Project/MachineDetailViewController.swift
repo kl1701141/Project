@@ -240,6 +240,11 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
             destinationController.device = device.name
             destinationController.user = user
             destinationController.type = "B7"
+        } else if segue.identifier == "interludePublish" {
+            let destinationController = segue.destination as! MessagePublishController
+            destinationController.user = user
+            destinationController.type = "B2"
+            destinationController.device = device.name
         }
     }
 
