@@ -18,7 +18,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
 
     // for function picker options
     var infunction = ["向左移入","向內捲入","向外捲入","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲入","向下捲入","立即顯現","同時出現","跳入","射入","動畫","續幕"]
-    var outfunction = ["向左移入","向內捲出","向外捲出","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲出","向下捲出","立即顯現","同時出現","跳入","射入","動畫","續幕"]
+    var outfunction = ["向左移","向內捲出","向外捲出","覆蓋向左","覆蓋向右","覆蓋向上","覆蓋向下","覆蓋向內","附蓋向外","覆蓋 ↑↓","覆蓋 ↓↑","向上捲出","向下捲出","立即顯現","同時出現","跳出","射出","動畫","續幕"]
     var colors = ["紅色", "黃色", "綠色"]
     var fullHalf = ["一行半形英數字 (上限10字)", "兩行半形英數字 (上限20字)", "全形中英數字 (上限5字)"]
     var fullHalfForB2 = ["一行半形英數字 (上限25字)", "全形中英數字 (上限12字)"]
@@ -317,7 +317,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         
         var funcOut = funcOutTextField.text!
         switch funcOut {
-        case "向左移入":
+        case "向左移出":
             funcOut = "A"
         case "向內捲出":
             funcOut = "B"
@@ -347,9 +347,9 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
             funcOut = "N"
         case "同時出現":
             funcOut = "O"
-        case "跳入":
+        case "跳出":
             funcOut = "P"
-        case "射入":
+        case "射出":
             funcOut = "Q"
         case "動畫":
             funcOut = "R"
@@ -375,7 +375,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         request.httpMethod = "POST"
         request.httpBody = postData
         
-        // set headers
+        // set Headers
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
         
@@ -412,6 +412,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         _ = navigationController?.popViewController(animated: true)
     }
     
+    // if there is no data for this line in DB, use this function to POST
     func newLinePostToDB(Station: String, PreFunc: String, PostFunc: String, Date: String, Line: String, Text: String) {
         // API format
         let urlString: String = "http://\(host):\(port)/api/Contents/"
@@ -426,7 +427,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         request.httpMethod = "POST"
         request.httpBody = postData
         
-        // set headers
+        // set Headers
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
         
@@ -459,7 +460,7 @@ class MessagePublishController: UIViewController, UIPickerViewDelegate, UIPicker
         request.httpMethod = "PUT"
         request.httpBody = putData
         
-        // set headers
+        // set Headers
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
         

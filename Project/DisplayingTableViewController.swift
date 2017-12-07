@@ -52,7 +52,7 @@ class DisplayingTableViewController: UITableViewController {
         // use GET method
         request.httpMethod = "GET"
         
-        // set headers
+        // set Headers
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
         
@@ -106,6 +106,96 @@ class DisplayingTableViewController: UITableViewController {
         let message = messages[indexPath.row]
         cell.lineNumberLabel.text = "Line: " + message.line
         cell.displayingLabel.text = "正在顯示: " + message.text
+        
+        var funcIn: String = ""
+        switch message.funcIn {
+        case "A":
+            funcIn = "向左移入"
+        case "B":
+            funcIn = "向內捲入"
+        case "C":
+            funcIn = "向外捲入"
+        case "D":
+            funcIn = "覆蓋向左"
+        case "E":
+            funcIn = "覆蓋向右"
+        case "F":
+            funcIn = "覆蓋向上"
+        case "G":
+            funcIn = "覆蓋向下"
+        case "H":
+            funcIn = "覆蓋向內"
+        case "I":
+            funcIn = "覆蓋向外"
+        case "J":
+            funcIn = "覆蓋 ↑↓"
+        case "K":
+            funcIn = "覆蓋 ↓↑"
+        case "L":
+            funcIn = "向上捲入"
+        case "M":
+            funcIn = "向下捲入"
+        case "N":
+            funcIn = "立即顯現"
+        case "O":
+            funcIn = "同時出現"
+        case "P":
+            funcIn = "跳入"
+        case "Q":
+            funcIn = "射入"
+        case "R":
+            funcIn = "動畫"
+        case "S":
+            funcIn = "續幕"
+        default:
+            funcIn = " "
+        }
+        
+        var funcOut: String = ""
+        switch message.funcOut {
+        case "A":
+            funcOut = "向左移出"
+        case "B":
+            funcOut = "向內捲出"
+        case "C":
+            funcOut = "向外捲出"
+        case "D":
+            funcOut = "覆蓋向左"
+        case "E":
+            funcOut = "覆蓋向右"
+        case "F":
+            funcOut = "覆蓋向上"
+        case "G":
+            funcOut = "覆蓋向下"
+        case "H":
+            funcOut = "覆蓋向內"
+        case "I":
+            funcOut = "覆蓋向外"
+        case "J":
+            funcOut = "覆蓋 ↑↓"
+        case "K":
+            funcOut = "覆蓋 ↓↑"
+        case "L":
+            funcOut = "向上捲出"
+        case "M":
+            funcOut = "向下捲出"
+        case "N":
+            funcOut = "立即顯現"
+        case "O":
+            funcOut = "同時出現"
+        case "P":
+            funcOut = "跳出"
+        case "Q":
+            funcOut = "射出"
+        case "R":
+            funcOut = "動畫"
+        case "S":
+            funcOut = "續幕"
+        default:
+            funcOut = " "
+        }
+        
+        cell.funcLabel.text = funcIn + ", " + funcOut
         
         cell.accessoryType = .disclosureIndicator
 

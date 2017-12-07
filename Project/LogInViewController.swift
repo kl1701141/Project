@@ -107,18 +107,18 @@ class LogInViewController: UIViewController {
         return userDevices
     }
     
-    // Action to log in
+    // Action to Log in
     @IBAction func logInAction(_ sender: AnyObject) {
         if accountTextField.text == "" {
             // alert for empty account text field
             let alertMessage = UIAlertController(title: nil, message: "您尚未輸入帳號", preferredStyle: .alert)
-            alertMessage.addAction(UIAlertAction(title: "我知道了", style: .default, handler: nil))
+            alertMessage.addAction(UIAlertAction(title: "確認", style: .default, handler: nil))
             self.present(alertMessage, animated: true, completion: nil)
             
         } else if passwordTextField.text == "" {
             // alert for empty password text field
             let alertMessage = UIAlertController(title: nil, message: "您尚未輸入密碼", preferredStyle: .alert)
-            alertMessage.addAction(UIAlertAction(title: "我知道了", style: .default, handler: nil))
+            alertMessage.addAction(UIAlertAction(title: "確認", style: .default, handler: nil))
             self.present(alertMessage, animated: true, completion: nil)
             
         } else {
@@ -126,7 +126,7 @@ class LogInViewController: UIViewController {
             logInAndGetToken ()
             if userToken == "帳號或密碼錯誤" {
                 let alertMessage = UIAlertController(title: nil, message: "帳號或密碼錯誤", preferredStyle: .alert)
-                alertMessage.addAction(UIAlertAction(title: "我知道了", style: .default, handler: nil))
+                alertMessage.addAction(UIAlertAction(title: "確認", style: .default, handler: nil))
                 self.present(alertMessage, animated: true, completion: nil)
             } else {
                 self.performSegue(withIdentifier: "loginToProfile", sender: self)

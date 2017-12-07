@@ -21,11 +21,21 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
     
     @IBOutlet weak var displayLinesView: UIView!
     
+    // PickerViews
     @IBOutlet weak var fromPicker: UIPickerView!
     @IBOutlet weak var toPicker: UIPickerView!
     
+    // TextFields
     @IBOutlet weak var fromTextField: UITextField!
     @IBOutlet weak var toTextField: UITextField!
+    
+    // Buttons
+    @IBOutlet weak var interludeButton: UIButton!
+    @IBOutlet weak var publishMessageButton: UIButton!
+    @IBOutlet weak var enableLinesButton: UIButton!
+    @IBOutlet weak var disableLinesButton: UIButton!
+    @IBOutlet weak var displayLinesButton: UIButton!
+    @IBOutlet weak var getPermissionButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -49,6 +59,24 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
         for i in 1...255 {
             self.lineNum.append("\(i)")
         }
+        
+        // check permissions to enable/disable buttons
+        let permission = checkPermission()
+        if permission == 0 {
+            interludeButton.isEnabled = false
+            publishMessageButton.isEnabled = false
+            enableLinesButton.isEnabled = false
+            disableLinesButton.isEnabled = false
+            displayLinesButton.isEnabled = false
+            interludeButton.setTitleColor(.lightGray, for: .normal)
+            publishMessageButton.setTitleColor(.lightGray, for: .normal)
+            enableLinesButton.setTitleColor(.lightGray, for: .normal)
+            disableLinesButton.setTitleColor(.lightGray, for: .normal)
+            displayLinesButton.setTitleColor(.lightGray, for: .normal)
+        } else if permission == 1 {
+            getPermissionButton.setTitleColor(.lightGray, for: .normal)
+            getPermissionButton.isEnabled = false
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +88,218 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // reload device data after write back to DB
+    func reloadDeviceData() {
+        // API format
+        let urlString: String = "http://\(host):\(port)/api/Marquees/\(device.Did)"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        
+        // use GET method
+        request.httpMethod = "GET"
+        
+        // set Headers
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error as Any)
+            } else {
+                guard let data = data else {return}
+                
+                // parse response json to an Array with Dictionary<String, Any> elements
+                let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                self.device = Device(name: json!["Station"] as! String, location: json!["Location"] as! String, imageName: "marquee01.png", status: json!["Status"] as! String, Did: "\(json!["Id"] as! Int)")
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait()
+    }
+    
+    // test if this user have permission to set this marquee
+    func checkPermission() -> Int {
+        var permission: Int = 0;
+        
+        // API format
+        let urlString: String = "http://\(host):\(port)/api/Owners"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        
+        // use GET method
+        request.httpMethod = "GET"
+        
+        // set Headers
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error as Any)
+            } else {
+                guard let data = data else {return}
+                
+                // parse response json to an Array with Dictionary<String, Any> elements
+                let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [Dictionary<String, Any>]
+                
+                for object in json! {
+                    if (object["Station"] as! String == self.device.name) && (object["Uid"] as? Int == Int(self.user.UID)) {
+                        permission = 1
+                        break
+                    }
+                }
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait()
+        
+        return permission
+    }
+    
+    // Action & initial something for Function: 調整顯示行數
+    @IBAction func displayLineFunc(_ sender: AnyObject) {
+        // set default value
+        fromTextField.text = "1"
+        toTextField.text = "255"
+        
+        // set text into center
+        fromTextField.textAlignment = .center
+        toTextField.textAlignment = .center
+        
+        // set picker's color
+        fromPicker.backgroundColor = .white
+        toPicker.backgroundColor = .white
+
+        displayLinesView.isHidden = false
+        UIView.animate(withDuration: 0.3, animations: {
+            self.displayLinesView.transform = CGAffineTransform.identity
+        })
+    }
+    
+    // publish for adjust displaying lines
+    @IBAction func publishMessage(_ sender: AnyObject) {
+        // API format
+        let urlString: String = "http://\(host):\(port)/api/Mqtt"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        let from = fromTextField.text!
+        let to = toTextField.text!
+        let type = "B8"
+        
+        // POST body data
+        let body = "Topic=\(device.name)&Type=\(type)&Data=\(from),\(to)&Date=\(dateFormatter.string(from: now))"
+        let postData = body.data(using: String.Encoding.utf8)
+        
+        // use POST method
+        request.httpMethod = "POST"
+        request.httpBody = postData
+        
+        // set Headers
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error as Any)
+            } else {
+                guard data != nil else {return}
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait()
+
+        UIView.animate(withDuration: 10, animations: {
+            self.displayLinesView.transform = CGAffineTransform.init(scaleX: 0, y: 0)
+        })
+        displayLinesView.isHidden = true
+    }
+    
+    // Action for cancel adjusting displaying lines and go back
+    @IBAction func cancelDisplayLineFunc(_ sender: AnyObject) {
+        displayLinesView.isHidden = true
+        UIView.animate(withDuration: 0.3, animations: {
+            self.displayLinesView.transform = CGAffineTransform.init(scaleX: 0, y: 0)
+        })
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MachineDetailViewCell
+        cell.backgroundColor = UIColor.darkGray
+        
+        switch indexPath.row {
+        case 0:
+            cell.typeLabel.text = "裝置位置"
+            cell.valueLabel.text = device.location
+        case 1:
+            cell.typeLabel.text = "裝置站號"
+            cell.valueLabel.text = device.name
+//        case 2:
+//            cell.typeLabel.text = "管理者"
+//            cell.valueLabel.text = device.controller
+        default:
+            cell.typeLabel.text = ""
+            cell.valueLabel.text = ""
+        }
+        
+        cell.backgroundColor = UIColor.clear
+        return cell
+    }
+    
+    // this user ask for a permission to set this marquee
+    @IBAction func askForPermission(_ sender: AnyObject) {
+        // API format
+        let urlString: String = "http://\(host):\(port)/api/Owners"
+        let url = URL(string: urlString)!
+        var request = URLRequest(url: url)
+        
+        // POST body data
+        let body = "Station=\(device.name)&Uid=\(user.UID)"
+        let postData = body.data(using: String.Encoding.utf8)
+        
+        // use POST method
+        request.httpMethod = "POST"
+        request.httpBody = postData
+        
+        // set Headers
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
+        
+        let semaphore = DispatchSemaphore(value: 0)
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                print(error as Any)
+            } else {
+                guard data != nil else {return}
+            }
+            semaphore.signal()
+        }
+        task.resume()
+        semaphore.wait()
+        
+        
+        let alertMessage = UIAlertController(title: "申請成功！", message: "您的申請已成功送出，請耐心等待批准！", preferredStyle: .alert)
+        alertMessage.addAction(UIAlertAction(title: "確認", style: .default, handler: nil))
+        self.present(alertMessage, animated: true, completion: nil)
+
+    }
+
+    // MARK: - Picker view data source
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -124,138 +364,8 @@ class MachineDetailViewController: UIViewController, UITableViewDataSource, UIPi
             self.toPicker.isHidden = false
             textField.endEditing(true)
         }
-        
     }
     
-    func reloadDeviceData() {
-        // API format
-        let urlString: String = "http://\(host):\(port)/api/Marquees/\(device.Did)"
-        let url = URL(string: urlString)!
-        var request = URLRequest(url: url)
-        
-        // use GET method
-        request.httpMethod = "GET"
-        
-        // set headers
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
-        
-        let semaphore = DispatchSemaphore(value: 0)
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if error != nil {
-                print(error as Any)
-            } else {
-                guard let data = data else {return}
-                
-                // parse response json to an Array with Dictionary<String, Any> elements
-                let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                self.device = Device(name: json!["Station"] as! String, location: json!["Location"] as! String, imageName: "marquee01.png", status: json!["Status"] as! String, Did: "\(json!["Id"] as! Int)")
-            }
-            semaphore.signal()
-        }
-        task.resume()
-        semaphore.wait()
-    }
-    
-    // Action & initial something for Function: 調整顯示行數
-    @IBAction func displayLineFunc(_ sender: AnyObject) {
-        // set default value
-        fromTextField.text = "1"
-        toTextField.text = "255"
-        
-        // set text into center
-        fromTextField.textAlignment = .center
-        toTextField.textAlignment = .center
-        
-        // set picker's color
-        fromPicker.backgroundColor = .white
-        toPicker.backgroundColor = .white
-
-        displayLinesView.isHidden = false
-        UIView.animate(withDuration: 0.3, animations: {
-            self.displayLinesView.transform = CGAffineTransform.identity
-        })
-    }
-    
-    // publish for adjust displaying lines
-    @IBAction func publishMessage(_ sender: AnyObject) {
-        // API format
-        let urlString: String = "http://\(host):\(port)/api/Mqtt"
-        let url = URL(string: urlString)!
-        var request = URLRequest(url: url)
-        
-        let now = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        let from = fromTextField.text!
-        let to = toTextField.text!
-        let type = "B8"
-        
-        // POST body data
-        let body = "Topic=\(device.name)&Type=\(type)&Data=\(from),\(to)&Date=\(dateFormatter.string(from: now))"
-        let postData = body.data(using: String.Encoding.utf8)
-        
-        // use POST method
-        request.httpMethod = "POST"
-        request.httpBody = postData
-        
-        // set headers
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
-        
-        let semaphore = DispatchSemaphore(value: 0)
-        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
-            if error != nil {
-                print(error as Any)
-            } else {
-                guard data != nil else {return}
-            }
-            semaphore.signal()
-        }
-        task.resume()
-        semaphore.wait()
-
-        UIView.animate(withDuration: 10, animations: {
-            self.displayLinesView.transform = CGAffineTransform.init(scaleX: 0, y: 0)
-        })
-        displayLinesView.isHidden = true
-    }
-    
-    // Action for cancel adjusting displaying lines and go back
-    @IBAction func cancelDisplayLineFunc(_ sender: AnyObject) {
-        displayLinesView.isHidden = true
-        UIView.animate(withDuration: 0.3, animations: {
-            self.displayLinesView.transform = CGAffineTransform.init(scaleX: 0, y: 0)
-        })
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! MachineDetailViewCell
-        cell.backgroundColor = UIColor.darkGray
-        
-        switch indexPath.row {
-        case 0:
-            cell.typeLabel.text = "裝置位置"
-            cell.valueLabel.text = device.location
-        case 1:
-            cell.typeLabel.text = "裝置站號"
-            cell.valueLabel.text = device.name
-//        case 2:
-//            cell.typeLabel.text = "管理者"
-//            cell.valueLabel.text = device.controller
-        default:
-            cell.typeLabel.text = ""
-            cell.valueLabel.text = ""
-        }
-        
-        cell.backgroundColor = UIColor.clear
-        return cell
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.

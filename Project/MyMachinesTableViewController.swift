@@ -49,11 +49,13 @@ class MyMachinesTableViewController: UITableViewController, UISearchResultsUpdat
         if searchController.isActive {
             searchController.searchBar.isHidden = false
         }
-        //view.backgroundColor = UIColor.darkGray
     }
     
     override func viewWillAppear(_ animated: Bool) {
         // when view ever appears, do these
+        
+        // reset devices when this view appears
+        devices = []
         initialMarqueesTableFromServer()
     }
     
@@ -72,7 +74,7 @@ class MyMachinesTableViewController: UITableViewController, UISearchResultsUpdat
         // use GET method
         request.httpMethod = "GET"
         
-        // set headers
+        // set Headers
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
         getOwnersTable()
@@ -111,9 +113,12 @@ class MyMachinesTableViewController: UITableViewController, UISearchResultsUpdat
         // use GET method
         request.httpMethod = "GET"
         
-        // set headers
+        // set Headers
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
+        
+        // reset myMachines array for search function
+        myMachines = []
         
         let semaphore = DispatchSemaphore(value: 0)
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in

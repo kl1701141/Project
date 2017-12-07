@@ -48,11 +48,13 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
         if searchController.isActive {
             searchController.searchBar.isHidden = false
         }
-        //view.backgroundColor = UIColor.darkGray
     }
     
     override func viewWillAppear(_ animated: Bool) {
         // when view ever appears, do these
+        
+        // reset devices when this view appears
+        devices = []
         initialMarqueesTableFromServer()
     }
     
@@ -71,7 +73,7 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
         // use GET method
         request.httpMethod = "GET"
         
-        // set headers
+        // set Headers
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
         
@@ -81,6 +83,7 @@ class MachinesTableViewController: UITableViewController, UISearchResultsUpdatin
                 print(error as Any)
             } else {
                 guard let data = data else {return}
+                
                 // parse response json to an Array with Dictionary<String, Any> elements
                 let json = try? JSONSerialization.jsonObject(with: data, options: []) as! [Dictionary<String, Any>]
                 

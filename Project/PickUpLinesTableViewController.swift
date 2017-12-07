@@ -65,7 +65,6 @@ class PickUpLinesTableViewController: UITableViewController {
 
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -81,7 +80,7 @@ class PickUpLinesTableViewController: UITableViewController {
         // use GET method
         request.httpMethod = "GET"
         
-        // set headers
+        // set Headers
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
         
@@ -222,7 +221,7 @@ class PickUpLinesTableViewController: UITableViewController {
             request.httpMethod = "POST"
             request.httpBody = postData
             
-            // set headers
+            // set Headers
             request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
             request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
             
@@ -244,6 +243,7 @@ class PickUpLinesTableViewController: UITableViewController {
         _ = navigationController?.popViewController(animated: true)
     }
     
+    // write back the new Status for this Line to DB
     func setStatusBackToDB() {
         // API format
         let urlString: String = "http://\(host):\(port)/api/Marquees/\(device.Did)"
@@ -278,7 +278,7 @@ class PickUpLinesTableViewController: UITableViewController {
         request.httpMethod = "PUT"
         request.httpBody = putData
         
-        // set headers
+        // set Headers
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         request.setValue("bearer " + user.token, forHTTPHeaderField: "Authorization")
         

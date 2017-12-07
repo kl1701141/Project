@@ -12,6 +12,7 @@ class DisplayingTableViewCell: UITableViewCell {
 
     @IBOutlet var lineNumberLabel: UILabel!
     @IBOutlet var displayingLabel: UILabel!
+    @IBOutlet var funcLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
